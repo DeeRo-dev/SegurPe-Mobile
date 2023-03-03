@@ -10,6 +10,7 @@ import { MenuLateral } from './src/navigator/MenuLateral';
 export default function App() {
   return (
     <NavigationContainer>
+      {/* <Home/> */}
       <MenuLateral/>
     </NavigationContainer>
   );
