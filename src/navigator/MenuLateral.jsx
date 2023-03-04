@@ -12,7 +12,7 @@ export const MenuLateral = ()=> {
     <Drawer.Navigator 
     screenOptions={{
       drawerStyle: {
-        backgroundColor: 'black',
+        backgroundColor: '#000000',
        
       },
     }}
@@ -26,13 +26,13 @@ export const MenuLateral = ()=> {
   );
 }
 
-const MenuInterno = (props) =>{
+const MenuInterno = ({navigation}) =>{
   return (
     <DrawerContentScrollView>
       <View style={style.conteiner}>
          <View style={style.menuNav}>
             <Ionicons name="menu-outline" size={32} color="white" />
-            <Text style={style.menuNavText}>Menu</Text>  
+            <Text style={style.menuNavText}>Menú</Text>  
             <TouchableOpacity>
             <Ionicons name="chevron-back-outline" size={32} color="white" />
            </TouchableOpacity>
@@ -40,21 +40,24 @@ const MenuInterno = (props) =>{
 
           <View>
           <View style={style.contentItems}>
-             <TouchableOpacity>
-             <Ionicons name="person-circle-outline" size={32} color="white" />
-               <Text style={style.itemText}>Mi Perfil</Text>
+             <TouchableOpacity 
+              onPress={() => navigation.navigate("MiPerfil")}
+             >
+               <Text style={style.itemText}><Ionicons name="person-circle-outline" size={20} color="white" /> Mí perfil</Text>
              </TouchableOpacity>
              </View>
              <View style={style.contentItems}>
-               <TouchableOpacity>  
-                <Ionicons name="time-outline" size={32} color="white" />
-               <Text style={style.itemText}>Historial de actividad</Text>
+               <TouchableOpacity 
+                onPress={() => navigation.navigate("Historial")}
+               >  
+                <Text style={style.itemText}><Ionicons name="time-outline" size={20} color="white" /> Historial de actividad</Text>
              </TouchableOpacity>
              </View>
-            <View style={style.contentItems}>
-              <TouchableOpacity>
-              <Ionicons name="settings-outline" size={32} color="white" />
-               <Text style={style.itemText}>Configuracion</Text>
+            <View style={{...style.contentItems, borderBottomWidth:2}}>
+              <TouchableOpacity 
+                onPress={() => navigation.navigate("Configuracion")}
+              >
+               <Text style={style.itemText}><Ionicons name="settings-outline" size={20} color="white" /> Configuración</Text>
              </TouchableOpacity>
             </View>
              
@@ -62,10 +65,9 @@ const MenuInterno = (props) =>{
       
       </View>   
       <View style={style.contentSesion}>
-            
-          <TouchableOpacity>
-             <Ionicons name="close-outline" size={32} color="red" />
-             <Text style={style.itemText} >Cerrar sesion</Text>  
+          <TouchableOpacity style={style.btnSesion}>
+            <Ionicons name="close-outline" size={32} color="red" />
+             <Text style={style.itemTextSesion} > Cerrar sesión</Text>  
           </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -77,10 +79,9 @@ const MenuInterno = (props) =>{
 
 const style = StyleSheet.create({
   conteiner:{
-    backgroundColor:'red',
     flex: 1,
     width:'80%',
-    alignSelf:'center'
+    alignSelf:'center',
   },
   menuNav:{
     flex:1,
@@ -90,28 +91,36 @@ const style = StyleSheet.create({
   },
   menuNavText:{
     fontSize:24,
-    color:'white'
+    color:'#FFFFFF'
   },
   contentItems:{
     borderWidthBottom:1,
     borderColor:'white',
-    // backgroundColor:'blue',
     height:60,
     justifyContent:'center',
-    flexDirection:'row'
+    borderTopWidth: 2,
+    borderColor:'#FFFFFF'
   },
   itemText:{
-    color:'white',
+    color:'#FFFFFF',
     fontSize:14,
   },
   contentSesion:{
     flexDirection:'row',
-    backgroundColor:'blue',
     height:500,
     alignItems:'flex-end',
     justifyContent:'center',
     width:'80%',
     alignSelf:'center',
+    
+  },
+  btnSesion:{
+    flexDirection:'row',
+    alignItems:'center',
+  },
+  itemTextSesion:{
+    color:'red',
+    fontSize:16
   }
 })
 
