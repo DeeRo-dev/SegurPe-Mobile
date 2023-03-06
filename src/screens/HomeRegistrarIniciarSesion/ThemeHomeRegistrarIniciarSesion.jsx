@@ -1,0 +1,49 @@
+import {StyleSheet} from 'react-native'
+
+export const styles = StyleSheet.create({
+    content:{
+        flex:1,
+        alignItems:'center'
+    },
+    contentBtns:{
+        marginVertical:50,
+    },
+    imgSegur:{
+        marginTop:40
+    },
+    title:{
+        fontSize:20,
+        marginLeft:15
+    },
+    textTitle:{
+        fontSize:20,
+    },
+    btnLog:{
+        backgroundColor:'#F57D20',
+        borderRadius:100,
+        width: 382,
+        height: 40,
+        alignItems:'center',
+        justifyContent:'center',
+        marginVertical:20
+    },
+    textBtn:{
+        color:'#FFFFFF',
+        fontSize:14
+    },
+    btnLogGoogle:{
+        // backgroundColor:'transparent',
+        borderRadius:100,
+        width: 382,
+        height: 40,
+        alignItems:'center',
+        justifyContent:'center',
+        // marginVertical:20
+        borderWidth:1,
+        borderColor:'#4285F4'
+    },
+    textBtnGoogle:{
+        color:'#4285F4',
+        fontSize:14
+    },
+})
