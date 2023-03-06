@@ -32,18 +32,18 @@ export const styles = StyleSheet.create({
         fontSize:14
     },
     btnLogGoogle:{
-        // backgroundColor:'transparent',
         borderRadius:100,
         width: 382,
         height: 40,
         alignItems:'center',
         justifyContent:'center',
-        // marginVertical:20
+        flexDirection:'row',
         borderWidth:1,
         borderColor:'#4285F4'
     },
     textBtnGoogle:{
         color:'#4285F4',
-        fontSize:14
+        fontSize:14,
+        marginLeft:10
     },
 })
