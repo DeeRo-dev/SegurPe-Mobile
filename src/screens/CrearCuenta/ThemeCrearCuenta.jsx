@@ -9,7 +9,16 @@ export const styles = StyleSheet.create({
     img:{
           marginVertical:10
     },
-    
+    contentBtnPagination:{
+        flexDirection:'row',
+        backgroundColor:'red',
+        width:100,
+        justifyContent:'space-between',
+        marginTop:40
+    },
+    textBtnPag:{
+        
+    },
     input:{
         backgroundColor:'#D8E2FF',
         borderBottomWidth:1,
@@ -44,6 +53,9 @@ export const styles = StyleSheet.create({
         fontSize:20,
         fontWeight: 'bold',
         marginVertical:10
+    },
+    parrafoCondiciones:{
+        fontSize:16
     }
     
 })
