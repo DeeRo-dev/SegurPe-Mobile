@@ -32,4 +32,18 @@ export const styles = StyleSheet.create({
         color:'#004494',
         fontSize:14
     },
+    contentTerminosCondiciones:{
+        width:'90%',
+    },
+    titleCondiciones:{
+        fontSize:24,
+        fontWeight: 'bold',
+       
+    },
+    subTitleCondiciones:{
+        fontSize:20,
+        fontWeight: 'bold',
+        marginVertical:10
+    }
+    
 })
