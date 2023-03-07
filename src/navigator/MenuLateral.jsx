@@ -18,7 +18,8 @@ export const MenuLateral = () => {
     <Drawer.Navigator
       screenOptions={{
         drawerStyle: {
-          backgroundColor: "black",
+          backgroundColor: "#16253A",
+          width:359
         },
       }}
       drawerContent={(props) => <MenuInterno {...props} />}
@@ -40,9 +41,6 @@ const MenuInterno = ({navigation}) =>{
          <View style={style.menuNav}>
             <Ionicons name="menu-outline" size={32} color="white" />
             <Text style={style.menuNavText}>Menú</Text>  
-            <TouchableOpacity>
-            <Ionicons name="chevron-back-outline" size={32} color="white" />
-           </TouchableOpacity>
          </View>
 
           <View>
@@ -50,21 +48,21 @@ const MenuInterno = ({navigation}) =>{
              <TouchableOpacity 
               onPress={() => navigation.navigate("MiPerfil")}
              >
-               <Text style={style.itemText}><Ionicons name="person-circle-outline" size={20} color="white" /> Mí perfil</Text>
+               <Text style={style.itemText}><Ionicons name="person-outline" size={20} color="white" />   Mí perfil</Text>
              </TouchableOpacity>
              </View>
              <View style={style.contentItems}>
                <TouchableOpacity 
                 onPress={() => navigation.navigate("Historial")}
                >  
-                <Text style={style.itemText}><Ionicons name="time-outline" size={20} color="white" /> Historial de actividad</Text>
+                <Text style={style.itemText}><Ionicons name="time-outline" size={20} color="white" />   Historial de actividad</Text>
              </TouchableOpacity>
              </View>
             <View style={{...style.contentItems, borderBottomWidth:2}}>
               <TouchableOpacity 
                 onPress={() => navigation.navigate("Configuracion")}
               >
-               <Text style={style.itemText}><Ionicons name="settings-outline" size={20} color="white" /> Configuración</Text>
+               <Text style={style.itemText}><Ionicons name="settings-outline" size={20} color="white" />   Configuración</Text>
              </TouchableOpacity>
             </View>
              
@@ -73,8 +71,8 @@ const MenuInterno = ({navigation}) =>{
       </View>   
       <View style={style.contentSesion}>
           <TouchableOpacity style={style.btnSesion}>
-            <Ionicons name="close-outline" size={32} color="red" />
-             <Text style={style.itemTextSesion} > Cerrar sesión</Text>  
+            <Ionicons name="close-outline" size={32} color="#FFFFFF" />
+             <Text style={style.itemTextSesion} >  Cerrar sesión</Text>  
           </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -93,12 +91,14 @@ const style = StyleSheet.create({
   menuNav:{
     flex:1,
     flexDirection:'row',
-    justifyContent:'space-between',
+    // justifyContent:'space-between',
     marginBottom:20,
   },
   menuNavText:{
     fontSize:24,
-    color:'#FFFFFF'
+    color:'#FFFFFF',
+    flex:1,
+    textAlign:'center'
   },
   contentItems:{
     borderWidthBottom:1,
@@ -110,13 +110,12 @@ const style = StyleSheet.create({
   },
   itemText:{
     color:'#FFFFFF',
-    fontSize:14,
+    fontSize:16,
   },
   contentSesion:{
     flexDirection:'row',
     height:500,
     alignItems:'flex-end',
-    justifyContent:'center',
     width:'80%',
     alignSelf:'center',
     
@@ -126,7 +125,7 @@ const style = StyleSheet.create({
     alignItems:'center',
   },
   itemTextSesion:{
-    color:'red',
+    color:'#FFFFFF',
     fontSize:16
   }
 })
