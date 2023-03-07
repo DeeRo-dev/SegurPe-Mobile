@@ -12,7 +12,7 @@ export const HomeRegistrarIniciarSesion = () => {
        <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
        <View style={styles.contentBtns}>
           <Text style={styles.title}>No tienes una cuenta</Text>
-          <TouchableOpacity style={styles.btnLog}>
+          <TouchableOpacity onPress={() => {navigator.navigate('CrearCuenta')}} style={styles.btnLog}>
               <Text style={styles.textBtn}>Crear una cuenta</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Ya tienes una cuenta</Text>

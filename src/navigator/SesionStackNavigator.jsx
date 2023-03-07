@@ -12,7 +12,7 @@ export const SesionStackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="HomeRegistrarIniciarSesion" options={{title:'Login'}} component={HomeRegistrarIniciarSesion} />
       <Stack.Screen name="InicioSesion" options={{title:'Iniciar Sesion'}} component={InicioSesion} />
-      <Stack.Screen name="CrearCuenta" component={CrearCuenta} />
+      <Stack.Screen name="CrearCuenta" options={{title:'Crear Cuenta'}} component={CrearCuenta} />
     </Stack.Navigator>
   );
 }
