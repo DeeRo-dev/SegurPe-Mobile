@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
+
 import { View, Text, Image, TouchableOpacity, } from 'react-native'
 // import { TouchableOpacity } from 'react-native';
 import { Datos1 } from './Datos1';
@@ -11,8 +12,6 @@ import {styles} from './ThemeCrearCuenta';
 export const CrearCuenta = () => {
 
   const [pagina, setPagina] = useState()
-
-
 
     const paginacion = (data) =>{
       console.log(data)

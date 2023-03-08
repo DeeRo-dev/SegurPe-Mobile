@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         backgroundColor:'red',
         width:100,
         justifyContent:'space-between',
-        marginTop:40
+        marginTop:10
     },
     textBtnPag:{
         
@@ -56,6 +56,14 @@ export const styles = StyleSheet.create({
     },
     parrafoCondiciones:{
         fontSize:16
-    }
-    
+    },
+    conteinerTextCam:{
+        marginTop:10
+    },
+    titleTextCam:{
+        fontSize:16
+    },
+    parrafoTextCam:{
+        fontSize:12
+    },
 })
