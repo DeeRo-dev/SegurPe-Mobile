@@ -7,8 +7,8 @@ export const Datos2 = () => {
     <View>
         <View>
             <TextInput style={styles.input} placeholder="Email"/>
-            <TextInput value={password} style={styles.input} placeholder="Contrase;e"/>
-            <TextInput value={password} style={styles.input} placeholder="Repetir contrasenia"/>
+            <TextInput secureTextEntry={true} style={styles.input} placeholder="Contrase;e"/>
+            <TextInput secureTextEntry={true} style={styles.input} placeholder="Repetir contrasenia"/>
         </View>
         
     </View>

@@ -3,10 +3,10 @@ import {StyleSheet} from 'react-native'
 export const styles = StyleSheet.create({
     content:{
         flex:1,
-        height:400,
-        alignItems:'center',
+        textAlign:'center'
     },
     img:{
+         alignSelf:'center',
           marginVertical:10
     },
     contentBtnPagination:{
@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
         marginTop:10
     },
     textBtnPag:{
-        
     },
     input:{
         backgroundColor:'#D8E2FF',
