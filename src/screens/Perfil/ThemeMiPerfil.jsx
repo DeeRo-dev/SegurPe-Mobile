@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         marginTop:80
     },
     contentDatos:{
-        width:'80%',
+        width:'90%',
         alignSelf:'center',
     },
     datos:{
@@ -33,4 +33,46 @@ export const styles = StyleSheet.create({
     dato:{
         fontSize:24,
     },
+    contentBtnEdit:{
+        alignItems:'center',
+        marginTop:120
+    },
+    btnEdit:{
+        borderRadius:100,
+        width: 342,
+        height: 40,
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:'row',
+        borderWidth:1,
+        borderColor:'#4285F4',
+    },
+    textBtn:{
+        color:'#004494',
+        fontSize:14
+    },
+    datosEdit:{
+        backgroundColor:'#D8E2FF',
+        marginTop:20,
+        paddingVertical:5,
+        borderBottomWidth:1,
+        borderColor:'#C4C6CF',
+    },
+    contentBtnEcho:{
+        alignItems:'center',
+        marginTop:50
+    },
+    btnEcho:{
+        backgroundColor:'#F57D20',
+        borderRadius:100,
+        width: 382,
+        height: 40,
+        alignItems:'center',
+        justifyContent:'center',
+        marginVertical:20
+    },
+    textBtnEcho:{
+        color:'white',
+        fontSize:14
+    }
 })

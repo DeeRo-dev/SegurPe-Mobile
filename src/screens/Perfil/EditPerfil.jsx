@@ -1,9 +1,9 @@
 import React from 'react';
 import {styles} from './ThemeMiPerfil'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image,TextInput, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
-export const MiPerfil = () => {
+export const EditPerfil = () => {
   const navigator = useNavigation();
   return (
     <View>
@@ -14,35 +14,34 @@ export const MiPerfil = () => {
          </View>
         </View>
      <View style={styles.contentDatos}>
-        <View style={styles.datos}>
-          <Text style={styles.titleDato}>
+        <View style={styles.datosEdit}>
+          
+          <Text >
             Nombre completo
           </Text>
-          <Text style={styles.dato}>
-           Leonel Andres Messi
-          </Text>
+          
+          <TextInput style={styles.dato} placeholder='Leonel Andres Messi'/>
+          
         </View>
-        <View style={styles.datos}>
+        <View style={styles.datosEdit}>
           <Text style={styles.titleDato}>
             Correo electronico  
           </Text>
-          <Text style={styles.dato}>
-             lapulga@messi.com
-          </Text>
+          <TextInput style={styles.dato} placeholder='lapulga@messi.com'/>
         </View>
-        <View style={styles.datos}>
+        <View style={styles.datosEdit}>
           <Text style={styles.titleDato}>
             Direccion
           </Text>
-          <Text style={styles.dato}>
-              A la vuelta de la torre efield 323
-          </Text>
+          
+          <TextInput style={styles.dato} placeholder='A la vuelta de la torre efield 323'/>
         </View>
     </View>
-    <View style={styles.contentBtnEdit}>
-      <TouchableOpacity  onPress={() => {navigator.navigate('EditPerfil')}} style={styles.btnEdit}>
-        <Text style={styles.textBtn}>
-        <Ionicons name="pencil-outline" size={15} color='#004494' /> Editar cuenta
+    <View style={styles.contentBtnEcho}>
+      <TouchableOpacity  onPress={() => {navigator.navigate('MiPerfil')}} style={styles.btnEcho}>
+       
+        <Text style={styles.textBtnEcho}>
+        <Ionicons name="pencil-outline" size={15} color='white' /> Editar cuenta
         </Text>
       </TouchableOpacity>
     </View>
