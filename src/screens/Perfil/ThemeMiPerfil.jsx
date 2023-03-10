@@ -17,4 +17,20 @@ export const styles = StyleSheet.create({
         borderRadius:100,
         marginTop:80
     },
+    contentDatos:{
+        width:'80%',
+        alignSelf:'center',
+    },
+    datos:{
+        marginTop:20,
+        paddingVertical:5,
+        borderBottomWidth:1,
+        borderColor:'#C4C6CF',
+    },
+    titleDato:{
+        fontSize:12,
+    },
+    dato:{
+        fontSize:24,
+    },
 })
