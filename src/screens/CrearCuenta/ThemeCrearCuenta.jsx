@@ -65,4 +65,13 @@ export const styles = StyleSheet.create({
     parrafoTextCam:{
         fontSize:12
     },
+    contentBtnPag:{
+        backgroundColor:'red',
+        flexDirection:'row',
+        marginBottom:50,
+        justifyContent:'center'
+    },
+    btnPag:{
+        marginLeft:10
+    }
 })
