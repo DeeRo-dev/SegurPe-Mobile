@@ -19,18 +19,18 @@ const ref = useRef();
       ref.current?.setPage(value)
 
   }
-const nameBtn= (select) => {
-  switch (select) {
-    case select === 0:
-        return ('radio-button-on-outline')
-    case select === 1:
-          return ('radio-button-on-outline')
-    case select === 2:
-            return ('radio-button-on-outline')
-    default:
-      break;
-  }
-}
+// const nameBtn= (select) => {
+//   switch (select) {
+//     case select === 0:
+//         return ('radio-button-on-outline')
+//     case select === 1:
+//           return ('radio-button-on-outline')
+//     case select === 2:
+//             return ('radio-button-on-outline')
+//     default:
+//       break;
+//   }
+// }
   return (
 
     <View style={styles.content}>
@@ -51,17 +51,17 @@ const nameBtn= (select) => {
       </View>
     </PagerView>
     <View style={styles.contentBtnPag}>
-    <TouchableOpacity style={styles.btnPag} onPress={()=> selectBtn(0)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
       <Text>
          <Ionicons name="radio-button-off-outline" size={15} color="black" />
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.btnPag} onPress={()=> selectBtn(1)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(1)}>
       <Text>
-      <Ionicons name="radio-button-on-outline" size={15} color="black" />
+      <Ionicons  name="radio-button-on-outline" size={15} color="black" />
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.btnPag} onPress={()=> selectBtn(2)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(2)}>
       <Text>
       <Ionicons name="radio-button-on-outline" size={15} color="black" />
       </Text>
