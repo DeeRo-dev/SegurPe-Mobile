@@ -1,6 +1,6 @@
 import React  ,{ useState }from 'react'
 import {styles} from './ThemeCrearCuenta'
-import { View,Text, TouchableOpacity, TextInput } from 'react-native'
+import { View,Text, ScrollView, TextInput } from 'react-native'
 import { CheckBox } from 'react-native-elements';
 
 export const Datos3 = () => {
@@ -12,6 +12,7 @@ export const Datos3 = () => {
         };
   return (
     <View style={styles.contentTerminosCondiciones}>
+       <ScrollView>
        <Text style={styles.titleCondiciones}>Términos y condiciones</Text>
        <View>
             <View>
@@ -30,6 +31,7 @@ export const Datos3 = () => {
         checkedColor={'#000000'}
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
+       </ScrollView>
     </View>
   )
 }

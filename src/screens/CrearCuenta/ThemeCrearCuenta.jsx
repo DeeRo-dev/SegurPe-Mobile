@@ -66,12 +66,30 @@ export const styles = StyleSheet.create({
         fontSize:12
     },
     contentBtnPag:{
-        backgroundColor:'red',
+        // backgroundColor:'red',
         flexDirection:'row',
-        marginBottom:50,
+        marginVertical:20,
         justifyContent:'center'
     },
     btnPag:{
         marginLeft:10
-    }
+    },
+    contentBtnLog:{
+        alignItems:'center'
+    },
+
+    btnLog:{
+        backgroundColor:'#F57D20',
+        borderRadius:100,
+        width: 382,
+        height: 40,
+    
+        alignItems:'center',
+        justifyContent:'center',
+        marginVertical:20
+    },
+    textBtnLog:{
+        color:'#FFFFFF',
+        fontSize:14
+    },
 })

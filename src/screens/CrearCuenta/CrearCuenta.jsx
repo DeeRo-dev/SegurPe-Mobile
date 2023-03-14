@@ -7,6 +7,7 @@ import { Datos2 } from './Datos2';
 import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { ModalBasico } from '../../components/Modals/ModalBasico';
 
 export const CrearCuenta = () => {
 
@@ -67,6 +68,12 @@ const ref = useRef();
       </Text>
     </TouchableOpacity>
     </View>
+    <View style={styles.contentBtnLog}>
+    <TouchableOpacity style={styles.btnLog}>
+        <Text style={styles.textBtnLog}>Crear una cuenta</Text>    
+    </TouchableOpacity>
+    </View>
+
   </View>  )
 }
    
