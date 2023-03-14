@@ -26,7 +26,7 @@ export const MenuLateral = () => {
     >
       {/* <Drawer.Screen name="Home" component={Home} /> */}
       {/* <Drawer.Screen name="Map" component={Map} /> */}
-      <Drawer.Screen name="SesionStackNavigator" component={SesionStackNavigator} />
+     <Drawer.Screen name="SesionStackNavigator" options={{title:false}} component={SesionStackNavigator} /> 
       <Drawer.Screen name="MiPerfil" component={MiPerfil} />
       <Drawer.Screen name="Historial" component={Historial} />
       <Drawer.Screen name="Configuracion" component={Configuracion} />
