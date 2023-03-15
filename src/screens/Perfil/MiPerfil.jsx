@@ -3,6 +3,7 @@ import {styles} from './ThemeMiPerfil'
 import { Image,TextInput, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
+
 export const MiPerfil = () => {
   const navigator = useNavigation();
   return (
@@ -29,7 +30,7 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            6556+596+5495
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {navigator.navigate('EditeTelefono')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
           </TouchableOpacity>
           
