@@ -1,37 +1,52 @@
 import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
-    contImgAvatar:{
-        height:260,
+    contNameAvatar:{
+        height:120,
+        backgroundColor:'#C5D6FF',
+        flexDirection:'row',
+        alignItems:'center'
     },
     contentAvatar:{
-        alignItems:'center',
-        height:150,
-         backgroundColor:'#C5D6FF',
-         borderBottomRadius:130
-         
+        alignItems:'flex-start',
+         borderBottomRadius:130,
+         flexDirection:'row',
+         marginLeft:23
+    },
+    pencilAvatar:{
+        marginTop:55,
     },
     avatarPerfil:{
-        width:150,
-        height:150,
+        width:75,
+        height:75,
         borderRadius:100,
-        marginTop:80
+    },
+    titleName:{
+        fontSize:24,
+        marginLeft:10
     },
     contentDatos:{
         width:'90%',
         alignSelf:'center',
     },
     datos:{
-        marginTop:20,
+        marginTop:10,
         paddingVertical:5,
-        borderBottomWidth:1,
+        borderWidth:1,
+        height:56,
+        borderRadius:100,
         borderColor:'#C4C6CF',
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center'
     },
     titleDato:{
         fontSize:12,
+        marginTop:30
     },
     dato:{
-        fontSize:24,
+        fontSize:16,
+        width:'75%'
     },
     contentBtnEdit:{
         alignItems:'center',
@@ -53,10 +68,11 @@ export const styles = StyleSheet.create({
     },
     datosEdit:{
         backgroundColor:'#D8E2FF',
-        marginTop:20,
+        marginTop:10,
         paddingVertical:5,
         borderBottomWidth:1,
         borderColor:'#C4C6CF',
+        flexDirection:'row'
     },
     contentBtnEcho:{
         alignItems:'center',
