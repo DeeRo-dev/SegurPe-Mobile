@@ -5,13 +5,23 @@ export const styles = StyleSheet.create({
         height:120,
         backgroundColor:'#C5D6FF',
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        borderBottomEndRadius:20,
+        borderBottomStartRadius:20,
+        shadowColor:'#171717',
+        shadowOffset: {width: 10, height: 3},
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
     },
     contentAvatar:{
         alignItems:'flex-start',
          borderBottomRadius:130,
          flexDirection:'row',
-         marginLeft:23
+         marginLeft:23,
+         shadowColor:'#171717',
+        shadowOffset: {width: 10, height: 3},
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
     },
     pencilAvatar:{
         marginTop:55,
