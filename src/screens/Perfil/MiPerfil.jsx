@@ -29,7 +29,10 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            6556+596+5495
           </Text>
-          <Ionicons name="pencil-outline" size={20} color='black' />
+          <TouchableOpacity>
+            <Ionicons name="pencil-outline" size={20} color='black' />
+          </TouchableOpacity>
+          
         </View>    
         <Text style={styles.titleDato}>Correo electronico  </Text>
         <View style={styles.datos}>
@@ -37,7 +40,10 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            Leonel-Andres-Mess@gmialca.com
           </Text>
-          <Ionicons name="pencil-outline" size={20} color='black' />
+          <TouchableOpacity>
+            <Ionicons name="pencil-outline" size={20} color='black' />
+          </TouchableOpacity>
+          
         </View>
 
         <Text style={styles.titleDato}>  Direccion</Text>
@@ -46,7 +52,11 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
           Argentina tierra del MATE Y el Fernet
           </Text>
-          <Ionicons name="pencil-outline" size={20} color='black' />
+
+          <TouchableOpacity>
+            <Ionicons name="pencil-outline" size={20} color='black' />
+          </TouchableOpacity>
+          
         </View>
         
         <Text style={styles.titleDato}> Contrasenia</Text>
@@ -55,7 +65,10 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            ***********
           </Text>
-          <Ionicons name="pencil-outline" size={20} color='black' />
+          <TouchableOpacity>
+             <Ionicons name="pencil-outline" size={20} color='black' />
+          </TouchableOpacity>
+         
         </View>
     </View>
     <View style={styles.contentBtnEcho}>
