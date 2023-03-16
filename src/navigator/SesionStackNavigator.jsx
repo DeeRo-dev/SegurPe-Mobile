@@ -16,7 +16,11 @@ export const SesionStackNavigator = () => {
   return (
     <Stack.Navigator 
       initialRouteName='HomeRegistrarIniciarSesion'
-     
+      options={{
+        headerStyle:{
+          backgroundColor:'#16253A',
+        }
+      }}
     >
       <Stack.Screen name="HomeRegistrarIniciarSesion" 
       options={{
@@ -26,10 +30,63 @@ export const SesionStackNavigator = () => {
       component={HomeRegistrarIniciarSesion} />
       <Stack.Screen name="InicioSesion" options={{title:'Iniciar Sesion'}} component={InicioSesion} />
       <Stack.Screen name="CrearCuenta" options={{title:'Crear Cuenta'}} component={CrearCuenta} />
-      <Stack.Screen name="EditeTelefono" options={{title:'Edición '}} component={EditeTelefono} />
-      <Stack.Screen name="EditeMail" options={{title:'Edición'}} component={EditeMail} />
-      <Stack.Screen name="EditeDireccion" options={{title:'Edición '}} component={EditeDireccion} />
-      <Stack.Screen name="EditeContrasenia" options={{title:'Edición '}} component={EditeContrasenia} />
+      <Stack.Screen 
+        options={{
+          title:'Edición', 
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="EditeTelefono" 
+        component={EditeTelefono} />
+      <Stack.Screen 
+        options={{
+          title:'Edición',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="EditeMail" component={EditeMail} />
+      <Stack.Screen 
+        options={{
+          title:'Edición',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+          }}
+          name="EditeDireccion" component={EditeDireccion} />
+      <Stack.Screen
+        options={{
+          title:'Edición',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="EditeContrasenia"  component={EditeContrasenia} />
     </Stack.Navigator>
   );
 }
