@@ -41,7 +41,7 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            Leonel-Andres-Mess@gmialca.com
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {navigator.navigate('EditeMail')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
           </TouchableOpacity>
           
@@ -54,7 +54,7 @@ export const MiPerfil = () => {
           Argentina tierra del MATE Y el Fernet
           </Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {navigator.navigate('EditeDireccion')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
           </TouchableOpacity>
           
@@ -66,7 +66,7 @@ export const MiPerfil = () => {
           <Text style={styles.dato}>
            ***********
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {navigator.navigate('EditeContrasenia')}}>
              <Ionicons name="pencil-outline" size={20} color='black' />
           </TouchableOpacity>
          

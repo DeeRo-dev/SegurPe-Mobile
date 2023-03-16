@@ -10,7 +10,6 @@ export const EditeTelefono = () => {
          </View>
          <Text  style={style.titleName}> Número de teléfono</Text>
         </View>
-
         <View style={style.contentDatos}>
         <View style={style.contTitles}>
           <Text style={style.titleExp}>Enviaremos un código para verificar tu celular</Text>
@@ -25,7 +24,7 @@ export const EditeTelefono = () => {
         <View style={style.contentBtn}>
           <TouchableOpacity>
             <View style={style.btn}>
-               <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Btn enviar code</Text>
+               <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Enviar código</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -78,7 +77,6 @@ titleExp:{
 subTitleExp:{
  color:'#75767F',
  fontSize:12,
- backgroundColor:'red',
  width:'80%'
 },
 titleInputs:{
