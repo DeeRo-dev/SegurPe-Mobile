@@ -11,11 +11,18 @@ export const styles = StyleSheet.create({
     },
     
     input:{
-        backgroundColor:'#D8E2FF',
-        borderBottomWidth:1,
         width: 382,
         height: 56,
         marginVertical:10,
+        paddingVertical:5,
+        borderBottomWidth:2,
+        borderRadius:100,
+        borderColor:'#C4C6CF',
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center',
+        backgroundColor:'#D8E2FF',
+        paddingLeft:22,
     },
     btn:{
         backgroundColor:'#F57D20',
