@@ -2,15 +2,16 @@ import React from 'react';
 import {View, StyleSheet, Button, Alert} from 'react-native';
 
 export const ModalBasico= () => {
-  console.log('hola')
+  
   const createTwoButtonAlert = () =>
     Alert.alert('¿Estás seguro que deseas cerrar sesión?', '', [
       {
-        text: 'No',
+        text: 'Cancelar',
         onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
+        style: 'Cancel',
+        
       },
-      {text: 'Si', onPress: () => console.log('OK Pressed')},
+      {text: 'Cerrar sesión', onPress: () => console.log('OK Pressed')},
     ]);
 
   // const createThreeButtonAlert = () =>
