@@ -2,9 +2,9 @@ import React from 'react';
 import {View, StyleSheet, Button, Alert} from 'react-native';
 
 export const ModalBasico= () => {
-
+  console.log('hola')
   const createTwoButtonAlert = () =>
-    Alert.alert('Alert Title', 'My Alert Msg', [
+    Alert.alert('¿Estás seguro que deseas cerrar sesión?', '', [
       {
         text: 'No',
         onPress: () => console.log('Cancel Pressed'),
@@ -27,13 +27,15 @@ export const ModalBasico= () => {
   //     {text: 'OK', onPress: () => console.log('OK Pressed')},
   //   ]);
 
-  return (
-    <View style={styles.container}>
+  // return (
+  //   <View style={styles.container}>
       
-      <Button title={'2-Button Alert'} onPress={createTwoButtonAlert} />
-      {/* <Button title={'3-Button Alert'} onPress={createThreeButtonAlert} /> */}
-    </View>
-  );
+  //     <Button title={'2-Button Alert'} onPress={createTwoButtonAlert} />
+  //     {/* <Button title={'3-Button Alert'} onPress={createThreeButtonAlert} /> */}
+  //   </View>
+  // );
+
+return createTwoButtonAlert()
 };
 
 const styles = StyleSheet.create({

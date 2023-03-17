@@ -10,6 +10,7 @@ import { Configuracion } from "../screens/Configuracion/Configuracion";
 import { Map } from "../screens/Map/Map";
 import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { ModalBasico } from "../components/Modals/ModalBasico";
 
 const Drawer = createDrawerNavigator();
 //Navegaciones del menu lateral
@@ -70,7 +71,7 @@ const MenuInterno = ({navigation}) =>{
       
       </View>   
       <View style={style.contentSesion}>
-          <TouchableOpacity style={style.btnSesion}>
+          <TouchableOpacity style={style.btnSesion} onPress={() => ModalBasico()}>
             <Ionicons name="close-outline" size={32} color="#FFFFFF" />
              <Text style={style.itemTextSesion} >  Cerrar sesión</Text>  
           </TouchableOpacity>
