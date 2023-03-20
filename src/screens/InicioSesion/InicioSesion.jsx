@@ -8,10 +8,12 @@ export const InicioSesion = () => {
   const navigator = useNavigation()
   return (
     <View style={styles.content}>
-      <Image style={styles.img} source={require('../../assets/Group169.png')}/>
+      
         <View>
+          <Text style={styles.titleInput}>Email</Text>
           <TextInput style={styles.input} placeholder="email"/>
-          <TextInput style={styles.input} placeholder="Contrasenia"/>
+          <Text style={styles.titleInput}>Contraseña</Text>
+          <TextInput style={styles.input} placeholder="Contraseña"/>
         </View>
         <TouchableOpacity  onPress={() => {navigator.navigate('maps')}} style={styles.btn}>
               <Text style={styles.textBtn}>Confirmar</Text>

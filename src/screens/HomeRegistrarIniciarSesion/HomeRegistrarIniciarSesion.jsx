@@ -9,7 +9,11 @@ export const HomeRegistrarIniciarSesion = () => {
   const navigator = useNavigation();
   return (
     <View style={styles.content}>
-       <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
+
+      <View style={styles.contentImg}>
+         <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
+      </View>
+      
        <View style={styles.contentBtns}>
           <Text style={styles.title}>No tienes una cuenta</Text>
           <TouchableOpacity onPress={() => {navigator.navigate('CrearCuenta')}} style={styles.btnLog}>

@@ -8,6 +8,14 @@ export const styles = StyleSheet.create({
     contentBtns:{
         marginVertical:50,
     },
+    contentImg:{
+        width:'100%',
+        height:255,
+        alignItems:'center',
+        backgroundColor:'#D8E2FF',
+        borderBottomEndRadius:200,
+        borderBottomLeftRadius:200,
+    },
     imgSegur:{
         marginTop:40
     },

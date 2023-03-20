@@ -6,10 +6,15 @@ export const styles = StyleSheet.create({
         height:400,
         alignItems:'center',
     },
+ 
     img:{
           marginVertical:40
     },
-    
+    titleInput:{
+        fontSize:12,
+        marginLeft:22,
+        marginTop:50,
+    },
     input:{
         width: 382,
         height: 56,
@@ -31,7 +36,8 @@ export const styles = StyleSheet.create({
         height: 40,
         alignItems:'center',
         justifyContent:'center',
-        marginTop:180,
+        marginTop:280,
+        
     },
     textBtn:{
         color:'#FFFFFF',
