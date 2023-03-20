@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
 
 export const EditeDireccion = () => {
+
+
+  
+  const [direc, setDirec] = useState(Number)
+
+  const onChangeNum = (value) =>{
+    setDirec(value)
+  }
+  console.log(direc)
+
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -21,7 +32,7 @@ export const EditeDireccion = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Dirección</Text>
-          <TextInput  style={style.datos} value='512454'/>
+          <TextInput  style={style.datos} placeholder="Berazategui e/bla y asd 234" onChangeText={(value)=> onChangeNum(value)}/>
           
         </View>
         <View style={style.contentBtn}>

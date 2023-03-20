@@ -1,10 +1,39 @@
-import React from 'react'
+import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
 
 export const EditeContrasenia = () => {
+  
+const [clave, setClave] = useState('')
+const [confirmarClave, setConfirmarClave] = useState('')
+
+// setear la nueva clave
+const onChangeClave = (value) =>{
+  setClave(value)
+}
+console.log(clave)
+
+
+// Ver que coincidan las claves
+const confClave = (clave, confirmarClave ) =>{
+  if( clave === confirmarClave){
+		console.log('true')
+		// return true;
+	}else{
+		console.log('false')
+		// return false;
+  }
+}
+// chequear en la api la clave actual
+const checkClave = () =>{
+  console.log('buscar en la API si concide la clave')
+}
+
+
+confClave (clave, confirmarClave);
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -21,11 +50,11 @@ export const EditeContrasenia = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Contraseña actual</Text>
-          <TextInput  style={style.datos} />
+          <TextInput  style={style.datos} placeholder="Password act" onChangeText={(value)=> checkClave(value)}/>
           <Text style={style.titleInputs}>Nueva contraseña</Text>
-          <TextInput  style={style.datos} />
+          <TextInput  style={style.datos} placeholder="Password new" onChangeText={(value)=> onChangeClave(value)}/>
           <Text style={style.titleInputs}>Repite la nueva contraseña</Text>
-          <TextInput  style={style.datos} />
+          <TextInput  style={style.datos} placeholder="Password repite" onChangeText={(value)=> setConfirmarClave(value)}/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
