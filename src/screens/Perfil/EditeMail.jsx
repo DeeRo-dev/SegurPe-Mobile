@@ -1,10 +1,41 @@
-import React from 'react'
+import React, {useState}from 'react';
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
-
 export const EditeMail = () => {
+
+const [email, setEmail] = useState('')
+const [confirmarEmail, setConfirmarEmail] = useState('')
+
+const onChangeEmail = (value) =>{
+  setEmail(value)
+}
+console.log(email)
+
+const validarEmail = (emailValue)=>{
+  let validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+  if( validEmail.test(emailValue) ){
+		console.log('true')
+		// return true;
+	}else{
+		console.log('false')
+		// return false;
+  }
+} 
+
+const confEmail = (email, confEmail ) =>{
+  if( email === confEmail){
+		console.log('true')
+		// return true;
+	}else{
+		console.log('false')
+		// return false;
+  }
+}
+validarEmail(email)
+confEmail(email, confirmarEmail)
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -21,11 +52,11 @@ export const EditeMail = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Correo electrónico</Text>
-          <TextInput  style={style.datos} value='512454'/>
+          <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail(value)} placeholder='example@exp.com'/>
           <Text style={style.titleInputs}>Repetir correo electrónico</Text>
-          <TextInput  style={style.datos} value='512454'/>
-          <Text style={style.titleInputs}>Código de verificación</Text>
-          <TextInput  style={style.datos} value='512454'/>
+          <TextInput  style={style.datos} onChangeText={(value)=> setConfirmarEmail(value)} placeholder='example@exp.com'/>
+          <Text style={style.titleInputs} >Código de verificación</Text>
+          <TextInput  style={style.datos} placeholder='SDaf344'/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
