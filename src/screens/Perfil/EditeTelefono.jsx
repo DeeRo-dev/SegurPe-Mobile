@@ -6,10 +6,9 @@ export const EditeTelefono = () => {
   const [numTel, setNumTel] = useState(Number)
 
   const onChangeNum = (value) =>{
-    
-    console.log(value)
+    setNumTel(value)
   }
-  
+  console.log(numTel)
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -25,7 +24,7 @@ export const EditeTelefono = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Número de teléfono</Text>
-          <TextInput  style={style.datos}  placeholder="n3242" onChangeText={(value)=> onChangeNum(value)}/>
+          <TextInput  style={style.datos} keyboardType="numeric" placeholder="n3242" onChangeText={(value)=> onChangeNum(value)}/>
           <Text style={style.titleInputs}>Código de verificación</Text>
           <TextInput  style={style.datos} />
         </View>
