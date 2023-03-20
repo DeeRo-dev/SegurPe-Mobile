@@ -20,22 +20,11 @@ const ref = useRef();
       ref.current?.setPage(value)
 
   }
-// const nameBtn= (select) => {
-//   switch (select) {
-//     case select === 0:
-//         return ('radio-button-on-outline')
-//     case select === 1:
-//           return ('radio-button-on-outline')
-//     case select === 2:
-//             return ('radio-button-on-outline')
-//     default:
-//       break;
-//   }
-// }
+
   return (
 
     <View style={styles.content}>
-       <Image style={styles.img} source={require('../../assets/Group169.png')}/>
+      
     <PagerView
      style={style.viewPager}
       initialPage={0}

@@ -18,10 +18,17 @@ export const styles = StyleSheet.create({
     },
     textBtnPag:{
     },
+    contentInputs:{
+        marginTop:40,
+    },
+    titleInput:{
+        fontSize:12,
+        marginLeft:22,
+       marginTop:30,
+    },
     input:{
         width: 382,
         height: 56,
-        marginVertical:10,
         paddingVertical:5,
         borderBottomWidth:2,
         borderRadius:100,
@@ -31,6 +38,7 @@ export const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#D8E2FF',
         paddingLeft:22,
+        marginTop:5
     },
     btn:{
         borderRadius:100,
@@ -41,7 +49,7 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         borderWidth:1,
         borderColor:'#004494',
-        marginTop:15
+       marginTop:50
     },
     textBtn:{
         color:'#004494',

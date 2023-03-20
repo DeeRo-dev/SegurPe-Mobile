@@ -6,9 +6,12 @@ export const Datos2 = () => {
   return (
     <View>
         <View>
+            <Text style={styles.titleInput}>Email</Text>
             <TextInput style={styles.input} placeholder="Email"/>
-            <TextInput secureTextEntry={true} style={styles.input} placeholder="Contrase;e"/>
-            <TextInput secureTextEntry={true} style={styles.input} placeholder="Repetir contrasenia"/>
+            <Text style={styles.titleInput}>Contraseña</Text>
+            <TextInput secureTextEntry={true} style={styles.input} placeholder="Contraseña"/>
+            <Text style={styles.titleInput}>Repetir contraseña</Text>
+            <TextInput secureTextEntry={true} style={styles.input} placeholder="Repetir contraseña"/>
         </View>
         
     </View>

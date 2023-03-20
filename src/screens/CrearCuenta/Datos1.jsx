@@ -32,8 +32,10 @@ export const Datos1 = () => {
   }
   return (
     <View style={styles.content}>
-        <View>
+        <View style={styles.contentInputs}>
+            <Text style={styles.titleInput}>Nombre</Text>
             <TextInput style={styles.input} placeholder="Nombre"/>
+            <Text style={styles.titleInput}>Apellido</Text>
             <TextInput style={styles.input} placeholder="Apellido"/>
         </View>
         <TouchableOpacity  onPress={cargarFoto} style={styles.btn}>
