@@ -1,7 +1,15 @@
-import React from 'react'
+import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 export const EditeTelefono = () => {
+
+  const [numTel, setNumTel] = useState(Number)
+
+  const onChangeNum = (value) =>{
+    
+    console.log(value)
+  }
+  
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -17,9 +25,9 @@ export const EditeTelefono = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Número de teléfono</Text>
-          <TextInput  style={style.datos} value='512454'/>
+          <TextInput  style={style.datos}  placeholder="n3242" onChangeText={(value)=> onChangeNum(value)}/>
           <Text style={style.titleInputs}>Código de verificación</Text>
-          <TextInput  style={style.datos} value='512454'/>
+          <TextInput  style={style.datos} />
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
