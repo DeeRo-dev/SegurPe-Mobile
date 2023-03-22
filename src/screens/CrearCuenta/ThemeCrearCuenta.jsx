@@ -107,4 +107,18 @@ export const styles = StyleSheet.create({
         color:'#FFFFFF',
         fontSize:14
     },
+    contTitles:{
+        marginTop:-140,
+        marginLeft:20
+    },
+    titleCodeTel:{
+        color:'#75767F',
+        fontSize:16,
+    },
+    subTitleCodeTel:{
+        color:'#75767F',
+        fontSize:12,
+        width:310
+     
+    },
 })

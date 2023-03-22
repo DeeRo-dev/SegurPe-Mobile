@@ -8,6 +8,7 @@ import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from '../../components/Modals/ModalBasico';
+import { Datos4 } from './Datos4';
 
 export const CrearCuenta = () => {
 
@@ -34,9 +35,12 @@ const ref = useRef();
         <Datos1/>
       </View>
       <View style={style.page} key="2">
-        <Datos2/>
+        <Datos4/>
       </View>
       <View style={style.page} key="3">
+        <Datos2/>
+      </View>
+      <View style={style.page} key="4">
         <Datos3/>
       </View>
     </PagerView>
@@ -48,10 +52,15 @@ const ref = useRef();
     </TouchableOpacity>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(1)}>
       <Text>
-      <Ionicons  name="radio-button-on-outline" size={15} color="black" />
+         <Ionicons name="radio-button-off-outline" size={15} color="black" />
       </Text>
     </TouchableOpacity>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(2)}>
+      <Text>
+      <Ionicons  name="radio-button-on-outline" size={15} color="black" />
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(3)}>
       <Text>
       <Ionicons name="radio-button-on-outline" size={15} color="black" />
       </Text>
