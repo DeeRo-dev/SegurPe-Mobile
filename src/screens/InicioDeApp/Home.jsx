@@ -2,13 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useRef, useState} from 'react'
 import PagerView from 'react-native-pager-view';
 import { View, Text, Image, TouchableOpacity,StyleSheet } from 'react-native'
-import { Datos1 } from './Datos1';
-import { Datos2 } from './Datos2';
-import { Datos3 } from './Datos3';
+import { Vista1 } from './Vista1';
+import { Vista2 } from './Vista2';
+import { Vista3 } from './Vista3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from '../../components/Modals/ModalBasico';
-import { Datos4 } from './Datos4';
+import { Vista4 } from './Vista4';
 
 export const CrearCuenta = () => {
 
@@ -25,25 +25,11 @@ export const CrearCuenta = () => {
   return (
 
     <View style={styles.content}>
-      
-    <PagerView
-     style={style.viewPager}
-      initialPage={0}
-      ref={ref}
-      >
-      <View style={style.page} key="1">
-        <Datos1/>
+        <View style={styles.contentImg}>
+         <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
       </View>
-      <View style={style.page} key="2">
-        <Datos4/>
-      </View>
-      <View style={style.page} key="3">
-        <Datos2/>
-      </View>
-      <View style={style.page} key="4">
-        <Datos3/>
-      </View>
-    </PagerView>
+
+
     <View style={styles.contentBtnPag}>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
       <Text>
@@ -66,13 +52,28 @@ export const CrearCuenta = () => {
       </Text>
     </TouchableOpacity>
     </View>
-    <View style={styles.contentBtnLog}>
-    <TouchableOpacity style={styles.btnLog}>
-        <Text style={styles.textBtnLog}>Crear una cuenta</Text>    
-    </TouchableOpacity>
-    </View>
-
-  </View>  )
+    
+       
+    <PagerView
+     style={style.viewPager}
+      initialPage={0}
+      ref={ref}
+      >
+      <View style={style.page} key="1">
+        <Vista1/>
+      </View>
+      <View style={style.page} key="2">
+       <Vista2/>
+      </View>
+      <View style={style.page} key="3">
+        <Vista3/>
+      </View>
+      <View style={style.page} key="4">
+        <Vista4/>
+      </View>
+    </PagerView>
+  </View>  
+  )
 }
    
 
@@ -85,3 +86,4 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
