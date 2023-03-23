@@ -5,11 +5,20 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const EditeMail = () => {
 
-const [email, setEmail] = useState('')
+const [email, setEmail] = useState({
+  email:'',
+  repEmail:'',
+  code:''
+})
 const [confirmarEmail, setConfirmarEmail] = useState('')
 
-const onChangeEmail = (value) =>{
-  setEmail(value)
+const onChangeEmail = (name, value) =>{
+  // setEmail(value)
+  setEmail({
+    ...email,
+    [name]: value //con bracket notation, le ponemos de key lo que entra por name
+  })
+  console.log(name, value)
 }
 console.log(email)
 
@@ -25,8 +34,8 @@ const validarEmail = (emailValue)=>{
   }
 } 
 
-const confEmail = (email, confEmail ) =>{
-  if( email === confEmail){
+const confEmail = (email, repEmail ) =>{
+  if( email === repEmail){
 		console.log('true')
 		// return true;
 	}else{
@@ -35,7 +44,7 @@ const confEmail = (email, confEmail ) =>{
   }
 }
 validarEmail(email)
-confEmail(email, confirmarEmail)
+confEmail((email.email, email.repEmail ))
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -52,11 +61,11 @@ confEmail(email, confirmarEmail)
         </View>
         <View>
           <Text style={style.titleInputs}>Correo electrónico</Text>
-          <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail(value)} placeholder='example@exp.com'/>
+          <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail('email', value)} placeholder='example@exp.com'/>
           <Text style={style.titleInputs}>Repetir correo electrónico</Text>
-          <TextInput  style={style.datos} onChangeText={(value)=> setConfirmarEmail(value)} placeholder='example@exp.com'/>
+          <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail('repEmail', value)} placeholder='example@exp.com'/>
           <Text style={style.titleInputs} >Código de verificación</Text>
-          <TextInput  style={style.datos} placeholder='SDaf344'/>
+          <TextInput  style={style.datos}  onChangeText={(value)=> onChangeEmail('repEmail', value)} placeholder='SDaf344'/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
