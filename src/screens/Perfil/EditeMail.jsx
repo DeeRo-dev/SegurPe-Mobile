@@ -10,41 +10,42 @@ const [email, setEmail] = useState({
   repEmail:'',
   code:''
 })
-const [confirmarEmail, setConfirmarEmail] = useState('')
+ const [errors, setErrors] = useState({})
+
+function validate(email){
+  var valid = /^(ftp|http|https):\/\/[^ "]+$/.test(email.email);
+ let errors = {};
+  if (!email.email || valid) {
+    errors.email='Se requiere un Email'
+  }
+  // else if(!email.email || !valid){
+  //   email.email = 'Deberias agregar una imgnn'}
+    else if(!email.repEmail || email.email != email.repEmail){
+    errors.repEmail = 'El correo electrónico no coincide. '
+  }else if(!email.code ){
+      errors.code = 'Se requiere el codigo de verificacion'
+  }
+  
+  return errors
+
+}
+
+
 
 const onChangeEmail = (name, value) =>{
-  // setEmail(value)
   setEmail({
     ...email,
     [name]: value //con bracket notation, le ponemos de key lo que entra por name
-  })
-  console.log(name, value)
+     })
+  // console.log(name, value)
+  setErrors(validate({
+    ...email,
+    [name]: value 
+   }));
+ 
 }
-console.log(email)
 
-const validarEmail = (emailValue)=>{
-  let validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
-  if( validEmail.test(emailValue) ){
-		console.log('true')
-		// return true;
-	}else{
-		console.log('false')
-		// return false;
-  }
-} 
-
-const confEmail = (email, repEmail ) =>{
-  if( email === repEmail){
-		console.log('true')
-		// return true;
-	}else{
-		console.log('false')
-		// return false;
-  }
-}
-validarEmail(email)
-confEmail((email.email, email.repEmail ))
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -62,10 +63,19 @@ confEmail((email.email, email.repEmail ))
         <View>
           <Text style={style.titleInputs}>Correo electrónico</Text>
           <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail('email', value)} placeholder='example@exp.com'/>
+          {errors.email && (
+              <Text style={style.textError}>{errors.email}</Text>
+            )}
           <Text style={style.titleInputs}>Repetir correo electrónico</Text>
           <TextInput  style={style.datos} onChangeText={(value)=> onChangeEmail('repEmail', value)} placeholder='example@exp.com'/>
+          {errors.repEmail && (
+              <Text style={style.textError}>{errors.repEmail}</Text>
+            )}
           <Text style={style.titleInputs} >Código de verificación</Text>
-          <TextInput  style={style.datos}  onChangeText={(value)=> onChangeEmail('repEmail', value)} placeholder='SDaf344'/>
+          <TextInput  style={style.datos}  onChangeText={(value)=> onChangeEmail('code', value)} placeholder='SDaf344'/>
+           {errors.code && (
+              <Text style={style.textError}>{errors.code}</Text>
+            )}
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
@@ -73,7 +83,7 @@ confEmail((email.email, email.repEmail ))
                <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Enviar código</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity disabled={errors}>
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
@@ -174,4 +184,9 @@ textBtnListo:{
   color:'#4D5656',
   fontSize:14,
 },
+textError:{
+  color:'red',
+  marginLeft:12,
+  fontSize:12,
+}
 })
