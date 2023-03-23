@@ -35,9 +35,9 @@ function validate(email){
 const onChangeEmail = (name, value) =>{
   setEmail({
     ...email,
-    [name]: value //con bracket notation, le ponemos de key lo que entra por name
+    [name]: value 
      })
-  // console.log(name, value)
+ 
   setErrors(validate({
     ...email,
     [name]: value 
@@ -83,8 +83,15 @@ const onChangeEmail = (name, value) =>{
                <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Enviar código</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity disabled={errors}>
-             <View style={style.btnListo}>
+
+          
+          <TouchableOpacity disabled={!errors}>
+             <View style={[
+              style.btnListo,
+              (console.log(errors.code),
+                !email.email ||!email.repEmail ||!email.code )  ?  style.bkColorNoListo: style.bkColorListo
+               ]
+            }>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
           </TouchableOpacity>
@@ -178,8 +185,10 @@ btnListo:{
   flexDirection:'row',
   justifyContent:'space-around',
   alignItems:'center',
-  backgroundColor:'#D5DBDB'
+  
 },
+bkColorListo:{backgroundColor:'#F57D20'},
+bkColorNoListo:{backgroundColor:'#D5DBDB'},
 textBtnListo:{
   color:'#4D5656',
   fontSize:14,
