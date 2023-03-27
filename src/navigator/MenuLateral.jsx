@@ -71,10 +71,16 @@ const MenuInterno = ({navigation}) =>{
       
       </View>   
       <View style={style.contentSesion}>
-          <TouchableOpacity style={style.btnSesion} onPress={() => ModalBasico()}>
+        <ModalBasico 
+        text='Cerrar sesión'
+         titleModal='¿Estás seguro que deseas cerrar sesión?' 
+         btn='Cerrar sesión'> 
+       <TouchableOpacity style={style.btnSesion} >
             <Ionicons name="close-outline" size={32} color="#FFFFFF" />
-             <Text style={style.itemTextSesion} >  Cerrar sesión</Text>  
-          </TouchableOpacity>
+             
+          </TouchableOpacity> 
+          </ModalBasico > 
+    
       </View>
     </DrawerContentScrollView>
    
