@@ -1,13 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
-import React, {useEffect, useRef, useState} from 'react'
+
+import React, { useRef, useState} from 'react'
 import PagerView from 'react-native-pager-view';
-import { View, Text, Image, TouchableOpacity,StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity,StyleSheet, ScrollView } from 'react-native'
+
 import { Datos1 } from './Datos1';
 import { Datos2 } from './Datos2';
 import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { ModalBasico } from '../../components/Modals/ModalBasico';
+
 import { Datos4 } from './Datos4';
 
 export const CrearCuenta = () => {
@@ -18,19 +19,12 @@ export const CrearCuenta = () => {
     btn4:false,
   });
 
-
-
-const handleButtonPress = (buttonNumber) => {
-  setActiveButton(buttonNumber);
-};
-  const [select, setSelect] = useState(0)
   const ref = useRef();
-
+  
   const setBtn =(btn)=>{
-
-    console.log(btn)
+    // console.log(btn)
     switch (btn) {
-      case btn = 'btn1':
+      case  0:
         setActiveButton({
           btn1:true,
           btn2:false,
@@ -39,7 +33,7 @@ const handleButtonPress = (buttonNumber) => {
         })
        
         break;
-        case btn = 'btn2':
+        case 1:
         setActiveButton({
           btn1:false,
           btn2:true,
@@ -48,7 +42,7 @@ const handleButtonPress = (buttonNumber) => {
         })
         
         break;
-        case btn = 'btn3':
+        case  2:
         setActiveButton({
           btn1:false,
           btn2:false,
@@ -56,7 +50,7 @@ const handleButtonPress = (buttonNumber) => {
           btn4:false,
         })
         break;
-        case btn = 'btn4':
+        case 3:
         setActiveButton({
           btn1:false,
           btn2:false,
@@ -67,54 +61,56 @@ const handleButtonPress = (buttonNumber) => {
     }
   }
 
-  const selectBtn = (btn, value) => {
-      setSelect(value)
-     
+  const selectBtn = (value) => {
       ref.current?.setPage(value)
-   
-     setBtn(btn)
-      
+     setBtn(value)
   }
-  console.log(activeButton)
+
+
+ 
+
   return (
 
     <View style={styles.content}>
       
     <PagerView
-     style={style.viewPager}
+      style={style.viewPager}
       initialPage={0}
       ref={ref}
+      onPageSelected={e => {setBtn(e.nativeEvent.position)}}
       >
-      <View style={style.page}  key="1">
-        <Datos1/>
+
+      <View style={style.page} key="1">
+        <Datos1 />
       </View>
-      <View style={style.page} key="2">
+      <View style={style.page}  key="2">
         <Datos4/>
       </View>
-      <View style={style.page} key="3">
+      <View style={style.page}  key="3">
         <Datos2/>
       </View>
       <View style={style.page} key="4">
         <Datos3/>
       </View>
+    
     </PagerView>
     <View style={styles.contentBtnPag}>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn('btn1', 0)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
       <Text>
          <Ionicons name={activeButton.btn1 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn('btn2', 1)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(1)}>
       <Text>
          <Ionicons  name={activeButton.btn2 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn('btn3', 2)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(2)}>
       <Text>
       <Ionicons   name={activeButton.btn3 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
       </Text>
     </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn('btn4', 3)}>
+    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(3)}>
       <Text>
       <Ionicons  name={activeButton.btn4 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
       </Text>
