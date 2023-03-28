@@ -6,19 +6,29 @@ import {styles} from './ThemeInicioSesion'
 
 export const InicioSesion = () => {
   const navigator = useNavigation()
-  const [email, setEmail] = useState('');
-  const [clave, setClave] = useState('')
+  const [datos, setDatos] = useState({
+    email:'',
+    clave:''
+  });
+  // const [clave, setClave] = useState('')
 
-  console.log(email, clave)
+  const cargarDatos = (name, value) =>{
+    
+     setDatos({
+      ...datos,
+      [name]: value}
+     )
+  }
+  console.log(datos)
 
   return (
     <View style={styles.content}>
       
         <View>
           <Text style={styles.titleInput}>Email</Text>
-          <TextInput style={styles.input} placeholder="email" onChangeText={(value) => setEmail(value)}/>
+          <TextInput style={styles.input} placeholder="email" onChangeText={(value) => cargarDatos('email',value)}/>
           <Text style={styles.titleInput}>Contraseña</Text>
-          <TextInput style={styles.input} placeholder="Contraseña" onChangeText={(value) => setClave(value)}/>
+          <TextInput style={styles.input} placeholder="Contraseña" onChangeText={(value) => cargarDatos('clave', value)}/>
         </View>
         <TouchableOpacity  onPress={() => {navigator.navigate('maps')}} style={styles.btn}>
               <Text style={styles.textBtn}>Confirmar</Text>
