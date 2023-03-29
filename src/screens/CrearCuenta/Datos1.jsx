@@ -1,12 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import * as MediaLibrary from 'expo-media-library';
 import * as  ImagePicker from 'expo-image-picker'
 import { Alert } from 'react-native'
 import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput } from 'react-native'
+import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 
 export const Datos1 = () => {
 
+  const estado = useContext(UsuarioContext)
+
+ 
+
+  const onChangeData = (name, value)=>{
+    // estado(name)
+    console.log(name)
+  }
   const loadImageFromGallery = async(array) =>{
     const response = {status:false, image:null}
     const resultPermissions = await MediaLibrary.requestPermissionsAsync();
@@ -34,7 +43,7 @@ export const Datos1 = () => {
     <View style={styles.content}>
         <View style={styles.contentInputs}>
             <Text style={styles.titleInput}>Nombre</Text>
-            <TextInput style={styles.input} placeholder="Nombre"/>
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('name', value)} placeholder="Nombre"/>
             <Text style={styles.titleInput}>Apellido</Text>
             <TextInput style={styles.input} placeholder="Apellido"/>
         </View>
