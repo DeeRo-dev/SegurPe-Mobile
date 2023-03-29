@@ -2,10 +2,10 @@ import React, { createContext, useReducer } from "react"
 
 
 export const usuarioState = {
-    nombre:'Derek',
-    apellido:'cabrera',
+    nombre:'',
+    apellido:'',
     img:'',
-    numCel:'456654',
+    numCel:'',
     codVer:'',
     email:'',
     clave:'',
@@ -15,9 +15,40 @@ export const usuarioState = {
 const usuarioReducer = ( state = usuarioState, payload) => {
     switch (payload.type) {
         case 'name':
-            console.log('name entro')
-            return state
-    
+            return {
+                ...state,
+                nombre: payload.data
+            }
+        case 'apellido':
+            return {
+                ...state,
+                apellido: payload.data
+            }
+       case 'numCel':
+           return {
+               ...state,
+               numCel: payload.data
+        }  
+        case 'codVer':
+             return {
+                 ...state,
+                 codVer: payload.data
+          }  
+          case 'email':
+             return {
+                 ...state,
+                 email: payload.data
+          }  
+          case 'clave':
+             return {
+                 ...state,
+                 clave: payload.data
+          }      
+          case 'terminos':
+             return {
+                 ...state,
+                 terminos: payload.data
+          }      
         default:
             break;
     }
@@ -28,6 +59,7 @@ export const UsuarioContext = createContext(usuarioState)
 export const UsuarioProvider = (props) =>{
     
     const [login, loginAction] = useReducer(usuarioReducer,  usuarioState)
+
     return (
         <UsuarioContext.Provider value={[login, loginAction]}>
             {props.children}
