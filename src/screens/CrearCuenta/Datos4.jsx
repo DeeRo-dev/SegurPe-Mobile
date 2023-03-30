@@ -1,8 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput } from 'react-native'
+import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext'
 
 export const Datos4 = () => {
+  const [login, loginAction] = useContext(UsuarioContext)
+  const onChangeData = (name, value)=>{
+    loginAction({
+      type: name,
+      data: value
+    })
+    
+}
   return (
     <View>  
         <View style={styles.contTitles}>
@@ -12,9 +21,9 @@ export const Datos4 = () => {
 
        <View>
             <Text style={styles.titleInput}>Número de teléfono</Text>
-            <TextInput style={styles.input} keyboardType="numeric" placeholder="154545"/>
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('numCel', value)} keyboardType="numeric" placeholder="154545"/>
             <Text style={styles.titleInput}>Código de verificación</Text>
-            <TextInput secureTextEntry={true} style={styles.input} placeholder="Contraseña"/>
+            <TextInput secureTextEntry={true} style={styles.input}  onChangeText={(value)=>onChangeData('codVer', value)} placeholder="Contraseña"/>
         </View>
         
     </View>

@@ -10,8 +10,8 @@ export const Datos1 = () => {
 
   const [login, loginAction] = useContext(UsuarioContext)
 
- console.log(login)
-
+ 
+// Funcion para cargar en el estado global los datos de los inputs
   const onChangeData = (name, value)=>{
       loginAction({
         type: name,
@@ -19,6 +19,8 @@ export const Datos1 = () => {
       })
       
   }
+
+
   const loadImageFromGallery = async(array) =>{
     const response = {status:false, image:null}
     const resultPermissions = await MediaLibrary.requestPermissionsAsync();
