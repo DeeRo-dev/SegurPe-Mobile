@@ -1,6 +1,6 @@
 import React  ,{ useState,useContext }from 'react'
 import {styles} from './ThemeCrearCuenta'
-import { View,Text, ScrollView, TextInput } from 'react-native'
+import { View,Text, ScrollView, TouchableOpacity } from 'react-native'
 import { CheckBox } from 'react-native-elements';
 import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 
@@ -43,6 +43,11 @@ export const Datos3 = () => {
         checkedColor={'#000000'}
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
+      <View style={styles.contentBtnLog}>
+    <TouchableOpacity style={styles.btnLog}>
+        <Text style={styles.textBtnLog}>Crear una cuenta</Text>    
+    </TouchableOpacity>
+    </View>
        </ScrollView>
     </View>
   )

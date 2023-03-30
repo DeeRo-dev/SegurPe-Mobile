@@ -96,9 +96,8 @@ export const styles = StyleSheet.create({
     btnLog:{
         backgroundColor:'#F57D20',
         borderRadius:100,
-        width: 382,
+        width: 362,
         height: 40,
-    
         alignItems:'center',
         justifyContent:'center',
         marginVertical:20

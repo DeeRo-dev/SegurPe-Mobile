@@ -1,5 +1,5 @@
 
-import React, { useRef, useState} from 'react'
+import React, { useRef, useState,useContext} from 'react'
 import PagerView from 'react-native-pager-view';
 import { View, Text, Image, TouchableOpacity,StyleSheet, ScrollView } from 'react-native'
 import { Datos1 } from './Datos1';
@@ -8,10 +8,12 @@ import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Datos4 } from './Datos4';
-import { UsuarioProvider } from '../../contextCrearUsuario/CrearUsuarioContext';
-
+import { UsuarioProvider, usuarioState} from '../../contextCrearUsuario/CrearUsuarioContext';
+import { UsuarioContext}  from '../../contextCrearUsuario/CrearUsuarioContext';
 
 export const CrearCuenta = () => {
+
+
   const [activeButton, setActiveButton] = useState({
     btn1:true,
     btn2:false,
@@ -67,12 +69,13 @@ export const CrearCuenta = () => {
   }
 
 
- 
+  
 
   return (
 
     <View style={styles.content}>
    <AppState>
+  
     <PagerView
       style={style.viewPager}
       initialPage={0}
@@ -117,11 +120,7 @@ export const CrearCuenta = () => {
       </Text>
     </TouchableOpacity>
     </View>
-    <View style={styles.contentBtnLog}>
-    <TouchableOpacity style={styles.btnLog}>
-        <Text style={styles.textBtnLog}>Crear una cuenta</Text>    
-    </TouchableOpacity>
-    </View>
+    
 
   </View>  )
 }

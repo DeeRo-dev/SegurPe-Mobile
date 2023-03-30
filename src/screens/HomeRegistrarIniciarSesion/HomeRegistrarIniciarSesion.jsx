@@ -9,7 +9,7 @@ export const HomeRegistrarIniciarSesion = () => {
   const navigator = useNavigation();
   return (
     <View style={styles.content}>
-
+      
       <View style={styles.contentImg}>
          <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
       </View>
@@ -30,5 +30,12 @@ export const HomeRegistrarIniciarSesion = () => {
               <Text style={styles.textBtnGoogle}>Ingresar con Google</Text>
           </TouchableOpacity>
     </View>
+  )
+}
+export const AppState = ({children}) => {
+  return(
+    <UsuarioProvider>
+      {children}
+    </UsuarioProvider>
   )
 }
