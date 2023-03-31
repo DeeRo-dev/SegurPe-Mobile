@@ -120,4 +120,6 @@ export const styles = StyleSheet.create({
         width:310
      
     },
+    bkColorListo:{backgroundColor:'#F57D20'},
+    bkColorNoListo:{backgroundColor:'#D5DBDB'},
 })

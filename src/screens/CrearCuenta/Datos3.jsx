@@ -21,6 +21,14 @@ export const Datos3 = () => {
        setIsChecked(!isChecked);
        onChangeData(name, !isChecked)
      };
+
+     const controlError = (login) =>{
+      // falta controlar la img que este completo
+        if (!login.nombre ||!login.apellido  ||!login.numCel||!login.codVer ||!login.email ||!login.clave||!login.terminos ) {
+          return true
+        }
+        return false
+     }
   return (
     <View style={styles.contentTerminosCondiciones}>
        <ScrollView>
@@ -44,7 +52,10 @@ export const Datos3 = () => {
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
       <View style={styles.contentBtnLog}>
-    <TouchableOpacity style={styles.btnLog}>
+    <TouchableOpacity disabled={controlError(login)} style={[styles.btnLog, 
+      (controlError(login))  ?  styles.bkColorNoListo: styles.bkColorListo
+    ]}>
+
         <Text style={styles.textBtnLog}>Crear una cuenta</Text>    
     </TouchableOpacity>
     </View>

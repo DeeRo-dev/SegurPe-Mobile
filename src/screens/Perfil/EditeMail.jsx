@@ -88,8 +88,7 @@ const onChangeEmail = (name, value) =>{
           <TouchableOpacity disabled={!errors}>
              <View style={[
               style.btnListo,
-              (console.log(errors.code),
-                !email.email ||!email.repEmail ||!email.code )  ?  style.bkColorNoListo: style.bkColorListo
+              (!email.email ||!email.repEmail ||!email.code )  ?  style.bkColorNoListo: style.bkColorListo
                ]
             }>
                <Text style={style.textBtnListo}>Listo</Text>
