@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { StyleSheet, View } from "react-native";
+import MapStyle from "../../components/CustomerMaps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
@@ -27,7 +28,9 @@ export function Map() {
     <View style={styles.container}>
       {location && ( // Solo muestra el mapa si se ha obtenido la ubicación del usuario
         <MapView
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
+          customMapStyle={MapStyle}
           initialRegion={{
             // Establecer la ubicación inicial del mapa en la posición del usuario
             latitude: location.latitude,
@@ -42,7 +45,6 @@ export function Map() {
               longitude: location.longitude,
             }}
           />
-          // Agregar un marcador en la ubicación del usuario
         </MapView>
       )}
     </View>
