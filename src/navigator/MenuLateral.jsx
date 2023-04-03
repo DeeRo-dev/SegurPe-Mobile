@@ -13,126 +13,150 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
 
 const Drawer = createDrawerNavigator();
-//Navegaciones del menu lateral
+
+const menuItems = [
+  {
+    name: "MiPerfil",
+    title: "Mí perfil",
+    icon: "person-outline",
+    component: MiPerfil,
+  },
+  {
+    name: "Historial",
+    title: "Historial de actividad",
+    icon: "time-outline",
+    component: Historial,
+  },
+  {
+    name: "Configuracion",
+    title: "Configuración",
+    icon: "settings-outline",
+    component: Configuracion,
+  },
+  {
+    name: "Mapa",
+    title: "Mapa",
+    icon: "md-checkmark-circle",
+    component: Map,
+  },
+];
+
 export const MenuLateral = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
         drawerStyle: {
           backgroundColor: "#16253A",
-          width:359
+          width: 359,
         },
       }}
       drawerContent={(props) => <MenuInterno {...props} />}
     >
-      {/* <Drawer.Screen name="Home" component={Home} /> */}
-      {/* <Drawer.Screen name="Map" component={Map} /> */}
-     <Drawer.Screen name="SesionStackNavigator" options={{title:false}} component={SesionStackNavigator} /> 
-      <Drawer.Screen name="MiPerfil" component={MiPerfil} />
-      <Drawer.Screen name="Historial" component={Historial} />
-      <Drawer.Screen name="Configuracion" component={Configuracion} />
+      <Drawer.Screen
+        name="SesionStackNavigator"
+        options={{ title: false }}
+        component={SesionStackNavigator}
+      />
+      {menuItems.map((item) => (
+        <Drawer.Screen
+          key={item.name}
+          name={item.name}
+          component={item.component}
+        />
+      ))}
     </Drawer.Navigator>
   );
 };
 
-const MenuInterno = ({navigation}) =>{
+const MenuInterno = ({ navigation }) => {
   return (
     <DrawerContentScrollView>
-      <View style={style.conteiner}>
-         <View style={style.menuNav}>
-            <Ionicons name="menu-outline" size={32} color="white" />
-            <Text style={style.menuNavText}>Menú</Text>  
-         </View>
-
-          <View>
-          <View style={style.contentItems}>
-             <TouchableOpacity 
-              onPress={() => navigation.navigate("MiPerfil")}
-             >
-               <Text style={style.itemText}><Ionicons name="person-outline" size={20} color="white" />   Mí perfil</Text>
-             </TouchableOpacity>
-             </View>
-             <View style={style.contentItems}>
-               <TouchableOpacity 
-                onPress={() => navigation.navigate("Historial")}
-               >  
-                <Text style={style.itemText}><Ionicons name="time-outline" size={20} color="white" />   Historial de actividad</Text>
-             </TouchableOpacity>
-             </View>
-            <View style={{...style.contentItems, borderBottomWidth:2}}>
-              <TouchableOpacity 
-                onPress={() => navigation.navigate("Configuracion")}
-              >
-               <Text style={style.itemText}><Ionicons name="settings-outline" size={20} color="white" />   Configuración</Text>
-             </TouchableOpacity>
-            </View>
-             
-         </View>
-      
-      </View>   
-      <View style={style.contentSesion}>
-        <ModalBasico 
-        text='Cerrar sesión'
-         titleModal='¿Estás seguro que deseas cerrar sesión?' 
-         btn='Cerrar sesión'> 
-       <TouchableOpacity style={style.btnSesion} >
-            <Ionicons name="close-outline" size={32} color="#FFFFFF" />
-             
-          </TouchableOpacity> 
-          </ModalBasico > 
-    
+      <View style={styles.container}>
+        <MenuHeader />
+        {menuItems.map((item) => (
+          <MenuItem
+            key={item.name}
+            title={item.title}
+            iconName={item.icon}
+            onPress={() => navigation.navigate(item.name)}
+          />
+        ))}
       </View>
+      <LogoutButton />
     </DrawerContentScrollView>
-   
-  
-  )
+  );
+};
 
-}
+const MenuHeader = () => (
+  <View style={styles.menuNav}>
+    <Ionicons name="menu-outline" size={32} color="white" />
+    <Text style={styles.menuNavText}>Menú</Text>
+  </View>
+);
 
-const style = StyleSheet.create({
-  conteiner:{
+const MenuItem = ({ title, iconName, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.contentItems}>
+    <Text style={styles.itemText}>
+      <Ionicons name={iconName} size={20} color="white" /> {title}
+    </Text>
+  </TouchableOpacity>
+);
+
+const LogoutButton = () => (
+  <View style={styles.contentSesion}>
+    <ModalBasico
+      text="Cerrar sesión"
+      titleModal="¿Estás seguro que deseas cerrar sesión?"
+      btn="Cerrar sesión"
+    >
+      <TouchableOpacity style={styles.btnSesion}>
+        <Ionicons name="close-outline" size={32} color="#FFFFFF" />
+      </TouchableOpacity>
+    </ModalBasico>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
-    width:'80%',
-    alignSelf:'center',
+    width: "80%",
+    alignSelf: "center",
   },
-  menuNav:{
-    flex:1,
-    flexDirection:'row',
-    // justifyContent:'space-between',
-    marginBottom:20,
+  menuNav: {
+    flexDirection: "row",
+    marginBottom: 20,
   },
-  menuNavText:{
-    fontSize:24,
-    color:'#FFFFFF',
-    flex:1,
-    textAlign:'center'
+  menuNavText: {
+    fontSize: 24,
+    color: "#FFFFFF",
+    flex: 1,
+    textAlign: "center",
   },
-  contentItems:{
-    borderWidthBottom:1,
-    borderColor:'white',
-    height:60,
-    justifyContent:'center',
+  contentItems: {
+    borderBottomWidth: 1,
+    borderColor: "white",
+    height: 60,
+    justifyContent: "center",
     borderTopWidth: 2,
-    borderColor:'#FFFFFF'
+    borderColor: "#FFFFFF",
   },
-  itemText:{
-    color:'#FFFFFF',
-    fontSize:16,
+  itemText: {
+    color: "#FFFFFF",
+    fontSize: 16,
   },
-  contentSesion:{
-    flexDirection:'row',
-    height:500,
-    alignItems:'flex-end',
-    width:'80%',
-    alignSelf:'center',
-    
+  contentSesion: {
+    flexDirection: "row",
+    height: 500,
+    alignItems: "flex-end",
+    width: "80%",
+    alignSelf: "center",
   },
-  btnSesion:{
-    flexDirection:'row',
-    alignItems:'center',
+  btnSesion: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  itemTextSesion:{
-    color:'#FFFFFF',
-    fontSize:16
-  }
-})
+  itemTextSesion: {
+    color: "#FFFFFF",
+    fontSize: 16,
+  },
+});
