@@ -1,7 +1,9 @@
-import React, {useContext} from 'react'
-import {styles} from './ThemeCrearCuenta'
-import { View,Text, TouchableOpacity, TextInput } from 'react-native'
-import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext'
+import React, {useContext} from 'react';
+import {styles} from './ThemeCrearCuenta';
+import { View,Text, TouchableOpacity, TextInput } from 'react-native';
+import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
+
+
 
 export const Datos4 = () => {
   const [login, loginAction] = useContext(UsuarioContext)
@@ -12,6 +14,8 @@ export const Datos4 = () => {
     })
     
 }
+
+
   return (
     <View>  
         <View style={styles.contTitles}>

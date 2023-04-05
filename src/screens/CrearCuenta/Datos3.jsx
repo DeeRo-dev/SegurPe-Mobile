@@ -29,6 +29,12 @@ export const Datos3 = () => {
         }
         return false
      }
+
+     const envDatos = () =>{
+      console.log('env datos')
+    }
+    
+
   return (
     <View style={styles.contentTerminosCondiciones}>
        <ScrollView>
@@ -52,7 +58,7 @@ export const Datos3 = () => {
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
       <View style={styles.contentBtnLog}>
-    <TouchableOpacity disabled={controlError(login)} style={[styles.btnLog, 
+    <TouchableOpacity onPress={envDatos} disabled={controlError(login)} style={[styles.btnLog, 
       (controlError(login))  ?  styles.bkColorNoListo: styles.bkColorListo
     ]}>
 
