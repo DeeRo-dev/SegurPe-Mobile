@@ -3,6 +3,7 @@ import {styles} from './ThemeCrearCuenta'
 import { View,Text, ScrollView, TouchableOpacity } from 'react-native'
 import { CheckBox } from 'react-native-elements';
 import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
+import { registerUser } from '../../helpers/ServerInteractions';
 
 export const Datos3 = () => {
 
@@ -30,8 +31,11 @@ export const Datos3 = () => {
         return false
      }
 
-     const envDatos = () =>{
-      console.log('env datos')
+     
+     const envDatos = (data) =>{
+      if (data) {
+        registerUser(data);
+      }
     }
     
 
@@ -58,7 +62,7 @@ export const Datos3 = () => {
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
       <View style={styles.contentBtnLog}>
-    <TouchableOpacity onPress={envDatos} disabled={controlError(login)} style={[styles.btnLog, 
+    <TouchableOpacity onPress={() => envDatos(login)} disabled={controlError(login)} style={[styles.btnLog, 
       (controlError(login))  ?  styles.bkColorNoListo: styles.bkColorListo
     ]}>
 

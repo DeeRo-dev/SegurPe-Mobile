@@ -42,7 +42,8 @@ export const Datos1 = () => {
   }
   const cargarFoto = async() =>{
     const result = await loadImageFromGallery([1,1])
-    console.log(result)
+    onChangeData('img', result.image)
+    console.log(result.image)
   }
   return (
     <View style={styles.content}>
@@ -51,6 +52,8 @@ export const Datos1 = () => {
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('name', value)} placeholder="Nombre"/>
             <Text style={styles.titleInput}>Apellido</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('apellido', value)} placeholder="Apellido"/>
+            <Text style={styles.titleInput}>Fecha de nacimiento</Text>
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('fechaDeNacimiento', value)} placeholder="Apellido"/>
         </View>
         <TouchableOpacity  onPress={cargarFoto} style={styles.btn}>
             <Text style={styles.textBtn}>Cargar foto de DNI</Text>

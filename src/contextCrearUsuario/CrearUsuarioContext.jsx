@@ -1,14 +1,30 @@
 import React, { createContext, useReducer } from "react"
 
+// * DATOS A ENVIAR--
+// * "names": "",
+//  "lastnames": "",
+//  "email": "",
+//  "password": "",
+//  "phone": "",
+//  "address": "",
+//  "birthdate": "",
+//  "DNI": "",
+//  "imgProfile": "",
+//  "DniFront": "",
+//  "DniBack": ""
+
 
 export const usuarioState = {
     nombre:'',
     apellido:'',
     img:'',
+    dniFront:"",
+    dniBack:"",
     numCel:'',
     codVer:'',
     email:'',
     clave:'',
+    fechaDeNacimiento:'',
     terminos:false,
 }
 
@@ -34,6 +50,14 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                  ...state,
                  codVer: payload.data
           }  
+          case 'img':
+            return {
+                ...state,
+                img: payload.data,
+                dniFront: payload.data,
+                dniBack: payload.data,
+
+         }  
           case 'email':
              return {
                  ...state,
@@ -44,6 +68,11 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                  ...state,
                  clave: payload.data
           }      
+          case 'fechaDeNacimiento':
+            return {
+                ...state,
+                fechaDeNacimiento: payload.data
+         }  
           case 'terminos':
              return {
                  ...state,
