@@ -1,7 +1,7 @@
 import axios from 'axios';
 // const urlServer = import la url el .env;
 
-const urlServer = 'http://localhost:3000/'
+const urlServer = 'http://localhost:3000/api/v1/'
 
 // axios({
 //     method: 'get',
@@ -12,14 +12,11 @@ const urlServer = 'http://localhost:3000/'
   
 
 /*
-// Enviar los datos para logearse//
-*Descripcion: Interactua con las ruta login. PUT -
+// Enviar los datos para Registrarse//
+*Descripcion: Interactua con las ruta signupUsers.POST -
  * Entradas:
  * data: objeto con las propiedades para la llamada
- * route: ruta del servidor,
- 
  * Retorna: Respuesta del servidor
-
  */
 const registerUser = async(data)=> {
     try {
@@ -31,6 +28,24 @@ const registerUser = async(data)=> {
 
 }
 
+/*
+// Enviar los datos para Login//
+*Descripcion: Interactua con las ruta loginUser .POST -
+ * Entradas:
+ * data: objeto con las propiedades para la llamada
+ * Retorna: Respuesta del servidor
+ */
+const login = async(data)=> {
+    try {
+        const resp = await axios.post(`${urlServer}loginUsers`)
+             console.log(resp);
+    } catch (error) {
+         console.log(error)
+    }
+
+}
+
 export {
     registerUser,
+    login
 }
