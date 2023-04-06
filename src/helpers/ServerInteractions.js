@@ -17,15 +17,14 @@ const urlServer = 'http://localhost:3000/'
  * Entradas:
  * data: objeto con las propiedades para la llamada
  * route: ruta del servidor,
- * output: tipo de salida deseada ('text' o 'json')
- * jwt: JSON Web Token, en caso de ser una llamada de autenticacion omitir este parametro -
+ 
  * Retorna: Respuesta del servidor
 
  */
-const registerUser = async(data, routeoutput, jwt = undefined)=> {
+const registerUser = async(data)=> {
     try {
-        const resp = await axios.get(`${urlServer}`)
-             console.log(resp.data);
+        const resp = await axios.post(`${urlServer}signupUsers`)
+             console.log(resp);
     } catch (error) {
          console.log(error)
     }
