@@ -18,6 +18,7 @@ export const usuarioState = {
     nombre:'',
     apellido:'',
     img:'',
+    address:'',
     dniFront:"",
     dniBack:"",
     numCel:'',

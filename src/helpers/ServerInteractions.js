@@ -1,7 +1,7 @@
 import axios from 'axios';
 // const urlServer = import la url el .env;
 
-const urlServer = 'http://localhost:3000/api/v1/'
+const urlServer = 'http://localhost:3000/auth/'
 
 // axios({
 //     method: 'get',
@@ -19,8 +19,24 @@ const urlServer = 'http://localhost:3000/api/v1/'
  * Retorna: Respuesta del servidor
  */
 const registerUser = async(data)=> {
+console.log(data, 'df')
+let date = 
+{
+
+     names: "DEred",
+     lastnames: "cabrera",
+     email: "deraes@adasd.com",
+     passwor: "31454542+Derek",
+     phone: "32324",
+     address: "dased23",
+     birthdate: "1997-01-25",
+     DNI: "43434367",
+     imgProfile: "",
+     DniFront: "",
+     DniBack: ""
+   };
     try {
-        const resp = await axios.post(`${urlServer}signupUsers`)
+        const resp = await axios.post(`${urlServer}signupUsers`, date)
              console.log(resp);
     } catch (error) {
          console.log(error)
