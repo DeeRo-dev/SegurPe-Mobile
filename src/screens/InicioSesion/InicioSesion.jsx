@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { View, Text, Image, TextInput } from 'react-native'
 import { TouchableOpacity } from 'react-native';
 import {styles} from './ThemeInicioSesion'
-import { login } from '../../helpers/ServerInteractions';
+import { serverUser } from '../../helpers/ServerInteractions';
 
 export const InicioSesion = () => {
   const navigator = useNavigation()
@@ -16,7 +16,7 @@ export const InicioSesion = () => {
 
   const envDatos = (data) =>{
     if (data) {
-      login(data);
+      serverUser(data, 'loginUsers', 'post');
     }
   }
   
@@ -39,7 +39,7 @@ export const InicioSesion = () => {
           <Text style={styles.titleInput}>Contraseña</Text>
           <TextInput style={styles.input} placeholder="Contraseña" onChangeText={(value) => cargarDatos('clave', value)}/>
         </View>
-        {/* disabled={!datos.email || !datos.clave} */}
+        disabled={!datos.email || !datos.clave}
         <TouchableOpacity   onPress={() => envDatos(datos)} style={styles.btn}>
               <Text style={styles.textBtn}>Confirmar</Text>
           </TouchableOpacity>

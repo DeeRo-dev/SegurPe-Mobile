@@ -3,7 +3,7 @@ import {styles} from './ThemeCrearCuenta'
 import { View,Text, ScrollView, TouchableOpacity } from 'react-native'
 import { CheckBox } from 'react-native-elements';
 import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
-import { registerUser } from '../../helpers/ServerInteractions';
+import {serverUser } from '../../helpers/ServerInteractions';
 
 export const Datos3 = () => {
 
@@ -34,7 +34,7 @@ export const Datos3 = () => {
      
      const envDatos = (data) =>{
       if (data) {
-        registerUser(data);
+        serverUser(data, 'singupUsers', 'post');
       }
     }
     

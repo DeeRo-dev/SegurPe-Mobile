@@ -11,7 +11,7 @@ const urlServer = 'http://localhost:3000/auth/'
  * data: objeto con las propiedades para la llamada
  * Retorna: Respuesta del servidor
  */
-const registerUser = async(data )=> {
+const serverUser = async(data,routa , method )=> {
 // console.log(data, 'df')
 let date = 
 {
@@ -38,10 +38,6 @@ let date =
    console.log(response)
 }
 
-
-
-
-
 const conexionServidor = async (url, method, body) => {
     let header;
     let httpOpc;
@@ -52,7 +48,7 @@ const conexionServidor = async (url, method, body) => {
                 "Content-Type": "application/json",
             }
             httpOpc = { 
-              
+                method:method,
                 headers: header,
                 body:body,
             }
@@ -65,30 +61,6 @@ const conexionServidor = async (url, method, body) => {
 
 
 
-
-/*
-// Enviar los datos para Login//
-*Descripcion: Interactua con las ruta loginUser .POST -
- * Entradas:
- * data: objeto con las propiedades para la llamada
- * Retorna: Respuesta del servidor
- */
-const login = async(data)=> {
-    let date =       {
-        email:"deraes@GFGadasd.com",
-        password:"31454542+Derek"
-        }
-    try {
-      const response = await axios.post(urlServer, {
-        email: 'deraes@GFGadasd.com',
-        password: '31454542+Derek'
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-
-}
 /**Descripcion: transforma la respuesta del servidor en un formato legible. -
  *Entradas:
  *response: respuesta del servidor,
@@ -100,6 +72,5 @@ const login = async(data)=> {
 	if (type === "json") return await response.json();
 };
 export {
-    registerUser,
-    login
+    serverUser
 }
