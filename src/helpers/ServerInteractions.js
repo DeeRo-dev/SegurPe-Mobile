@@ -3,23 +3,16 @@ import axios from 'axios';
 
 const urlServer = 'http://localhost:3000/auth/'
 
-// axios({
-//     method: 'get',
-//     //  url: `${baseUrl}/api/users/1`,
-//   }).then((response) => {
-//     console.log(response.data);
-//   });
-  
 
 /*
 // Enviar los datos para Registrarse//
-*Descripcion: Interactua con las ruta signupUsers.POST -
- * Entradas:
+*Descripcion: Interactua con las ruta signupUsers.POST -Sssss
+ * Entradas:SssssssssSss
  * data: objeto con las propiedades para la llamada
  * Retorna: Respuesta del servidor
  */
-const registerUser = async(data)=> {
-console.log(data, 'df')
+const registerUser = async(data )=> {
+// console.log(data, 'df')
 let date = 
 {
      names: "DEred",
@@ -34,14 +27,44 @@ let date =
      DniFront: "",
      DniBack: ""
    };
-    try {
-        const resp = await axios.post('http://localhost:3000/auth/signupUsers',date)
-             console.log(resp);
-    } catch (error) {
-         console.log(`${urlServer}signupUsers`,date)
-    }
+   const route = 'singupUsers'
+   const response = await conexionServidor(route, "post", date)
 
+   if (response) {
+    const responseHanded = await ServerResponseHandler(response, output);
+    console.log(responseHanded)
+	return responseHanded;
+   }
+   console.log(response)
 }
+
+
+
+
+
+const conexionServidor = async (url, method, body) => {
+    let header;
+    let httpOpc;
+         try {
+            header = {
+                Accept: "*/*",
+				"Access-Control-Allow-Origin": urlServer,
+                "Content-Type": "application/json",
+            }
+            httpOpc = { 
+              
+                headers: header,
+                body:body,
+            }
+            console.log(urlServer+url, httpOpc)
+            return response = await axios.post(urlServer+url, httpOpc);
+         } catch (error) {
+            console.log(error, 'entro en el error de la conx')
+         }
+}
+
+
+
 
 /*
 // Enviar los datos para Login//
@@ -51,19 +74,31 @@ let date =
  * Retorna: Respuesta del servidor
  */
 const login = async(data)=> {
-    let date = {
-        email:'dsd@da.com',
-        password:'12345678+Derek'
-    }
+    let date =       {
+        email:"deraes@GFGadasd.com",
+        password:"31454542+Derek"
+        }
     try {
-        const resp = await axios.post('http://localhost:3000/auth/loginUsers',JSON.stringify(date))
-             console.log(resp);
+      const response = await axios.post(urlServer, {
+        email: 'deraes@GFGadasd.com',
+        password: '31454542+Derek'
+      });
+      console.log(response.data);
     } catch (error) {
-         console.log('http://localhost:3000/auth/loginUsers',JSON.stringify(date))
+      console.error(error);
     }
 
 }
-
+/**Descripcion: transforma la respuesta del servidor en un formato legible. -
+ *Entradas:
+ *response: respuesta del servidor,
+ *type: tipo de formato 'text' o 'json' -
+ *Retorna: Respuesta del servidor en formato legible
+ */
+ const ServerResponseHandler = async (response, type) => {
+	if (type === "text") return await response.text();
+	if (type === "json") return await response.json();
+};
 export {
     registerUser,
     login
