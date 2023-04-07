@@ -62,7 +62,7 @@ export const Datos3 = () => {
         containerStyle={{backgroundColor:'transparent', borderWidth:0}}
       />
       <View style={styles.contentBtnLog}>
-    <TouchableOpacity onPress={() => envDatos(login)} disabled={controlError(login)} style={[styles.btnLog, 
+    <TouchableOpacity onPress={() => envDatos(login)}  style={[styles.btnLog, 
       (controlError(login))  ?  styles.bkColorNoListo: styles.bkColorListo
     ]}>
 

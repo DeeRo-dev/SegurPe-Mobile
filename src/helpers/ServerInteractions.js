@@ -22,10 +22,9 @@ const registerUser = async(data)=> {
 console.log(data, 'df')
 let date = 
 {
-
      names: "DEred",
      lastnames: "cabrera",
-     email: "deraes@adasd.com",
+     email: "deraes@adasgfd.com",
      passwor: "31454542+Derek",
      phone: "32324",
      address: "dased23",
@@ -36,10 +35,10 @@ let date =
      DniBack: ""
    };
     try {
-        const resp = await axios.post(`${urlServer}signupUsers`, date)
+        const resp = await axios.post('http://localhost:3000/auth/signupUsers',date)
              console.log(resp);
     } catch (error) {
-         console.log(error)
+         console.log(`${urlServer}signupUsers`,date)
     }
 
 }
@@ -52,11 +51,15 @@ let date =
  * Retorna: Respuesta del servidor
  */
 const login = async(data)=> {
+    let date = {
+        email:'dsd@da.com',
+        password:'12345678+Derek'
+    }
     try {
-        const resp = await axios.post(`${urlServer}loginUsers`)
+        const resp = await axios.post('http://localhost:3000/auth/loginUsers',JSON.stringify(date))
              console.log(resp);
     } catch (error) {
-         console.log(error)
+         console.log('http://localhost:3000/auth/loginUsers',JSON.stringify(date))
     }
 
 }
