@@ -3,26 +3,20 @@ import * as MediaLibrary from 'expo-media-library';
 import * as  ImagePicker from 'expo-image-picker'
 import { Alert } from 'react-native'
 import {styles} from './ThemeCrearCuenta'
-import { View,Text, TouchableOpacity, TextInput } from 'react-native'
+import { View,Text, TouchableOpacity, TextInput} from 'react-native'
 import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 export const Datos1 = () => {
  
   const [login, loginAction] = useContext(UsuarioContext)
 
-
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-console.log(date)
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShowDatePicker(Platform.OS === 'ios');
+    setShowDatePicker(false);
     setDate(currentDate);
-  };
-
-  const handleShowDatePicker = () => {
-    setShowDatePicker(true);
   };
 
 
@@ -69,24 +63,21 @@ console.log(date)
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('apellido', value)} placeholder="Apellido"/> 
       
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
-            <View>
-      <TouchableOpacity onPress={handleShowDatePicker}>
-        <TextInput
-          style={styles.input}
-          editable={false}
-          placeholder="Seleccionar fecha"
-          value={date.toDateString()}
-        />
-      </TouchableOpacity>
+            <TextInput
+              style={styles.input}
+              value={date.toLocaleDateString()}
+               onTouchStart={() => setShowDatePicker(true)}
+               placeholder='dasd'
+            />
+
       {showDatePicker && (
         <DateTimePicker
           value={date}
           mode="date"
-          display="default"
+          display="calendar"
           onChange={handleDateChange}
         />
       )}
-    </View>
         </View>
         <TouchableOpacity  onPress={cargarFoto} style={styles.btn}>
             <Text style={styles.textBtn}>Cargar foto de DNI</Text>
@@ -102,3 +93,4 @@ console.log(date)
     </View>
   )
 }
+
