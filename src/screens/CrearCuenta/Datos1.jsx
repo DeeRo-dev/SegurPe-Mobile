@@ -10,14 +10,14 @@ export const Datos1 = () => {
  
   const [login, loginAction] = useContext(UsuarioContext)
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-    onChangeData('address', date.toLocaleDateString())
+    onChangeData('fechaDeNacimiento', date.toLocaleDateString().replace(/\//g, "-"))
   };
 
 
@@ -66,14 +66,14 @@ export const Datos1 = () => {
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TextInput
               style={styles.input}
-              value={date.toLocaleDateString()}
+              value={date? date.toLocaleDateString() : ''}
                onTouchStart={() => setShowDatePicker(true)}
-               placeholder='dasd'
+               placeholder='AAAA-MM-DD'
             />
 
       {showDatePicker && (
         <DateTimePicker
-          value={date}
+          value={new Date()}
           mode="date"
           display="calendar"
           onChange={handleDateChange}
