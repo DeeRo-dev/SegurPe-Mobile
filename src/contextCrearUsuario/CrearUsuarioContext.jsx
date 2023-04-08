@@ -41,7 +41,12 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                 ...state,
                 apellido: payload.data
             }
-       case 'numCel':
+       case 'address':
+           return {
+               ...state,
+               address: payload.data
+        }  
+        case 'numCel':
            return {
                ...state,
                numCel: payload.data

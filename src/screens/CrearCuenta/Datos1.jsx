@@ -17,6 +17,7 @@ export const Datos1 = () => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
+    onChangeData('address', date.toLocaleDateString())
   };
 
 
