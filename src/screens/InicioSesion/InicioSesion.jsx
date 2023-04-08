@@ -39,8 +39,8 @@ export const InicioSesion = () => {
           <Text style={styles.titleInput}>Contraseña</Text>
           <TextInput style={styles.input} placeholder="Contraseña" onChangeText={(value) => cargarDatos('clave', value)}/>
         </View>
-        disabled={!datos.email || !datos.clave}
-        <TouchableOpacity   onPress={() => envDatos(datos)} style={styles.btn}>
+       
+        <TouchableOpacity   disabled={!datos.email || !datos.clave} onPress={() => envDatos(datos)} style={styles.btn}>
               <Text style={styles.textBtn}>Confirmar</Text>
           </TouchableOpacity>
     </View>
