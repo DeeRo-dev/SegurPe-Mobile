@@ -1,0 +1,3 @@
+/*
+    Lista de variables de las rutas de la aplicacion
+*/
