@@ -17,7 +17,7 @@ export const Datos1 = () => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-    onChangeData('fechaDeNacimiento', date.toLocaleDateString().replace(/\//g, "-"))
+    onChangeData('birthdate', date.toLocaleDateString().replace(/\//g, "-"))
   };
 
 
@@ -52,16 +52,16 @@ export const Datos1 = () => {
   }
   const cargarFoto = async() =>{
     const result = await loadImageFromGallery([1,1])
-    onChangeData('img', result.image)
+    onChangeData('imgProfile', result.image)
     console.log(result.image)
   }
   return (
     <View style={styles.content}>
         <View style={styles.contentInputs}>
              <Text style={styles.titleInput}>Nombre</Text>
-            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('name', value)} placeholder="Nombre"/>
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('names', value)} placeholder="Nombre"/>
             <Text style={styles.titleInput}>Apellido</Text>
-            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('apellido', value)} placeholder="Apellido"/> 
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('lastnames', value)} placeholder="Apellido"/> 
       
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TextInput

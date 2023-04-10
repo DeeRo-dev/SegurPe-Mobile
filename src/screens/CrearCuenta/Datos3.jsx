@@ -4,6 +4,7 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
+import { saveUserInfo } from "../../helpers/store";
 
 export const Datos3 = () => {
   const [login, loginAction] = useContext(UsuarioContext);
@@ -24,23 +25,23 @@ export const Datos3 = () => {
   const controlError = (login) => {
     // falta controlar la img que este completo
     if (
-      !login.nombre ||
-      !login.apellido ||
-      !login.numCel ||
-      !login.codVer ||
+      !login.names ||
+      !login.lastnames ||
+      !login.phone ||
       !login.email ||
-      !login.clave ||
-      !login.terminos
+      !login.password 
     ) {
       return true;
     }
     return false;
   };
 
-  const envDatos = (data) => {
+  const envDatos = (keyname,data) => {
     if (data) {
       // darle la nueva estructura y borrar este comentario
-      // serverUser(data, 'singupUsers', 'post');
+      
+        saveUserInfo(keyname, data)
+    
     }
   };
 
