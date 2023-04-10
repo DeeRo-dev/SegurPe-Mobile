@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import MapStyle from "../../components/CustomerMaps";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
@@ -15,6 +15,7 @@ export function Map() {
     // Función asíncrona para solicitar permisos de ubicación
     const requestLocationPermission = async () => {
       const { granted } = await requestForegroundPermissionsAsync();
+
       if (granted) {
         // Obtener la posición actual del usuario
         const { coords } = await getCurrentPositionAsync({});
@@ -26,7 +27,7 @@ export function Map() {
 
   return (
     <View style={styles.container}>
-      {location && ( // Solo muestra el mapa si se ha obtenido la ubicación del usuario
+      {location ? ( // Solo muestra el mapa si se ha obtenido la ubicación del usuario
         <MapView
           provider={PROVIDER_GOOGLE}
           style={styles.map}
@@ -46,6 +47,8 @@ export function Map() {
             }}
           />
         </MapView>
+      ) : (
+        <Text> No tenemos por permisos </Text>
       )}
     </View>
   );
