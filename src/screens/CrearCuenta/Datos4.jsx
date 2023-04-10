@@ -25,9 +25,10 @@ export const Datos4 = () => {
 
        <View>
             <Text style={styles.titleInput}>Número de teléfono</Text>
-            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('numCel', value)} keyboardType="numeric" placeholder="154545"/>
+            <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
             <Text style={styles.titleInput}>Código de verificación</Text>
-            <TextInput secureTextEntry={true} style={styles.input}  onChangeText={(value)=>onChangeData('codVer', value)} placeholder="Contraseña"/>
+            <TextInput secureTextEntry={true} style={styles.input}  placeholder="Contraseña"/>
+            {/* onChangeText={(value)=>onChangeData('codVer', value)} */}
         </View>
         
     </View>

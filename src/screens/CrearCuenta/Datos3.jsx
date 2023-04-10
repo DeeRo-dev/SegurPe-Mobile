@@ -6,6 +6,7 @@ import { UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
 import { saveUserInfo } from "../../helpers/store";
 
+
 export const Datos3 = () => {
   const [login, loginAction] = useContext(UsuarioContext);
   // Funcion para cargar en el estado global los datos de los inputs
@@ -19,7 +20,7 @@ export const Datos3 = () => {
 
   const handleCheckboxChange = (name) => {
     setIsChecked(!isChecked);
-    onChangeData(name, !isChecked);
+    // onChangeData(name, !isChecked);
   };
 
   const controlError = (login) => {
@@ -36,12 +37,12 @@ export const Datos3 = () => {
     return false;
   };
 
-  const envDatos = (keyname,data) => {
+  const envDatos = async (data) => {
     if (data) {
       // darle la nueva estructura y borrar este comentario
-      
-        saveUserInfo(keyname, data)
-    
+      console.log(data)
+      const result = await performRequest('POST', 'auth/signupUsers',data , null,null )
+      console.log(result)
     }
   };
 

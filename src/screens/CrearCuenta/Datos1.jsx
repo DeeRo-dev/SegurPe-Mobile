@@ -10,14 +10,19 @@ export const Datos1 = () => {
  
   const [login, loginAction] = useContext(UsuarioContext)
 
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
+    let fecha = date.toLocaleDateString().replace(/\//g, "-");
+    let partes = fecha.split('-');
+    let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
+    let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + partes[0];
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
-    onChangeData('birthdate', date.toLocaleDateString().replace(/\//g, "-"))
+
+    onChangeData('birthdate', nuevaFecha)
   };
 
 
@@ -73,7 +78,7 @@ export const Datos1 = () => {
 
       {showDatePicker && (
         <DateTimePicker
-          value={new Date()}
+          value={date}
           mode="date"
           display="calendar"
           onChange={handleDateChange}
