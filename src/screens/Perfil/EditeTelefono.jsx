@@ -12,9 +12,10 @@ export const EditeTelefono = () => {
   const onChangeNum = (name, value) =>{
     setValue([name]=value)
   }
+  // Falta tener el jwt
   const editeSend = async (data) =>{
     const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
-    console.log(numTel)
+    
   }
   console.log(value)
   return (

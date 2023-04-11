@@ -45,6 +45,11 @@ const onChangeEmail = (name, value) =>{
  
 }
 
+  // Falta tener el jwt
+  const editeSend = async (data) =>{
+    const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
+    
+  }
 
   return (
     <View style={style.content}>
@@ -85,7 +90,10 @@ const onChangeEmail = (name, value) =>{
           </TouchableOpacity>
 
           
-          <TouchableOpacity disabled={!errors}>
+          <TouchableOpacity disabled={!errors}
+             onPress={()=>{editeSend(email)}}
+          >
+             
              <View style={[
               style.btnListo,
               (!email.email ||!email.repEmail ||!email.code )  ?  style.bkColorNoListo: style.bkColorListo

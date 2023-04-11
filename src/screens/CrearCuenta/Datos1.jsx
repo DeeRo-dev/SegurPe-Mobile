@@ -12,25 +12,25 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export const Datos1 = () => {
 
   // Estado para controlar datos extra en el registro del user
-  const [date, dataAction] = useContext(DataExtraContext);
+  const [data, dataAction] = useContext(DataExtraContext);
    // Estado para controlar datos del user
   const [login, loginAction] = useContext(UsuarioContext)
     // Estado para controlar la carga de la fecha
-  const [data, setData] = useState(new Date());
+    const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
  
 
   const handleDateChange = (event, selectedDate) => {
     // Controlar que cuando se agrega la fecha sea en formato AAAA-MM-DD
-    let fecha = data.toLocaleDateString().replace(/\//g, "-");
+    let fecha = date.toLocaleDateString().replace(/\//g, "-");
     let partes = fecha.split('-');
     let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
     let nuevoDia = partes[0].length === 1 ? '0' + partes[0] : partes[0];
     let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + nuevoDia;
-    const currentDate = selectedDate || data;
+    const currentDate = selectedDate || date;
     setShowDatePicker(false);
-    setData(currentDate);
-
+    setDate(currentDate);
+    console.log(nuevaFecha)
     onChangeData('birthdate', nuevaFecha)
   };
 
@@ -87,14 +87,14 @@ export const Datos1 = () => {
             <TextInput
               style={styles.input}
               // ? data.toLocaleDateString() : ''
-              value={data? data.toLocaleDateString() : ''}
+              value={date.toLocaleDateString()}
                onTouchStart={() => setShowDatePicker(true)}
                placeholder='AAAA-MM-DD'
             />
 
       {showDatePicker && (
         <DateTimePicker
-        value={data}
+        value={date}
           mode="data"
           display="calendar"
           onChange={handleDateChange}

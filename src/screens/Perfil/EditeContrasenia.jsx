@@ -34,6 +34,12 @@ const checkClave = () =>{
 
 confClave (clave, confirmarClave);
 
+ // Falta tener el jwt
+ const editeSend = async (data) =>{
+  const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
+  
+}
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -62,7 +68,7 @@ confClave (clave, confirmarClave);
                <Text style={style.textBtn}>Olvidé mi contraseña</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={()=>{editeSend(clave)}}>
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
