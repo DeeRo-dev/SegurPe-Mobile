@@ -14,6 +14,7 @@ export const Datos1 = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
+    // Controlar que cuando se agrega la fecha sea en formato AAAA-MM-DD
     let fecha = date.toLocaleDateString().replace(/\//g, "-");
     let partes = fecha.split('-');
     let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];

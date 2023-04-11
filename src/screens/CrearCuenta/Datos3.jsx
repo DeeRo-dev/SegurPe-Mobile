@@ -4,7 +4,8 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
-import { saveUserInfo } from "../../helpers/store";
+import { getUserToken, saveUserInfo } from "../../helpers/store";
+import { USER } from "../../helpers/const";
 
 
 export const Datos3 = () => {
@@ -43,8 +44,12 @@ export const Datos3 = () => {
       console.log(data)
       const result = await performRequest('POST', 'auth/signupUsers',data , null,null )
       console.log(result)
-      if (result.token) {
-        console.log(result.token)
+      if (result.data.token) {
+        // Guarda un token de usuario en el almacenamiento seguro.
+        saveUserInfo(USER, result.data.token)
+       // Obtiene un token de usuario del almacenamiento seguro.
+        const tokenSeg = await getUserToken(USER)
+        console.log(tokenSeg, 'entro')
       }
     }
   };
