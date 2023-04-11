@@ -66,19 +66,24 @@ export const Datos3 = () => {
       imgObj:img
     }
     if (data) {
-      
+      try {
          const result = await performRequest('POST', 'auth/signupUsers',data , null, null)
         // console.log(result)
-        if (result.data.token) {
-          // Guarda un token de usuario en el almacenamiento seguro.
-          await saveUserInfo(TOKEN, result.data.token)
-          await saveUserInfo(USER, data)
-        // Obtiene un token de usuario del almacenamiento seguro.
-          const dataSeg = await getUserToken(USER)
-          const tokenSeg = await getUserToken(TOKEN)
-           console.log(dataSeg, 'entro')
-           console.log(tokenSeg, 'entro')
-      } 
+        // if (result.data.token) {
+        //   // Guarda un token de usuario en el almacenamiento seguro.
+        //   await saveUserInfo(TOKEN, result.data.token)
+        //   await saveUserInfo(USER, data)
+        // // Obtiene un token de usuario del almacenamiento seguro.
+        //   const dataSeg = await getUserToken(USER)
+        //   const tokenSeg = await getUserToken(TOKEN)
+        //    console.log(dataSeg, 'entro')
+        //    console.log(tokenSeg, 'entro')
+      // } 
+      // SI LA RESPUESTA ES BUENA NAVEGAR HACIA INICIO DE SESION <-----
+      } catch (error) {
+        console.log(error, 'no se pudo registrar')
+      }
+        
     }
   };
 
