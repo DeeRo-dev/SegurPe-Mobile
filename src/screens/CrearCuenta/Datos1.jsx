@@ -17,7 +17,8 @@ export const Datos1 = () => {
     let fecha = date.toLocaleDateString().replace(/\//g, "-");
     let partes = fecha.split('-');
     let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
-    let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + partes[0];
+    let nuevoDia = partes[0].length === 1 ? '0' + partes[0] : partes[0];
+    let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + nuevoDia;
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);

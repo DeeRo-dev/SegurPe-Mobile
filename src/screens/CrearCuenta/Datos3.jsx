@@ -43,6 +43,9 @@ export const Datos3 = () => {
       console.log(data)
       const result = await performRequest('POST', 'auth/signupUsers',data , null,null )
       console.log(result)
+      if (result.token) {
+        console.log(result.token)
+      }
     }
   };
 

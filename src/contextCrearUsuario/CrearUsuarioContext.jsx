@@ -19,8 +19,8 @@ export const usuarioState = {
     lastnames:'',
     address:'calle falsa',
     imgProfile:'',
-    dniFront:"",
-    dniBack:"",
+    DniFront:"",
+    DniBack:"",
     phone:'',
     email:'',
     DNI: "12345678",
@@ -63,8 +63,8 @@ const usuarioReducer = ( state = usuarioState, payload) => {
             return {
                 ...state,
                 imgProfile: payload.data,
-                dniFront: payload.data,
-                dniBack: payload.data,
+                DniFront: payload.data,
+                DniBack: payload.data,
 
          }  
           case 'email':
