@@ -1,11 +1,25 @@
-import React from 'react';
+import React,{ useState,useEffect } from 'react';
 import {styles} from './ThemeMiPerfil'
 import { Image,TextInput, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
+import { getUserInfo } from '../../helpers/store';
+import {USER, TOKEN} from '../../helpers/const'
 
 export const MiPerfil = () => {
   const navigator = useNavigation();
+  const [data, setData] = useState({})
+  const tokenSeg="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiMzYiLCJlbWFpbCI6IkhkaGRAamZqZC5jb20iLCJETkkiOiIxMjM0NTY3OCIsIm1heGNhbGxzIjoyLCJ0eXBlVXNlciI6IjEifSwiaWF0IjoxNjgxMjQwNDIyLCJleHAiOjE2ODM4MzI0MjJ9.h_v44Q7Eey1IYbjCxjYTpoGrPA1V5Xj7_w9hYvFWIkM"
+    const traerData = async (name)=>{
+      setData(
+        await getUserInfo(name)
+     )
+    }
+
+    traerData(USER)
+// console.log(data,'perfillll')
+
+    useEffect
   return (
 
 
@@ -18,7 +32,7 @@ export const MiPerfil = () => {
                 style={styles.avatarPerfil} />
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' />
          </View>
-         <Text  style={styles.titleName}> Leonel Andres Messi</Text>
+         <Text  style={styles.titleName}> {data.names} {data.lastnames}</Text>
         </View>
 
 
@@ -28,7 +42,7 @@ export const MiPerfil = () => {
         <View style={styles.datos}>
           <Ionicons name="call-outline" size={20} color='black' />   
           <Text style={styles.dato}>
-           6556+596+5495
+          {data.phone}
           </Text>
           <TouchableOpacity onPress={() => {navigator.navigate('EditeTelefono')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
@@ -39,7 +53,7 @@ export const MiPerfil = () => {
         <View style={styles.datos}>
           <Ionicons name="mail-outline" size={20} color='black' />
           <Text style={styles.dato}>
-           Leonel-Andres-Mess@gmialca.com
+          {data.email}
           </Text>
           <TouchableOpacity onPress={() => {navigator.navigate('EditeMail')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
@@ -51,7 +65,7 @@ export const MiPerfil = () => {
         <View style={styles.datos}>
           <Ionicons name="location-outline" size={20} color='black' />
           <Text style={styles.dato}>
-          Argentina tierra del MATE Y el Fernet
+          {data.address}
           </Text>
 
           <TouchableOpacity onPress={() => {navigator.navigate('EditeDireccion')}}>

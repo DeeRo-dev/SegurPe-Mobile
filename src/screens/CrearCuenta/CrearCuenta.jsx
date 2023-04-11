@@ -8,8 +8,8 @@ import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Datos4 } from './Datos4';
-import { UsuarioProvider, usuarioState, DataExtraProvider} from '../../contextCrearUsuario/CrearUsuarioContext';
-import { UsuarioContext}  from '../../contextCrearUsuario/CrearUsuarioContext';
+import { UsuarioProvider, DataExtraProvider} from '../../contextCrearUsuario/CrearUsuarioContext';
+
 
 export const CrearCuenta = () => {
 

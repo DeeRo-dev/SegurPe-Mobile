@@ -5,7 +5,7 @@ import { CheckBox } from "react-native-elements";
 import { DataExtraContext, UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
 import { getUserToken, saveUserInfo } from "../../helpers/store";
-import { USER } from "../../helpers/const";
+import { TOKEN, USER } from "../../helpers/const";
 
 
 export const Datos3 = () => {
@@ -66,17 +66,19 @@ export const Datos3 = () => {
       imgObj:img
     }
     if (data) {
-      console.log(data.imgprofile, 'desdeenvDatos')
-      const result = await performRequest('POST', 'auth/signupUsers',data , null, obj)
-      console.log(result)
-      if (result.data.token) {
-        // Guarda un token de usuario en el almacenamiento seguro.
-        saveUserInfo(USER, result.data.token)
-       // Obtiene un token de usuario del almacenamiento seguro.
-        const tokenSeg = await getUserToken(USER)
-        console.log(tokenSeg, 'entro')
-       
-      }
+      
+         const result = await performRequest('POST', 'auth/signupUsers',data , null, null)
+        // console.log(result)
+        if (result.data.token) {
+          // Guarda un token de usuario en el almacenamiento seguro.
+          await saveUserInfo(TOKEN, result.data.token)
+          await saveUserInfo(USER, data)
+        // Obtiene un token de usuario del almacenamiento seguro.
+          const dataSeg = await getUserToken(USER)
+          const tokenSeg = await getUserToken(TOKEN)
+           console.log(dataSeg, 'entro')
+           console.log(tokenSeg, 'entro')
+      } 
     }
   };
 
@@ -124,7 +126,7 @@ export const Datos3 = () => {
               styles.btnLog,
               error ? styles.bkColorNoListo : styles.bkColorListo,
             ]}
-            disabled={error}
+            // disabled={error}
           >
             <Text style={styles.textBtnLog}>Crear una cuenta</Text>
           </TouchableOpacity>

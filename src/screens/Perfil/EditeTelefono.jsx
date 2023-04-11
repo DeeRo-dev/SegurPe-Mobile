@@ -1,14 +1,22 @@
 import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { performRequest } from '../../helpers/api';
 export const EditeTelefono = () => {
 
-  const [numTel, setNumTel] = useState(Number)
+  const [value, setValue] = useState({
+    phone:'',
+    codVerf:''
+  })
 
-  const onChangeNum = (value) =>{
-    setNumTel(value)
+  const onChangeNum = (name, value) =>{
+    setValue([name]=value)
   }
-  console.log(numTel)
+  const editeSend = async (data) =>{
+    const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
+    console.log(numTel)
+  }
+  console.log(value)
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -24,9 +32,9 @@ export const EditeTelefono = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Número de teléfono</Text>
-          <TextInput  style={style.datos} keyboardType="numeric" placeholder="n3242" onChangeText={(value)=> onChangeNum(value)}/>
+          <TextInput  style={style.datos} keyboardType="numeric" placeholder="n3242" onChangeText={(value)=> onChangeNum('phone',value)}/>
           <Text style={style.titleInputs}>Código de verificación</Text>
-          <TextInput  style={style.datos} />
+          <TextInput  style={style.datos}  onChangeText={(value)=> onChangeNum('codVerf',value)}/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
@@ -34,7 +42,10 @@ export const EditeTelefono = () => {
                <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Enviar código</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+             onPress={()=>{editeSend(value)}}
+          >
+           
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
