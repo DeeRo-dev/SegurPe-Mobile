@@ -29,6 +29,7 @@ export const usuarioState = {
     // terminos:false,
 }
 
+
 const usuarioReducer = ( state = usuarioState, payload) => {
     switch (payload.type) {
         case 'names':
@@ -63,8 +64,7 @@ const usuarioReducer = ( state = usuarioState, payload) => {
             return {
                 ...state,
                 imgProfile: payload.data,
-                DniFront: payload.data,
-                DniBack: payload.data,
+                
 
          }  
           case 'email':
@@ -105,3 +105,51 @@ export const UsuarioProvider = (props) =>{
     )
 }
 
+// Otro context para controlar datos extras
+
+export const dataUserExtraState = {
+    codVer:'',
+    img:'',
+    terminos:false,
+}
+
+
+
+const dataExtraReducer = ( state = dataUserExtra, payload) => {
+    switch (payload.type) {
+        
+        case 'codVer':
+             return {
+                 ...state,
+                 codVer: payload.data
+          }  
+          case 'img':
+            return {
+                ...state,
+                imgProfile: payload.data,
+                
+
+         }  
+          case 'terminos':
+             return {
+                 ...state,
+                 terminos: payload.data
+          }      
+        default:
+            break;
+    }
+}
+
+
+export const dataExtraContext = createContext(dataUserExtraState)
+
+export const dataExtraProvider = (props) =>{
+    
+    const [login, loginAction] = useReducer(dataExtraReducer,  dataUserExtraState)
+
+    return (
+        <UsuarioContext.Provider value={[login, loginAction]}>
+            {props.children}
+        </UsuarioContext.Provider>
+    )
+}

@@ -41,7 +41,7 @@ export const Datos3 = () => {
   const envDatos = async (data) => {
     if (data) {
       // darle la nueva estructura y borrar este comentario
-      console.log(data)
+      console.log(data.imgprofile, 'desdeenvDatos')
       const result = await performRequest('POST', 'auth/signupUsers',data , null,null )
       console.log(result)
       if (result.data.token) {
