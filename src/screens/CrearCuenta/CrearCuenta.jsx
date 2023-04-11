@@ -8,7 +8,7 @@ import { Datos3 } from './Datos3';
 import {styles} from './ThemeCrearCuenta';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Datos4 } from './Datos4';
-import { UsuarioProvider, usuarioState} from '../../contextCrearUsuario/CrearUsuarioContext';
+import { UsuarioProvider, usuarioState, DataExtraProvider} from '../../contextCrearUsuario/CrearUsuarioContext';
 import { UsuarioContext}  from '../../contextCrearUsuario/CrearUsuarioContext';
 
 export const CrearCuenta = () => {
@@ -74,8 +74,8 @@ export const CrearCuenta = () => {
   return (
 
     <View style={styles.content}>
-   <AppState>
-  
+    <AppState>
+      <ExtraDataState>
     <PagerView
       style={style.viewPager}
       initialPage={0}
@@ -97,6 +97,7 @@ export const CrearCuenta = () => {
       </View>
  
     </PagerView>     
+    </ExtraDataState>
     </AppState>
     <View style={styles.contentBtnPag}>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
@@ -130,6 +131,13 @@ export const AppState = ({children}) => {
     <UsuarioProvider>
       {children}
     </UsuarioProvider>
+  )
+}
+export const ExtraDataState = ({children}) => {
+  return(
+    <DataExtraProvider>
+      {children}
+    </DataExtraProvider>
   )
 }
 

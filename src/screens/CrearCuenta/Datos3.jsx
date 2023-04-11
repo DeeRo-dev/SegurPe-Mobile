@@ -2,13 +2,15 @@ import React, { useState, useContext } from "react";
 import { styles } from "./ThemeCrearCuenta";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { CheckBox } from "react-native-elements";
-import { UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
+import { DataExtraContext, UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
 import { getUserToken, saveUserInfo } from "../../helpers/store";
 import { USER } from "../../helpers/const";
 
 
 export const Datos3 = () => {
+  const [date, dataAction] = useContext(DataExtraContext);
+
   const [login, loginAction] = useContext(UsuarioContext);
   // Funcion para cargar en el estado global los datos de los inputs
   const onChangeData = (name, value) => {
@@ -16,12 +18,20 @@ export const Datos3 = () => {
       type: name,
       data: value,
     });
+
+  };
+  const onChangeDataExtra = (name, value) => {
+    dataAction({
+      type: name,
+      data: value,
+    });
+
   };
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (name) => {
     setIsChecked(!isChecked);
-    // onChangeData(name, !isChecked);
+    onChangeDataExtra(name, !isChecked);
   };
 
   const controlError = (login) => {

@@ -124,13 +124,15 @@ const dataExtraReducer = ( state = dataUserExtra, payload) => {
                  codVer: payload.data
           }  
           case 'img':
+            console.log(payload.data)
             return {
                 ...state,
-                imgProfile: payload.data,
+                img: payload.data,
                 
 
          }  
           case 'terminos':
+            console.log(payload.data)
              return {
                  ...state,
                  terminos: payload.data
@@ -141,15 +143,15 @@ const dataExtraReducer = ( state = dataUserExtra, payload) => {
 }
 
 
-export const dataExtraContext = createContext(dataUserExtraState)
+export const DataExtraContext = createContext(dataUserExtraState)
 
-export const dataExtraProvider = (props) =>{
+export const DataExtraProvider = (props) =>{
     
-    const [login, loginAction] = useReducer(dataExtraReducer,  dataUserExtraState)
+    const [data, dataAction] = useReducer(dataExtraReducer,  dataUserExtraState)
 
     return (
-        <UsuarioContext.Provider value={[login, loginAction]}>
+        <DataExtraContext.Provider value={[data, dataAction]}>
             {props.children}
-        </UsuarioContext.Provider>
+        </DataExtraContext.Provider>
     )
 }

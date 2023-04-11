@@ -4,18 +4,18 @@ import * as  ImagePicker from 'expo-image-picker'
 import { Alert } from 'react-native'
 import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput} from 'react-native'
-import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
+import { DataExtraContext, UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 export const Datos1 = () => {
- 
+  const [date, dataAction] = useContext(DataExtraContext);
   const [login, loginAction] = useContext(UsuarioContext)
 
-  const [date, setDate] = useState(new Date());
+  const [data, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
     // Controlar que cuando se agrega la fecha sea en formato AAAA-MM-DD
-    let fecha = date.toLocaleDateString().replace(/\//g, "-");
+    let fecha = data.toLocaleDateString().replace(/\//g, "-");
     let partes = fecha.split('-');
     let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
     let nuevoDia = partes[0].length === 1 ? '0' + partes[0] : partes[0];
@@ -36,7 +36,13 @@ export const Datos1 = () => {
       })
       
   }
+  const onChangeDataExtra = (name, value) => {
+    dataAction({
+      type: name,
+      data: value,
+    });
 
+  };
 
   const loadImageFromGallery = async(array) =>{
     const response = {status:false, image:null}
@@ -59,8 +65,8 @@ export const Datos1 = () => {
   }
   const cargarFoto = async() =>{
     const result = await loadImageFromGallery([1,1])
-    onChangeData('imgProfile', result.image)
-    console.log(result.image)
+    onChangeDataExtra('img', result.image)
+    // console.log(result.image)
   }
   return (
     <View style={styles.content}>
@@ -73,7 +79,7 @@ export const Datos1 = () => {
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TextInput
               style={styles.input}
-              value={date? date.toLocaleDateString() : ''}
+              value={data? data.toLocaleDateString() : ''}
                onTouchStart={() => setShowDatePicker(true)}
                placeholder='AAAA-MM-DD'
             />
@@ -81,7 +87,7 @@ export const Datos1 = () => {
       {showDatePicker && (
         <DateTimePicker
           value={date}
-          mode="date"
+          mode="data"
           display="calendar"
           onChange={handleDateChange}
         />
