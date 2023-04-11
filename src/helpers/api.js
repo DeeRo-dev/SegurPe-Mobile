@@ -36,6 +36,7 @@ const performRequest = async (
     };
 
     if (uploadFile) {
+      console.log(uploadFile, 'uploadfile')
       const formData = new FormData();
 
       formData.append("file", {

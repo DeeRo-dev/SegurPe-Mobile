@@ -10,16 +10,20 @@ import { USER } from "../../helpers/const";
 
 export const Datos3 = () => {
   const [date, dataAction] = useContext(DataExtraContext);
-
   const [login, loginAction] = useContext(UsuarioContext);
-  // Funcion para cargar en el estado global los datos de los inputs
-  const onChangeData = (name, value) => {
-    loginAction({
-      type: name,
-      data: value,
-    });
+   // Estado para controlar que todos los campos del registro esten completos
+   const [error, setError] = useState(false);
 
-  };
+
+
+  // Funcion para cargar en el estado global los datos de los inputs
+  // const onChangeData = (name, value) => {
+  //   loginAction({
+  //     type: name,
+  //     data: value,
+  //   });
+
+  // };
   const onChangeDataExtra = (name, value) => {
     dataAction({
       type: name,
@@ -34,25 +38,36 @@ export const Datos3 = () => {
     onChangeDataExtra(name, !isChecked);
   };
 
-  const controlError = (login) => {
+  const controlError = (login,date,error) => {
     // falta controlar la img que este completo
     if (
       !login.names ||
       !login.lastnames ||
       !login.phone ||
       !login.email ||
-      !login.password 
+      !login.password ||
+      !date.codVer ||
+      !date.img ||
+      !date.repPassword ||
+      !date.terminos 
     ) {
-      return true;
+       if (error === false) {
+        console.log('set err')
+        setError(true);
+       }
+      
     }
     return false;
   };
-
-  const envDatos = async (data) => {
+  controlError(login, date, error)
+  console.log(date, 'data exta')
+  const envDatos = async (data, img) => {
+    const obj = {
+      imgObj:img
+    }
     if (data) {
-      // darle la nueva estructura y borrar este comentario
       console.log(data.imgprofile, 'desdeenvDatos')
-      const result = await performRequest('POST', 'auth/signupUsers',data , null,null )
+      const result = await performRequest('POST', 'auth/signupUsers',data , null, obj)
       console.log(result)
       if (result.data.token) {
         // Guarda un token de usuario en el almacenamiento seguro.
@@ -60,6 +75,7 @@ export const Datos3 = () => {
        // Obtiene un token de usuario del almacenamiento seguro.
         const tokenSeg = await getUserToken(USER)
         console.log(tokenSeg, 'entro')
+       
       }
     }
   };
@@ -103,11 +119,12 @@ export const Datos3 = () => {
         />
         <View style={styles.contentBtnLog}>
           <TouchableOpacity
-            onPress={() => envDatos(login)}
+            onPress={() => envDatos(login, date.img)}
             style={[
               styles.btnLog,
-              controlError(login) ? styles.bkColorNoListo : styles.bkColorListo,
+              error ? styles.bkColorNoListo : styles.bkColorListo,
             ]}
+            disabled={error}
           >
             <Text style={styles.textBtnLog}>Crear una cuenta</Text>
           </TouchableOpacity>

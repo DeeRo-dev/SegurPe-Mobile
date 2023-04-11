@@ -6,12 +6,19 @@ import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput} from 'react-native'
 import { DataExtraContext, UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
-export const Datos1 = () => {
-  const [date, dataAction] = useContext(DataExtraContext);
-  const [login, loginAction] = useContext(UsuarioContext)
 
-  const [data, setDate] = useState(new Date());
+
+
+export const Datos1 = () => {
+
+  // Estado para controlar datos extra en el registro del user
+  const [date, dataAction] = useContext(DataExtraContext);
+   // Estado para controlar datos del user
+  const [login, loginAction] = useContext(UsuarioContext)
+    // Estado para controlar la carga de la fecha
+  const [data, setData] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+ 
 
   const handleDateChange = (event, selectedDate) => {
     // Controlar que cuando se agrega la fecha sea en formato AAAA-MM-DD
@@ -20,9 +27,9 @@ export const Datos1 = () => {
     let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
     let nuevoDia = partes[0].length === 1 ? '0' + partes[0] : partes[0];
     let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + nuevoDia;
-    const currentDate = selectedDate || date;
+    const currentDate = selectedDate || data;
     setShowDatePicker(false);
-    setDate(currentDate);
+    setData(currentDate);
 
     onChangeData('birthdate', nuevaFecha)
   };
@@ -79,6 +86,7 @@ export const Datos1 = () => {
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TextInput
               style={styles.input}
+              // ? data.toLocaleDateString() : ''
               value={data? data.toLocaleDateString() : ''}
                onTouchStart={() => setShowDatePicker(true)}
                placeholder='AAAA-MM-DD'
@@ -86,7 +94,7 @@ export const Datos1 = () => {
 
       {showDatePicker && (
         <DateTimePicker
-          value={date}
+        value={data}
           mode="data"
           display="calendar"
           onChange={handleDateChange}

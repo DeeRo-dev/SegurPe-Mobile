@@ -110,6 +110,7 @@ export const UsuarioProvider = (props) =>{
 export const dataUserExtraState = {
     codVer:'',
     img:'',
+    repPassword:'',
     terminos:false,
 }
 
@@ -128,9 +129,12 @@ const dataExtraReducer = ( state = dataUserExtra, payload) => {
             return {
                 ...state,
                 img: payload.data,
-                
-
          }  
+         case 'repPassword':
+            return {
+                ...state,
+                repPassword: payload.data
+         } 
           case 'terminos':
             console.log(payload.data)
              return {
