@@ -5,25 +5,17 @@ import {styles} from './ThemeMiPerfil'
 import { Image,TextInput, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
-import { getUserInfo } from '../../helpers/store';
+import { getUserInfo, getUserToken } from '../../helpers/store';
 import {USER, TOKEN} from '../../helpers/const'
+import { performRequest } from '../../helpers/api';
 
 
 export const MiPerfil = () => {
 
-
-
   const navigator = useNavigation();
   const [data, setData] = useState({})
-  const tokenSeg="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiMzYiLCJlbWFpbCI6IkhkaGRAamZqZC5jb20iLCJETkkiOiIxMjM0NTY3OCIsIm1heGNhbGxzIjoyLCJ0eXBlVXNlciI6IjEifSwiaWF0IjoxNjgxMjQwNDIyLCJleHAiOjE2ODM4MzI0MjJ9.h_v44Q7Eey1IYbjCxjYTpoGrPA1V5Xj7_w9hYvFWIkM"
-    const traerData = async (name)=>{
-      setData(
-        await getUserInfo(name)
-     )
-    }
-
-    traerData(USER)
-    // console.log(data,'perfillll')
+  const [tokenUser, setToken] = useState()
+  const [dataUser, setDataUser] = useState({})
 
   // Libreria para cargar la image
 const loadImageFromGallery = async(array) =>{
@@ -51,6 +43,49 @@ const cargarFoto = async() =>{
   // FUNCION PARA CARGAR LA IMAGEN DEL AVATAR
 }
   
+ 
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name1 ,name2)=>{
+  
+    // Obtiene un token de usuario del almacenamiento seguro.
+    const dataSeg = await getUserInfo(name1)
+    const tokenSeg = await getUserToken(name2)
+      console.log(dataSeg, 'entro data seg')
+       console.log(tokenSeg, 'entro')
+      //  sendDataUser(dataSeg)
+    //  TRAER INFO DEL USUARIO
+       if (tokenSeg) {
+          const respon = await sendDataUser(dataSeg.token)
+          // console.log(respon, 'se dio')
+       }
+ 
+  
+ }
+ 
+ getUser(USER, TOKEN)
+console.log(tokenUser, 'eseeee')
+// if (tokenUser) {
+  
+// }
+// FUNCION PARA REALIZAR EL GET USER
+const sendDataUser = async (token) => {
+  const headerList = {
+    "Authorization" : 'Bearer ' + token
+  }
+  try {
+    const response = await performRequest('GET', 'getUserProfileInfo',null , headerList, null)
+   console.log(response, 'se dio por2')
+    setData(response.data)
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+ 
+}
+console.log(dataUser, ' desde el estado ')
+
   return (
 
 

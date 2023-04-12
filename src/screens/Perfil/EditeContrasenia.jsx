@@ -36,10 +36,31 @@ confClave (clave, confirmarClave);
 
  // Falta tener el jwt
  const editeSend = async (data) =>{
-  const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
-  
+
+  const tokenSeg = await getUserToken(name2)
+
+     console.log(tokenSeg, 'entro')
+    //  sendDataUser(dataSeg)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(dataSeg.token, data)
+        console.log(respon)
+     }
 }
 
+const sendDataUser = async (token,data ) => {
+  const headerList = {
+    'Authorization': token
+  }
+  try {
+    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+   console.log(response)
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+ 
+}
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>

@@ -27,6 +27,7 @@ const performRequest = async (
   headers = {},
   uploadFile = null
 ) => {
+
   try {
     const config = {
       method,

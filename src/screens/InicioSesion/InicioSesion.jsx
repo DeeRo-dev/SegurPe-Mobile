@@ -4,7 +4,7 @@ import { View, Text, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./ThemeInicioSesion";
 import { performRequest } from "../../helpers/api";
-import { getUserToken, saveUserInfo } from "../../helpers/store";
+import { getUserToken, saveUserInfo, saveUserToken } from "../../helpers/store";
 import { TOKEN, USER } from "../../helpers/const";
 
 export const InicioSesion = () => {
@@ -35,17 +35,14 @@ export const InicioSesion = () => {
         console.log(result.data, 'esto devuelve')
         if (result.data.token) {
           // Guarda un token de usuario en el almacenamiento seguro.
-          await saveUserInfo(TOKEN, result.data.token)
-          await saveUserInfo(USER, data)
-        // Obtiene un token de usuario del almacenamiento seguro.
-          const dataSeg = await getUserToken(USER)
-          const tokenSeg = await getUserToken(TOKEN)
-           console.log(dataSeg, 'entro')
-           console.log(tokenSeg, 'entro')
+          await saveUserToken(TOKEN, result.data.token)
+          await saveUserInfo(USER,result.data)
+
+
+          
       } 
     }
   };
-
 
   return (
     <View style={styles.content}>
