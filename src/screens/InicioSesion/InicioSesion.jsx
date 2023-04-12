@@ -37,9 +37,6 @@ export const InicioSesion = () => {
           // Guarda un token de usuario en el almacenamiento seguro.
           await saveUserToken(TOKEN, result.data.token)
           await saveUserInfo(USER,result.data)
-
-
-          
       } 
     }
   };

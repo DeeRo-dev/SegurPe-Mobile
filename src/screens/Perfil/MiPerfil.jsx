@@ -42,9 +42,9 @@ const cargarFoto = async() =>{
 }
   
 // FUNCION PARA TRAER INFO DEL USER
-const getUser = async (name1 ,name2)=>{
+const getUser = async (name)=>{
     // Obtiene un token de usuario del almacenamiento seguro.
-    const tokenSeg = await getUserToken(name2)
+    const tokenSeg = await getUserToken(name)
     //  TRAER INFO DEL USUARIO
        if (tokenSeg) {
           const respon = await sendDataUser(tokenSeg)
@@ -52,7 +52,7 @@ const getUser = async (name1 ,name2)=>{
        }
  }
  
- getUser(USER, TOKEN)
+ getUser(TOKEN)
 
 
 // FUNCION PARA REALIZAR EL GET USER
@@ -81,7 +81,10 @@ const sendDataUser = async (token) => {
                 style={styles.avatarPerfil} />
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
-         <Text  style={styles.titleName}> {data.names} {data.lastnames}</Text>
+         <Text  style={styles.titleName}> 
+         {/* {data ? [data.names , data.lastnames] : 'Loading...'} */}
+        { data?.names } {data?.lastnames}
+         </Text>
         </View>
 
 
@@ -91,7 +94,7 @@ const sendDataUser = async (token) => {
         <View style={styles.datos}>
           <Ionicons name="call-outline" size={20} color='black' />   
           <Text style={styles.dato}>
-          {data.phone}
+         {data?.phone}
           </Text>
           <TouchableOpacity onPress={() => {navigator.navigate('EditeTelefono')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
@@ -102,7 +105,7 @@ const sendDataUser = async (token) => {
         <View style={styles.datos}>
           <Ionicons name="mail-outline" size={20} color='black' />
           <Text style={styles.dato}>
-          {data.email}
+          {data?.email}
           </Text>
           <TouchableOpacity onPress={() => {navigator.navigate('EditeMail')}}>
             <Ionicons name="pencil-outline" size={20} color='black' />
@@ -114,7 +117,7 @@ const sendDataUser = async (token) => {
         <View style={styles.datos}>
           <Ionicons name="location-outline" size={20} color='black' />
           <Text style={styles.dato}>
-          {data.address}
+          {data?.address}
           </Text>
 
           <TouchableOpacity onPress={() => {navigator.navigate('EditeDireccion')}}>

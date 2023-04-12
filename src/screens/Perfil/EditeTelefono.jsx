@@ -2,22 +2,55 @@ import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { performRequest } from '../../helpers/api';
+import { TOKEN } from '../../helpers/const';
+import { getUserToken } from '../../helpers/store';
 export const EditeTelefono = () => {
 
-  const [value, setValue] = useState({
+  const [valuePhone, setValuePhone] = useState({
     phone:'',
     codVerf:''
   })
 
   const onChangeNum = (name, value) =>{
-    setValue([name]=value)
+    setValuePhone({
+        ...valuePhone,
+        [name]:value
+         })
   }
-  // Falta tener el jwt
-  const editeSend = async (data) =>{
-    const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
-    
+  
+
+// FUNCION PARA HACER LA PETICION
+const sendDataUser = async (token,data) => {
+  
+  console.log(data, 'data')
+  const headerList = {
+    "Authorization" : 'Bearer ' + token
   }
-  console.log(value)
+  try {
+    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+   console.log(response, 'se dio EXITOSO')
+    // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+}
+
+
+
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name, data)=>{
+  // Obtiene un token de usuario del almacenamiento seguro.
+  const tokenSeg = await getUserToken(name)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(tokenSeg, data)
+        // console.log(respon, 'se dio')
+     }
+}
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -44,7 +77,7 @@ export const EditeTelefono = () => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-             onPress={()=>{editeSend(value)}}
+             onPress={()=>getUser(TOKEN, valuePhone)}
           >
            
              <View style={style.btnListo}>

@@ -1,55 +1,81 @@
 import React, {useState}from 'react';
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { performRequest } from '../../helpers/api';
+import { TOKEN } from '../../helpers/const';
+import { getUserToken } from '../../helpers/store';
 
 
 export const EditeMail = () => {
 
-const [email, setEmail] = useState({
+const [data, setData] = useState({
   email:'',
   repEmail:'',
   code:''
 })
  const [errors, setErrors] = useState({})
 
-function validate(email){
-  var valid = /^(ftp|http|https):\/\/[^ "]+$/.test(email.email);
+function validate(data){
+  var valid = /^(ftp|http|https):\/\/[^ "]+$/.test(data.email);
  let errors = {};
-  if (!email.email || valid) {
+  if (!data.email || valid) {
     errors.email='Se requiere un Email'
   }
   // else if(!email.email || !valid){
   //   email.email = 'Deberias agregar una imgnn'}
-    else if(!email.repEmail || email.email != email.repEmail){
+    else if(!data.repEmail || data.email != data.repEmail){
     errors.repEmail = 'El correo electrónico no coincide. '
-  }else if(!email.code ){
+  }else if(!data.code ){
       errors.code = 'Se requiere el codigo de verificacion'
   }
   
-  return errors
-
 }
 
+// FUNCION PARA HACER LA PETICION
+const sendDataUser = async (token, data) => {
+  const headerList = {
+    "Authorization" : 'Bearer ' + token
+  }
+  try {
+    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+   console.log(response, 'se dio EXITOSO')
+    // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+}
+
+
+
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name, data)=>{
+  // Obtiene un token de usuario del almacenamiento seguro.
+  const tokenSeg = await getUserToken(name)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(tokenSeg, data)
+        // console.log(respon, 'se dio')
+     }
+}
 
 
 const onChangeEmail = (name, value) =>{
-  setEmail({
-    ...email,
+  setData({
+    ...data,
     [name]: value 
      })
  
-  setErrors(validate({
-    ...email,
-    [name]: value 
-   }));
+  // setErrors(validate({
+  //   ...data,
+  //   [name]: value 
+  //  }));
  
 }
 
-  // Falta tener el jwt
-  const editeSend = async (data) =>{
-    const result = await performRequest('PUT', 'updateProfileInfo',data , null, null)
-    
-  }
+  
 
   return (
     <View style={style.content}>
@@ -91,12 +117,12 @@ const onChangeEmail = (name, value) =>{
 
           
           <TouchableOpacity disabled={!errors}
-             onPress={()=>{editeSend(email)}}
+             onPress={()=>getUser(TOKEN, data)}
           >
              
              <View style={[
               style.btnListo,
-              (!email.email ||!email.repEmail ||!email.code )  ?  style.bkColorNoListo: style.bkColorListo
+              (!data.email ||!data.repEmail ||!data.code )  ?  style.bkColorNoListo: style.bkColorListo
                ]
             }>
                <Text style={style.textBtnListo}>Listo</Text>

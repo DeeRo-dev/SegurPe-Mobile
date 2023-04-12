@@ -1,66 +1,82 @@
 import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { TOKEN } from '../../helpers/const';
+import { getUserToken } from '../../helpers/store';
+import { performRequest } from '../../helpers/api';
 
 
 
 export const EditeContrasenia = () => {
   
-const [clave, setClave] = useState('')
-const [confirmarClave, setConfirmarClave] = useState('')
+const [clave, setClave] = useState({
+  password:'',
+  confirmarClave:''
+})
+
 
 // setear la nueva clave
-const onChangeClave = (value) =>{
-  setClave(value)
+const onChangeClave = (name, value) =>{
+  setClave(
+    {
+      ...clave,
+      [name]:value
+    }
+    )
 }
 console.log(clave)
 
 
 // Ver que coincidan las claves
-const confClave = (clave, confirmarClave ) =>{
-  if( clave === confirmarClave){
-		console.log('true')
-		// return true;
-	}else{
-		console.log('false')
-		// return false;
-  }
-}
-// chequear en la api la clave actual
-const checkClave = () =>{
-  console.log('buscar en la API si concide la clave')
-}
+// const confClave = (clave, confirmarClave ) =>{
+//   if( clave === confirmarClave){
+// 		console.log('true')
+// 		// return true;
+// 	}else{
+// 		console.log('false')
+// 		// return false;
+//   }
+// }
+// // chequear en la api la clave actual
+// const checkClave = () =>{
+//   console.log('buscar en la API si concide la clave')
+// }
 
 
-confClave (clave, confirmarClave);
+// confClave (clave, confirmarClave);
 
  // Falta tener el jwt
- const editeSend = async (data) =>{
-
-  const tokenSeg = await getUserToken(name2)
-
-     console.log(tokenSeg, 'entro')
-    //  sendDataUser(dataSeg)
-  //  TRAER INFO DEL USUARIO
-     if (tokenSeg) {
-        const respon = await sendDataUser(dataSeg.token, data)
-        console.log(respon)
-     }
-}
-
-const sendDataUser = async (token,data ) => {
+ 
+// FUNCION PARA HACER LA PETICION
+const sendDataUser = async (token, data) => {
   const headerList = {
-    'Authorization': token
+    "Authorization" : 'Bearer ' + token
   }
   try {
     const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
-   console.log(response)
+   console.log(response, 'se dio EXITOSO')
+    // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
        return error
   }
- 
 }
+
+
+
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name, data)=>{
+  // Obtiene un token de usuario del almacenamiento seguro.
+  const tokenSeg = await getUserToken(name)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(tokenSeg, data)
+        // console.log(respon, 'se dio')
+     }
+}
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -79,9 +95,9 @@ const sendDataUser = async (token,data ) => {
           <Text style={style.titleInputs}>Contraseña actual</Text>
           <TextInput  style={style.datos} placeholder="Password act" onChangeText={(value)=> checkClave(value)}/>
           <Text style={style.titleInputs}>Nueva contraseña</Text>
-          <TextInput  style={style.datos} placeholder="Password new" onChangeText={(value)=> onChangeClave(value)}/>
+          <TextInput  style={style.datos} placeholder="Password new" onChangeText={(value)=> onChangeClave('password',value)}/>
           <Text style={style.titleInputs}>Repite la nueva contraseña</Text>
-          <TextInput  style={style.datos} placeholder="Password repite" onChangeText={(value)=> setConfirmarClave(value)}/>
+          <TextInput  style={style.datos} placeholder="Password repite" onChangeText={(value)=> onChangeClave('confirmarClave',value)}/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
@@ -89,7 +105,7 @@ const sendDataUser = async (token,data ) => {
                <Text style={style.textBtn}>Olvidé mi contraseña</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity  onPress={()=>{editeSend(clave)}}>
+          <TouchableOpacity  onPress={()=>getUser(TOKEN, clave)}>
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
