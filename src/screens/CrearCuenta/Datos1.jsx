@@ -16,24 +16,23 @@ export const Datos1 = () => {
    // Estado para controlar datos del user
   const [login, loginAction] = useContext(UsuarioContext)
     // Estado para controlar la carga de la fecha
-    const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+   const [birthdate, setBirthdate]= useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
- 
-
-  const handleDateChange = (event, selectedDate) => {
-    // Controlar que cuando se agrega la fecha sea en formato AAAA-MM-DD
-    let fecha = date.toLocaleDateString().replace(/\//g, "-");
-    let partes = fecha.split('-');
-    let nuevoMes = partes[1].length === 1 ? '0' + partes[1] : partes[1];
-    let nuevoDia = partes[0].length === 1 ? '0' + partes[0] : partes[0];
-    let nuevaFecha = partes[2] + '-' + nuevoMes + '-' + nuevoDia;
-    const currentDate = selectedDate || date;
-    setShowDatePicker(false);
-    setDate(currentDate);
-    console.log(nuevaFecha)
-    onChangeData('birthdate', nuevaFecha)
-  };
-
+  function showDatepicker() {
+    setShowDatePicker(true);
+  }
+  
+  function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const fecha = `${year}-${month}-${day}`
+  
+      return fecha;
+  }
+  
+  
 
 // Funcion para cargar en el estado global los datos de los inputs
   const onChangeData = (name, value)=>{
@@ -75,6 +74,7 @@ export const Datos1 = () => {
     onChangeDataExtra('img', result.image)
     // console.log(result.image)
   }
+  console.log(date)
   return (
     <View style={styles.content}>
         <View style={styles.contentInputs}>
@@ -84,22 +84,27 @@ export const Datos1 = () => {
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('lastnames', value)} placeholder="Apellido"/> 
       
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
-            <TextInput
+            <TouchableOpacity
               style={styles.input}
-              // ? data.toLocaleDateString() : ''
-              value={date.toLocaleDateString()}
-               onTouchStart={() => setShowDatePicker(true)}
-               placeholder='AAAA-MM-DD'
-            />
+               onPress={showDatepicker}
+            >
+              <Text style={styles.input}>{formatDate(date)}</Text>
+            </TouchableOpacity>
 
       {showDatePicker && (
-        <DateTimePicker
-        value={date}
-          mode="data"
-          display="calendar"
-          onChange={handleDateChange}
-        />
-      )}
+  <DateTimePicker
+    value={date}
+    mode="date"
+    display="default"
+    onChange={(event, selectedDate) => {
+      setShowDatePicker(false);
+      if (selectedDate) {
+        setDate(selectedDate);
+      }
+    }}
+  />
+)}
+
         </View>
         <TouchableOpacity  onPress={cargarFoto} style={styles.btn}>
             <Text style={styles.textBtn}>Cargar foto de DNI</Text>
