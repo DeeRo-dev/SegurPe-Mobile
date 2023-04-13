@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
         borderRadius:100,
         width: 382,
         height: 40,
+        marginVertical:20,
         alignItems:'center',
         justifyContent:'center',
         flexDirection:'row',

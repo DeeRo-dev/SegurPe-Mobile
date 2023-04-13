@@ -15,20 +15,21 @@ export const HomeRegistrarIniciarSesion = () => {
       </View>
       
        <View style={styles.contentBtns}>
-          <Text style={styles.title}>No tienes una cuenta</Text>
+          {/* <Text style={styles.title}>No tienes una cuenta</Text>
           <TouchableOpacity onPress={() => {navigator.navigate('CrearCuenta')}} style={styles.btnLog}>
               <Text style={styles.textBtn}>Crear una cuenta</Text>
-          </TouchableOpacity>
-          <Text style={styles.title}>Ya tienes una cuenta</Text>
+          </TouchableOpacity> */}
+          <Text style={styles.title}>Accede a tu cuenta</Text>
           <TouchableOpacity  onPress={() => {navigator.navigate('InicioSesion')}} style={styles.btnLog}>
               <Text style={styles.textBtn}>Iniciar sesion</Text>
           </TouchableOpacity>
-          
-       </View>
-       <TouchableOpacity style={styles.btnLogGoogle}>
+          <Text style={styles.title}>Inicia sesión con Google</Text>
+         <TouchableOpacity style={styles.btnLogGoogle}>
               <Image source={require('../../assets/icon.png')}/>
               <Text style={styles.textBtnGoogle}>Ingresar con Google</Text>
           </TouchableOpacity>
+       </View>
+    
     </View>
   )
 }
