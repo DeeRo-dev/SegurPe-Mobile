@@ -12,6 +12,7 @@ import { Map } from "../screens/Map/Map";
 import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
+import { useEffect } from "react";
 
 const Drawer = createDrawerNavigator();
 
@@ -72,14 +73,33 @@ export const MenuLateral = () => {
 };
 
 const MenuInterno = ({ navigation }) => {
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
   return (
     <DrawerContentScrollView>
       
       <View style={styles.container}>
-        <MenuHeader />
+        <MenuHeader/>
         <View style={styles.contentItemsEstado}>
-            <Text style={styles.itemTextEstado}><RoundIcon/>  Estado</Text>
-           <ToggleButton/>
+        <View style={[styles.iconActDes, { backgroundColor: isEnabled ? '#CE6D22' : '#AFAFAF' }]} />
+            <Text style={styles.itemTextEstado}>
+                Estado {isEnabled? 'activo' : 'inactivo'}
+               </Text>
+       
+            <View style={styles.viewDeslizar}>
+               <Switch
+                  trackColor={{ false: "#767577", true: 'white' }}
+                  thumbColor={isEnabled ? "#CE6D22" : "#f4f3f4"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+                />
+           </View>
+          
+          
         </View>
         {menuItems.map((item) => (
           <MenuItem
@@ -183,50 +203,24 @@ const styles = StyleSheet.create({
   viewDeslizar: {
     flex: 1,
     justifyContent: "center",
+   
   },
   iconActDes: {
-    flex: 1,
     width: 10,
     height: 10,
-    borderRadius: 25
+    borderRadius: 25, 
+    justifyContent:'center',
+    alignItems:'center',
+    marginRight:5,
+    alignSelf:'center'
   },
   itemTextEstado:{
     flex: 1,
     color: "#FFFFFF",
     fontSize: 16,
-    alignSelf:'center'
+    alignSelf:'center',
   }
 });
 
-
-const ToggleButton = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => {
-    setIsEnabled(previousState => !previousState);
-  };
-
-  return (
-    <View style={styles.viewDeslizar}>
-      <Switch
-        trackColor={{ false: "#767577", true: "#4caf50f" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-    </View>
-  );
-}
-
-
-
-const RoundIcon = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  return (
-    <View style={[styles. iconActDes, { backgroundColor: isEnabled ? '#4caf50' : '#f44336' }]} />
-  );
-}
 
 
