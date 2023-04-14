@@ -53,9 +53,7 @@ export const Datos3 = () => {
         setError(true);
        }
       
-
     }
-    return false;
   };
   controlError(login, data, error)
   console.log(data, 'data exta')
@@ -119,9 +117,25 @@ console.log(data, login)
              onPress={() => envDatos(login)}
             style={[
               styles.btnLog,
-              !error ? styles.bkColorNoListo : styles.bkColorListo,
+              !login.names ||
+              !login.lastnames ||
+              !login.phone ||
+              !login.email ||
+              !login.password ||
+              !data.codVer ||
+              // !date.img ||
+              !data.repPassword ||
+              !data.terminos  ? styles.bkColorNoListo : styles.bkColorListo,
             ]}
-             disabled={!error}
+             disabled={ !login.names ||
+              !login.lastnames ||
+              !login.phone ||
+              !login.email ||
+              !login.password ||
+              !data.codVer ||
+              // !date.img ||
+              !data.repPassword ||
+              !data.terminos }
           >
             <Text style={styles.textBtnLog}>Crear una cuenta</Text>
           </TouchableOpacity>
