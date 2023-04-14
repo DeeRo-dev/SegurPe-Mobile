@@ -9,7 +9,7 @@ import { TOKEN, USER } from "../../helpers/const";
 
 
 export const Datos3 = () => {
-  const [date, dataAction] = useContext(DataExtraContext);
+  const [data, dataAction] = useContext(DataExtraContext);
   const [login, loginAction] = useContext(UsuarioContext);
    // Estado para controlar que todos los campos del registro esten completos
    const [error, setError] = useState(false);
@@ -17,13 +17,7 @@ export const Datos3 = () => {
 
 
   // Funcion para cargar en el estado global los datos de los inputs
-  // const onChangeData = (name, value) => {
-  //   loginAction({
-  //     type: name,
-  //     data: value,
-  //   });
-
-  // };
+ 
   const onChangeDataExtra = (name, value) => {
     dataAction({
       type: name,
@@ -36,31 +30,36 @@ export const Datos3 = () => {
   const handleCheckboxChange = (name) => {
     setIsChecked(!isChecked);
     onChangeDataExtra(name, !isChecked);
-  };
+    console.log(error, 'el error estas en')
+  }
+  
 
-  const controlError = (login,date,error) => {
+  const controlError = (login,data,error) => {
     // falta controlar la img que este completo
+     //  && LA FECHA DE NACIMIENTO
     if (
       !login.names ||
       !login.lastnames ||
       !login.phone ||
       !login.email ||
       !login.password ||
-      !date.codVer ||
-      !date.img ||
-      !date.repPassword ||
-      !date.terminos 
+      !data.codVer ||
+      // !date.img ||
+      !data.repPassword ||
+      !data.terminos 
     ) {
        if (error === false) {
-        console.log('set err')
+       
         setError(true);
        }
       
+
     }
     return false;
   };
-  controlError(login, date, error)
-  console.log(date, 'data exta')
+  controlError(login, data, error)
+  console.log(data, 'data exta')
+
   const envDatos = async (data, img) => {
     const obj = {
       imgObj:img
@@ -77,7 +76,7 @@ export const Datos3 = () => {
         
     }
   };
-
+console.log(data, login)
   return (
     <View style={styles.contentTerminosCondiciones}>
       <ScrollView>
@@ -117,12 +116,12 @@ export const Datos3 = () => {
         />
         <View style={styles.contentBtnLog}>
           <TouchableOpacity
-            onPress={() => envDatos(login, date.img)}
+             onPress={() => envDatos(login)}
             style={[
               styles.btnLog,
-              error ? styles.bkColorNoListo : styles.bkColorListo,
+              !error ? styles.bkColorNoListo : styles.bkColorListo,
             ]}
-            // disabled={error}
+             disabled={!error}
           >
             <Text style={styles.textBtnLog}>Crear una cuenta</Text>
           </TouchableOpacity>
