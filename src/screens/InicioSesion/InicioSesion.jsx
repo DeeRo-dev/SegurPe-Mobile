@@ -31,14 +31,20 @@ export const InicioSesion = () => {
   // EMAIL:Derek@gmail.com
   // CLAVE:87654321Derek
   const sendLogin = async (data) => {
-    if (data) {
-         const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
-        console.log(result.data, 'esto devuelve')
-        if (result.data.token) {
-          // Guarda un token de usuario en el almacenamiento seguro.
-          await saveUserToken(TOKEN, result.data.token)
-          await saveUserInfo(USER,result.data)
-      } 
+    try {
+      if (data) {
+        const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
+       console.log(result.data, 'esto devuelve')
+       if (result.data.token) {
+         // Guarda un token de usuario en el almacenamiento seguro.
+         await saveUserToken(TOKEN, result.data.token)
+         await saveUserInfo(USER,result.data)
+
+     } 
+   }
+   return navigator.navigate('Map')
+    } catch (error) {
+      console.log(error, 'entre en el error del trycatch')
     }
   };
 

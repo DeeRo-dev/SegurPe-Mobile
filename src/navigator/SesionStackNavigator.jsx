@@ -8,6 +8,7 @@ import { EditeTelefono } from '../screens/Perfil/EditeTelefono';
 import { EditeMail } from '../screens/Perfil/EditeMail';
 import { EditeDireccion } from '../screens/Perfil/EditeDireccion';
 import { EditeContrasenia } from '../screens/Perfil/EditeContrasenia';
+import { Map } from '../screens/Map/Map';
 
 
 const Stack = createStackNavigator();
@@ -87,6 +88,21 @@ export const SesionStackNavigator = () => {
           },
         }}
         name="EditeContrasenia"  component={EditeContrasenia} />
+        <Stack.Screen
+        options={{
+          title:'Map',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="Map"  component={Map} />
     </Stack.Navigator>
+    
   );
 }
