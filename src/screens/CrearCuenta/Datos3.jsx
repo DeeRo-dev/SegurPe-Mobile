@@ -49,7 +49,6 @@ export const Datos3 = () => {
       !data.terminos 
     ) {
        if (error === false) {
-       
         setError(true);
        }
       
