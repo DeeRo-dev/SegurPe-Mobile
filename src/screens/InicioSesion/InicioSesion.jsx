@@ -15,8 +15,6 @@ export const InicioSesion = () => {
     password: "",
   });
 
- 
-
   const cargarDatos = (name, value) => {
     setDatos({
       ...datos,
@@ -30,14 +28,24 @@ export const InicioSesion = () => {
   // EMAIL:Derek@gmail.com
   // CLAVE:87654321Derek
   const sendLogin = async (data) => {
-    if (data) {
-         const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
-        console.log(result.data, 'esto devuelve')
+    try {
+      if (data) {
+        const result = await performRequest(
+          "POST",
+          "auth/loginSerenazgos",
+          data,
+          null,
+          null
+        );
+        console.log(result.data, "esto devuelveee");
         if (result.data.token) {
           // Guarda un token de usuario en el almacenamiento seguro.
-          await saveUserToken(TOKEN, result.data.token)
-          await saveUserInfo(USER,result.data)
-      } 
+          await saveUserToken(TOKEN, result.data.token);
+          await saveUserInfo(USER, result.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -59,7 +67,6 @@ export const InicioSesion = () => {
       </View>
 
       <TouchableOpacity
-
         // disabled={!datos.email || !datos.clave}
         onPress={() => sendLogin(datos)}
         style={styles.btn}

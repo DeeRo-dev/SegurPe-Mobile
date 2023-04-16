@@ -6,6 +6,7 @@ import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
+import PreventionCall from "../../components/PreventionCall";
 
 export function Map() {
   // Estado para almacenar la ubicación del usuario
@@ -47,6 +48,7 @@ export function Map() {
           />
         </MapView>
       )}
+      <PreventionCall />
     </View>
   );
 }
