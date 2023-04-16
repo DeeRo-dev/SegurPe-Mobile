@@ -43,4 +43,6 @@ export const styles = StyleSheet.create({
         color:'#FFFFFF',
         fontSize:14
     },
+    bkColorListo:{backgroundColor:'#F57D20'},
+    bkColorNoListo:{backgroundColor:'#D5DBDB'},
 })

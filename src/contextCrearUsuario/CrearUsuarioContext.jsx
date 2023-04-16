@@ -15,53 +15,56 @@ import React, { createContext, useReducer } from "react"
 
 
 export const usuarioState = {
-    nombre:'',
-    apellido:'',
-    img:'',
-    address:'',
-    dniFront:"",
-    dniBack:"",
-    numCel:'',
-    codVer:'',
+    names:'',
+    lastnames:'',
+    address:'calle falsa',
+    imgProfile:'',
+    DniFront:"",
+    DniBack:"",
+    phone:'',
     email:'',
-    clave:'',
-    fechaDeNacimiento:'',
-    terminos:false,
+    DNI: "12345678",
+    password:'',
+    birthdate:'1997-11-24',
+    // terminos:false,
 }
+
 
 const usuarioReducer = ( state = usuarioState, payload) => {
     switch (payload.type) {
-        case 'name':
+        case 'names':
             return {
                 ...state,
-                nombre: payload.data
+                address:'calle false',
+                DNI:'12345678',
+                imgProfile:'',
+                names: payload.data
             }
-        case 'apellido':
+        case 'lastnames':
             return {
                 ...state,
-                apellido: payload.data
+                lastnames: payload.data
             }
        case 'address':
            return {
                ...state,
                address: payload.data
         }  
-        case 'numCel':
+        case 'phone':
            return {
                ...state,
-               numCel: payload.data
+               phone: payload.data
         }  
-        case 'codVer':
-             return {
-                 ...state,
-                 codVer: payload.data
-          }  
-          case 'img':
+        // case 'codVer':
+        //      return {
+        //          ...state,
+        //          codVer: payload.data
+        //   }  
+          case 'imgProfile':
             return {
                 ...state,
-                img: payload.data,
-                dniFront: payload.data,
-                dniBack: payload.data,
+                imgProfile: payload.data,
+                
 
          }  
           case 'email':
@@ -69,21 +72,21 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                  ...state,
                  email: payload.data
           }  
-          case 'clave':
+          case 'password':
              return {
                  ...state,
-                 clave: payload.data
+                 password: payload.data
           }      
-          case 'fechaDeNacimiento':
+          case 'birthdate':
             return {
                 ...state,
-                fechaDeNacimiento: payload.data
+                birthdate: payload.data
          }  
-          case 'terminos':
-             return {
-                 ...state,
-                 terminos: payload.data
-          }      
+        //   case 'terminos':
+        //      return {
+        //          ...state,
+        //          terminos: payload.data
+        //   }      
         default:
             break;
     }
@@ -102,3 +105,57 @@ export const UsuarioProvider = (props) =>{
     )
 }
 
+// Otro context para controlar datos extras
+
+export const dataUserExtraState = {
+    codVer:'',
+    img:'',
+    repPassword:'',
+    terminos:false,
+}
+
+
+
+const dataExtraReducer = ( state = dataUserExtra, payload) => {
+    switch (payload.type) {
+        
+        case 'codVer':
+             return {
+                 ...state,
+                 codVer: payload.data
+          }  
+          case 'img':
+            console.log(payload.data)
+            return {
+                ...state,
+                img: payload.data,
+         }  
+         case 'repPassword':
+            return {
+                ...state,
+                repPassword: payload.data
+         } 
+          case 'terminos':
+            console.log(payload.data)
+             return {
+                 ...state,
+                 terminos: payload.data
+          }      
+        default:
+            break;
+    }
+}
+
+
+export const DataExtraContext = createContext(dataUserExtraState)
+
+export const DataExtraProvider = (props) =>{
+    
+    const [data, dataAction] = useReducer(dataExtraReducer,  dataUserExtraState)
+
+    return (
+        <DataExtraContext.Provider value={[data, dataAction]}>
+            {props.children}
+        </DataExtraContext.Provider>
+    )
+}

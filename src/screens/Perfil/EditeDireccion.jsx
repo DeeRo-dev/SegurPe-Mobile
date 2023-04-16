@@ -1,6 +1,9 @@
 import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { TOKEN } from '../../helpers/const';
+import { getUserToken } from '../../helpers/store';
+import { performRequest } from '../../helpers/api';
 
 
 
@@ -8,13 +11,51 @@ export const EditeDireccion = () => {
 
 
   
-  const [direc, setDirec] = useState(Number)
+  const [direc, setDirec] = useState({
+    address:'',
+  })
 
-  const onChangeNum = (value) =>{
-    setDirec(value)
+  const onChangeNum = (name, value) =>{
+    setDirec({
+      ...direc,
+      [name]:value
+    })
   }
-  console.log(direc)
 
+
+
+  
+
+// FUNCION PARA HACER LA PETICION
+const sendDataUser = async (token, data) => {
+  console.log(data, 'asds')
+  const headerList = {
+    "Authorization" : 'Bearer ' + token
+  }
+  try {
+    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+   console.log(response, 'se dio EXITOSO')
+    // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+}
+
+
+
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name, data)=>{
+  // Obtiene un token de usuario del almacenamiento seguro.
+  const tokenSeg = await getUserToken(name)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(tokenSeg, data)
+        // console.log(respon, 'se dio')
+     }
+}
 
   return (
     <View style={style.content}>
@@ -32,12 +73,13 @@ export const EditeDireccion = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Dirección</Text>
-          <TextInput  style={style.datos} placeholder="Berazategui e/bla y asd 234" onChangeText={(value)=> onChangeNum(value)}/>
+          <TextInput  style={style.datos} placeholder="Berazategui e/bla y asd 234" onChangeText={(value)=> onChangeNum('address',value)}/>
           
         </View>
         <View style={style.contentBtn}>
           
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> getUser(TOKEN, direc)
+          }>
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 

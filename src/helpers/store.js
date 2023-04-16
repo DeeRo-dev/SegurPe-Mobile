@@ -72,6 +72,7 @@ async function deleteUserToken(keyName) {
  * @param {Object} userInfo - La información del usuario actualizada a guardar.
  */
 async function updateUserInfo(keyName, userInfo) {
+  console.log(keyName, userInfo, )
   const userInfoJSON = JSON.stringify(userInfo);
   await SecureStore.setItemAsync(keyName, userInfoJSON);
 }

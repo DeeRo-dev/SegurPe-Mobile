@@ -27,6 +27,7 @@ const performRequest = async (
   headers = {},
   uploadFile = null
 ) => {
+
   try {
     const config = {
       method,
@@ -36,6 +37,7 @@ const performRequest = async (
     };
 
     if (uploadFile) {
+      console.log(uploadFile, 'uploadfile')
       const formData = new FormData();
 
       formData.append("file", {

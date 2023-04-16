@@ -1,14 +1,56 @@
 import React, {useState}from 'react'
 import {  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { performRequest } from '../../helpers/api';
+import { TOKEN } from '../../helpers/const';
+import { getUserToken } from '../../helpers/store';
 export const EditeTelefono = () => {
 
-  const [numTel, setNumTel] = useState(Number)
+  const [valuePhone, setValuePhone] = useState({
+    phone:'',
+    codVerf:''
+  })
 
-  const onChangeNum = (value) =>{
-    setNumTel(value)
+  const onChangeNum = (name, value) =>{
+    setValuePhone({
+        ...valuePhone,
+        [name]:value
+         })
   }
-  console.log(numTel)
+  
+
+// FUNCION PARA HACER LA PETICION
+const sendDataUser = async (token,data) => {
+  
+  console.log(data, 'data')
+  const headerList = {
+    "Authorization" : 'Bearer ' + token
+  }
+  try {
+    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+   console.log(response, 'se dio EXITOSO')
+    // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+  } catch (error) { 
+       console.log(error, ' entro en el error del senddata')
+       return error
+  }
+}
+
+
+
+
+
+// FUNCION PARA TRAER INFO DEL USER
+const getUser = async (name, data)=>{
+  // Obtiene un token de usuario del almacenamiento seguro.
+  const tokenSeg = await getUserToken(name)
+  //  TRAER INFO DEL USUARIO
+     if (tokenSeg) {
+        const respon = await sendDataUser(tokenSeg, data)
+        // console.log(respon, 'se dio')
+     }
+}
+
   return (
     <View style={style.content}>
          <View style={style.contNameAvatar}>
@@ -24,9 +66,9 @@ export const EditeTelefono = () => {
         </View>
         <View>
           <Text style={style.titleInputs}>Número de teléfono</Text>
-          <TextInput  style={style.datos} keyboardType="numeric" placeholder="n3242" onChangeText={(value)=> onChangeNum(value)}/>
+          <TextInput  style={style.datos} keyboardType="numeric" placeholder="n3242" onChangeText={(value)=> onChangeNum('phone',value)}/>
           <Text style={style.titleInputs}>Código de verificación</Text>
-          <TextInput  style={style.datos} />
+          <TextInput  style={style.datos}  onChangeText={(value)=> onChangeNum('codVerf',value)}/>
         </View>
         <View style={style.contentBtn}>
           <TouchableOpacity>
@@ -34,7 +76,10 @@ export const EditeTelefono = () => {
                <Text style={style.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>  Enviar código</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+             onPress={()=>getUser(TOKEN, valuePhone)}
+          >
+           
              <View style={style.btnListo}>
                <Text style={style.textBtnListo}>Listo</Text>
             </View> 
