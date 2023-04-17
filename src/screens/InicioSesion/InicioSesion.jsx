@@ -42,7 +42,7 @@ export const InicioSesion = () => {
 
      } 
    }
-   return navigator.navigate('Map')
+   return navigator.navigate('HomeRegistrarIniciarSesion')
     } catch (error) {
       console.log(error, 'entre en el error del trycatch')
     }

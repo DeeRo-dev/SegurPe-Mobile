@@ -6,9 +6,13 @@ import { DataExtraContext, UsuarioContext } from "../../contextCrearUsuario/Crea
 import { performRequest } from "../../helpers/api";
 import { getUserToken, saveUserInfo } from "../../helpers/store";
 import { TOKEN, USER } from "../../helpers/const";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const Datos3 = () => {
+
+  navigate = useNavigation()
+
   const [data, dataAction] = useContext(DataExtraContext);
   const [login, loginAction] = useContext(UsuarioContext);
    // Estado para controlar que todos los campos del registro esten completos
@@ -67,6 +71,8 @@ export const Datos3 = () => {
         console.log(result)
 
       // SI LA RESPUESTA ES BUENA NAVEGAR HACIA INICIO DE SESION <-----
+      return navigate.navigate('Map')
+
       } catch (error) {
         console.log(error, 'no se pudo registrar')
       }
