@@ -71,7 +71,7 @@ export const Datos3 = () => {
         console.log(result)
 
       // SI LA RESPUESTA ES BUENA NAVEGAR HACIA INICIO DE SESION <-----
-      return navigate.navigate('Map')
+      return navigate.navigate('HomeRegistrarIniciarSesion')
 
       } catch (error) {
         console.log(error, 'no se pudo registrar')
