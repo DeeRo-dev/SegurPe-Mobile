@@ -59,6 +59,7 @@ export const InicioSesion = () => {
         />
         <Text style={styles.titleInput}>Contraseña</Text>
         <TextInput
+          secureTextEntry={true}
           style={styles.input}
           placeholder="Contraseña"
           onChangeText={(value) => cargarDatos("password", value)}

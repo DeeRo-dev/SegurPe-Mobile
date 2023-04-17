@@ -9,62 +9,85 @@ export const Datos2 = () => {
 // Funcion para cargar en el estado global los datos de los inputs
   const [login, loginAction] = useContext(UsuarioContext);
   const [data, dataAction] = useContext(DataExtraContext);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({
+    caracteres:false,
+    mayuscula:false,
+    clave:false
+  });
   const onChangeData = (name, value)=>{
+    
     loginAction({
       type: name,
       data: value
     })
-    
+    // controlPassword( login, error)
 };
 
 
 const onChangeDataExtra = (name, value,login, data ) =>{
-  confClave(login, data)
   dataAction({
     type: name,
     data: value
 })
+confClave(login, data)
 };
 
-const validatePassword = (data) => {
-  const regex = /^(?=.*[A-Z]).{8,}$/;
-  return regex.test(data);
-}
+// CONTROLAR QUE LA CLAVE CUMPLA CON LOS REQUISITOS
 
-const confClave = (login, data ) =>{
-  if (login.password) {
-    const res = validatePassword(login.password)
-    if (res === false) {
-      setError(true)
-    } }
+const controlPassword = (error, login) =>{
   
-  if( login.password === data.repPassword){
+    const res = /[A-Z]/.test(login.password);
+    console.log(res, 'set')
+    if (res == false) {
+      setError({
+        ...error,
+        [mayuscula] : true
+      })     
+    }else{
+      setError({
+        ...error,
+        [mayuscula] : false
+      })
+    }
+
+}
+const confClave = (login, data ) =>{
+  if(login.password != data.repPassword){
    if (error == false) {
-    setError(true)
+    console.log(error, 'entro')
+    setError({
+      ...error,
+     [clave]: true
+    })
     return;
    }
-	}else{
-		setError(false)
+	}
+  else{
+		setError({
+      ...error,
+      [clave] : false
+    })
 		 return;
   }
 }
 
 
-console.log(error)
+ console.log(error, 'error clave') 
   return (
     <View>
         <View>
             <Text style={styles.titleInput}>Email</Text>
             <TextInput style={styles.input}  onChangeText={(value)=>onChangeData('email', value)}  placeholder="Email"/>
-            <Text style={styles.titleInput}>Contraseña</Text>
-            {error && (
-              <Text style={styles.textError}>La clave debe contener 8 caracteres</Text>
-            )}
+            <Text style={styles.titleInput}>Contraseña</Text>           
             <TextInput secureTextEntry={true}  onChangeText={(value)=>onChangeData('password', value)}  style={styles.input} placeholder="Contraseña"/>
+          
+              {/* {error.mayuscula && <Text style={styles.textError}>La clave debe contener al menos una mayúscula</Text> }  */}
+            {/* {error.caracteres && (
+              <Text style={styles.textError}>La clave debe contener 8 caracteres</Text>
+            )} */}
             <Text style={styles.titleInput}>Repetir contraseña</Text>
             <TextInput secureTextEntry={true} style={styles.input} onChangeText={(value)=>onChangeDataExtra('repPassword', value,login, data )} placeholder="Repetir contraseña"/>
-            {error && (
+            {error.clave && (
               <Text style={styles.textError}>Las claves no coinciden</Text>
             )}
         </View>

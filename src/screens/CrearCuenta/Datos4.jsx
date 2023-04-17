@@ -35,7 +35,7 @@ const onChangeDataExtra = (name, value) =>{
             <Text style={styles.titleInput}>Número de teléfono</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
             <Text style={styles.titleInput}>Código de verificación</Text>
-            <TextInput secureTextEntry={true} onChangeText={(value)=>onChangeDataExtra('codVer', value)} style={styles.input}  placeholder="Código de verificación"/>
+            <TextInput  onChangeText={(value)=>onChangeDataExtra('codVer', value)} style={styles.input}  placeholder="Código de verificación"/>
             {/* onChangeText={(value)=>onChangeData('codVer', value)} */}
         </View>
         
