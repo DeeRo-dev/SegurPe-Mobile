@@ -85,7 +85,7 @@ export const Datos1 = () => {
       
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TouchableOpacity
-              style={styles.input}
+            
                onPress={showDatepicker}
             >
               <Text style={styles.input}>{formatDate(date)}</Text>

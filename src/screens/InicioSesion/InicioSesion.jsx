@@ -4,12 +4,13 @@ import { View, Text, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./ThemeInicioSesion";
 import { performRequest } from "../../helpers/api";
-import { getUserToken, saveUserInfo, saveUserToken } from "../../helpers/store";
+import { saveUserInfo, saveUserToken } from "../../helpers/store";
 import { TOKEN, USER } from "../../helpers/const";
+
 
 export const InicioSesion = () => {
   const navigator = useNavigation();
-  const [error, setError] = useState(false);
+
   const [datos, setDatos] = useState({
     email: "",
     password: "",
@@ -30,14 +31,20 @@ export const InicioSesion = () => {
   // EMAIL:Derek@gmail.com
   // CLAVE:87654321Derek
   const sendLogin = async (data) => {
-    if (data) {
-         const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
-        console.log(result.data, 'esto devuelve')
-        if (result.data.token) {
-          // Guarda un token de usuario en el almacenamiento seguro.
-          await saveUserToken(TOKEN, result.data.token)
-          await saveUserInfo(USER,result.data)
-      } 
+    try {
+      if (data) {
+        const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
+       console.log(result.data, 'esto devuelve')
+       if (result.data.token) {
+         // Guarda un token de usuario en el almacenamiento seguro.
+         await saveUserToken(TOKEN, result.data.token)
+         await saveUserInfo(USER,result.data)
+
+     } 
+   }
+   return navigator.navigate('Map')
+    } catch (error) {
+      console.log(error, 'entre en el error del trycatch')
     }
   };
 
@@ -52,6 +59,7 @@ export const InicioSesion = () => {
         />
         <Text style={styles.titleInput}>Contraseña</Text>
         <TextInput
+          secureTextEntry={true}
           style={styles.input}
           placeholder="Contraseña"
           onChangeText={(value) => cargarDatos("password", value)}
@@ -60,9 +68,9 @@ export const InicioSesion = () => {
 
       <TouchableOpacity
 
-        // disabled={!datos.email || !datos.clave}
+        disabled={!datos.email || !datos.password}
         onPress={() => sendLogin(datos)}
-        style={styles.btn}
+        style={[styles.btn,  !datos.email || !datos.password ? styles.bkColorNoListo : styles.bkColorListo]}
       >
         <Text style={styles.textBtn}>Confirmar</Text>
       </TouchableOpacity>

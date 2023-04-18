@@ -17,7 +17,7 @@ import React, { createContext, useReducer } from "react"
 export const usuarioState = {
     names:'',
     lastnames:'',
-    address:'calle falsa',
+    address:'Direccion',
     imgProfile:'',
     DniFront:"",
     DniBack:"",
@@ -35,9 +35,6 @@ const usuarioReducer = ( state = usuarioState, payload) => {
         case 'names':
             return {
                 ...state,
-                address:'calle false',
-                DNI:'12345678',
-                imgProfile:'',
                 names: payload.data
             }
         case 'lastnames':
@@ -55,18 +52,11 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                ...state,
                phone: payload.data
         }  
-        // case 'codVer':
-        //      return {
-        //          ...state,
-        //          codVer: payload.data
-        //   }  
           case 'imgProfile':
             return {
                 ...state,
                 imgProfile: payload.data,
-                
-
-         }  
+         } 
           case 'email':
              return {
                  ...state,
@@ -82,11 +72,6 @@ const usuarioReducer = ( state = usuarioState, payload) => {
                 ...state,
                 birthdate: payload.data
          }  
-        //   case 'terminos':
-        //      return {
-        //          ...state,
-        //          terminos: payload.data
-        //   }      
         default:
             break;
     }

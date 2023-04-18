@@ -38,37 +38,59 @@ const loadImageFromGallery = async(array) =>{
 const cargarFoto = async() =>{
   const result = await loadImageFromGallery([1,1])
   console.log(result)
+  const objImage = { 
+    uri: result.image,
+     name: 'image.jpg',
+      type: 'image/jpeg' }
+
   // FUNCION PARA CARGAR LA IMAGEN DEL AVATAR
+    if (result.image) {
+      // console.log(TOKEN, 'PUT', 'UploadUserImage', objImage)
+       getUser(TOKEN, 'PUT', 'UploadUserImage', objImage)
+    }
+  return
 }
   
+
+
 // FUNCION PARA TRAER INFO DEL USER
-const getUser = async (name)=>{
+const getUser = async (name, method, route, image = null)=>{
     // Obtiene un token de usuario del almacenamiento seguro.
     const tokenSeg = await getUserToken(name)
     //  TRAER INFO DEL USUARIO
        if (tokenSeg) {
-          const respon = await sendDataUser(tokenSeg)
+          const respon = await sendDataUser(tokenSeg, method, route, image )
           // console.log(respon, 'se dio')
        }
+       return
  }
  
- getUser(TOKEN)
-
-
-// FUNCION PARA REALIZAR EL GET USER
-const sendDataUser = async (token) => {
+ useEffect(() => {
+  getUser(TOKEN, 'GET', 'getUserProfileInfo')
+  ,[]
+ }
+)
+// FUNCION PARA REALIZAR EL GET - PUT USER
+const sendDataUser = async (token, method, route, image = null) => {
   const headerList = {
     "Authorization" : 'Bearer ' + token
   }
+  if (method == 'PUT') {
+      console.log(method, route ,null , headerList, image, 'DESDEEE')
+  }
+ 
   try {
-    const response = await performRequest('GET', 'getUserProfileInfo',null , headerList, null)
-  //  console.log(response, 'se dio por2')
+    const response = await performRequest(method, route ,null , headerList, image)
+
     setData(response.data)
+    return;
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
        return error
   }
 }
+
+
   return (
 
 
@@ -77,8 +99,12 @@ const sendDataUser = async (token) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              <Image source={{uri:"https://static.dw.com/image/64142948_303.jpg"}}
+              {data.imgProfile
+               ? <Image source={{uri:data.imgProfile}}
+               style={styles.avatarPerfil} />
+               :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
                 style={styles.avatarPerfil} />
+              }
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
          <Text  style={styles.titleName}> 

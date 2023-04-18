@@ -45,7 +45,6 @@ console.log(clave)
 
 // confClave (clave, confirmarClave);
 
- // Falta tener el jwt
  
 // FUNCION PARA HACER LA PETICION
 const sendDataUser = async (token, data) => {
@@ -61,9 +60,6 @@ const sendDataUser = async (token, data) => {
        return error
   }
 }
-
-
-
 
 
 // FUNCION PARA TRAER INFO DEL USER
