@@ -42,21 +42,24 @@ const cargarFoto = async() =>{
     uri: result.image,
      name: 'image.jpg',
       type: 'image/jpeg' }
-  console.log(objImage)
+
   // FUNCION PARA CARGAR LA IMAGEN DEL AVATAR
-  getUser(TOKEN, 'PUT', 'UploadUserImage', objImage)
+    if (result.image) {
+      // console.log(TOKEN, 'PUT', 'UploadUserImage', objImage)
+       getUser(TOKEN, 'PUT', 'UploadUserImage', objImage)
+    }
   return
 }
   
 
 
 // FUNCION PARA TRAER INFO DEL USER
-const getUser = async (name, method, route)=>{
+const getUser = async (name, method, route, image = null)=>{
     // Obtiene un token de usuario del almacenamiento seguro.
     const tokenSeg = await getUserToken(name)
     //  TRAER INFO DEL USUARIO
        if (tokenSeg) {
-          const respon = await sendDataUser(tokenSeg, method, route)
+          const respon = await sendDataUser(tokenSeg, method, route, image )
           // console.log(respon, 'se dio')
        }
        return
@@ -72,10 +75,13 @@ const sendDataUser = async (token, method, route, image = null) => {
   const headerList = {
     "Authorization" : 'Bearer ' + token
   }
-  console.log(method, route ,null , headerList, image)
+  if (method == 'PUT') {
+      console.log(method, route ,null , headerList, image, 'DESDEEE')
+  }
+ 
   try {
     const response = await performRequest(method, route ,null , headerList, image)
-      
+
     setData(response.data)
     return;
   } catch (error) { 
@@ -83,6 +89,9 @@ const sendDataUser = async (token, method, route, image = null) => {
        return error
   }
 }
+
+// console.log(data)
+
   return (
 
 
@@ -91,8 +100,13 @@ const sendDataUser = async (token, method, route, image = null) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              <Image source={{uri:"https://static.dw.com/image/64142948_303.jpg"}}
+              {data.imgProfile
+               ? <Image source={{uri:data.imgProfile}}
+               style={styles.avatarPerfil} />
+               :<Image source={{uri:"https://static.dw.com/image/64142948_303.jpg"}}
                 style={styles.avatarPerfil} />
+              }
+
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
          <Text  style={styles.titleName}> 
