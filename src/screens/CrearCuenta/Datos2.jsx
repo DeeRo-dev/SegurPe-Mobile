@@ -1,19 +1,15 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput } from 'react-native'
 import { UsuarioContext, DataExtraContext } from '../../contextCrearUsuario/CrearUsuarioContext'
-import { useState } from 'react'
+
 
 export const Datos2 = () => {
 
 // Funcion para cargar en el estado global los datos de los inputs
   const [login, loginAction] = useContext(UsuarioContext);
   const [data, dataAction] = useContext(DataExtraContext);
-  const [error, setError] = useState({
-    caracteres:false,
-    mayuscula:false,
-    clave:false
-  });
+  
   const onChangeData = (name, value)=>{
     if (name == 'email') {
       let data = value.toLowerCase()
@@ -27,8 +23,9 @@ export const Datos2 = () => {
         type: name,
         data: value
       })
+      
     }
-    // controlPassword( login, error)
+      
 };
 
 
@@ -37,67 +34,43 @@ const onChangeDataExtra = (name, value,login, data ) =>{
     type: name,
     data: value
 })
-confClave(login, data)
 };
 
 // CONTROLAR QUE LA CLAVE CUMPLA CON LOS REQUISITOS
 
-const controlPassword = (error, login) =>{
-  
-    const res = /[A-Z]/.test(login.password);
-    console.log(res, 'set')
-    if (res == false) {
-      setError({
-        ...error,
-        [mayuscula] : true
-      })     
+const controlPassword = (data) =>{
+  const regex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+   return regex.test(data);
+  // si cumple retorna True, si no False
+}
+const controlEmail = (data) =>{
+  const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+   return regex.test(data);
+  // si cumple retorna True, si no False
+}
+const controlDePasswords = (password, repPassword) =>{
+    if (password === repPassword) {
+      return true;
     }else{
-      setError({
-        ...error,
-        [mayuscula] : false
-      })
+      return false;
     }
-
-}
-const confClave = (login, data ) =>{
-  if(login.password != data.repPassword){
-   if (error == false) {
-    console.log(error, 'entro')
-    setError({
-      ...error,
-     [clave]: true
-    })
-    return;
-   }
-	}
-  else{
-		setError({
-      ...error,
-      [clave] : false
-    })
-		 return;
-  }
+  // si cumple retorna True, si no False
 }
 
-
- console.log(error, 'error clave') 
+//  console.log(error, 'error clave') 
   return (
     <View>
         <View>
             <Text style={styles.titleInput}>Email</Text>
             <TextInput style={styles.input}  onChangeText={(value)=>onChangeData('email', value)}  placeholder="Email"/>
+            {!controlEmail(login.email) &&   <Text style={styles.textError}>No cumple con las condiciones de un email</Text>}
             <Text style={styles.titleInput}>Contraseña</Text>           
             <TextInput secureTextEntry={true}  onChangeText={(value)=>onChangeData('password', value)}  style={styles.input} placeholder="Contraseña"/>
-          
-              {/* {error.mayuscula && <Text style={styles.textError}>La clave debe contener al menos una mayúscula</Text> }  */}
-            {/* {error.caracteres && (
-              <Text style={styles.textError}>La clave debe contener 8 caracteres</Text>
-            )} */}
+            {!controlPassword(login.password) &&   <Text style={styles.textError}>La clave debe contener al menos una mayúscula y 8 caracteres</Text>}
             <Text style={styles.titleInput}>Repetir contraseña</Text>
             <TextInput secureTextEntry={true} style={styles.input} onChangeText={(value)=>onChangeDataExtra('repPassword', value,login, data )} placeholder="Repetir contraseña"/>
-            {error.clave && (
-              <Text style={styles.textError}>Las claves no coinciden</Text>
-            )}
+            {!controlDePasswords(login.password, data.repPassword) &&   <Text style={styles.textError}>Las claves no coinciden</Text>}
+            
         </View>
         
     </View>

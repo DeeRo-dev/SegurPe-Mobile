@@ -93,7 +93,7 @@ const sendDataUser = async (token, method, route, image = null) => {
        return error
   }
 }
-
+//  console.log(img)
 
   return (
 
@@ -103,13 +103,13 @@ const sendDataUser = async (token, method, route, image = null) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              {/* {data.imgProffile
-               ? <Image source={{uri:data.imgProfile}}
+              {/* {img
+               ? <Image source={{uri : img}}
                style={styles.avatarPerfil} />
                :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
                 style={styles.avatarPerfil} />
               } */}
-              <Image source={{uri: img? img : "https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg" }}
+              <Image source={{uri: img ? (img) : ("https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg") }}
                style={styles.avatarPerfil} />
 
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
