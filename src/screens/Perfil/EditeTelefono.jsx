@@ -4,11 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { performRequest } from '../../helpers/api';
 import { TOKEN } from '../../helpers/const';
 import { getUserToken } from '../../helpers/store';
-
-
-
+import { useNavigation } from '@react-navigation/native';
 export const EditeTelefono = () => {
-
+  navigator = useNavigation();
   const [valuePhone, setValuePhone] = useState({
     phone:'',
     codVerf:''
@@ -32,8 +30,10 @@ const sendDataUser = async (token,data) => {
     const response = await performRequest('PUT', 'updateSerenazgoProfileInfo',data , headerList, null)
    console.log(response, 'se dio EXITOSO')
     // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+    navigator.navigate("MiPerfil")
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
+       alert('Ocurrió un error: ' + error);
        return error
   }
 }

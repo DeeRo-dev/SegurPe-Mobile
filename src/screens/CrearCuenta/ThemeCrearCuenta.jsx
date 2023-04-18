@@ -34,9 +34,8 @@ export const styles = StyleSheet.create({
         borderRadius:100,
         borderColor:'#C4C6CF',
         flexDirection:'row',
-        justifyContent:'space-around',
-        alignItems:'center',
         backgroundColor:'#D8E2FF',
+        alignItems:'center',
         paddingLeft:22,
         marginTop:5
     },
@@ -124,5 +123,6 @@ export const styles = StyleSheet.create({
     bkColorNoListo:{backgroundColor:'#D5DBDB'},
     textError:{
         color:'red'
-    }
+    },
+  
 })

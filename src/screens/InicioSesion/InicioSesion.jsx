@@ -19,11 +19,20 @@ export const InicioSesion = () => {
  
 
   const cargarDatos = (name, value) => {
+    if (name == 'email') {
+      let data = value.toLowerCase()
+      setDatos({
+        ...datos,
+        [name]: data
+      })
+      
+    }else{
     setDatos({
       ...datos,
       [name]: value,
     });
-  };
+  }
+}
   console.log(datos);
 
   // Funcion para inicio de sesion
@@ -45,6 +54,8 @@ export const InicioSesion = () => {
    return navigator.navigate('Map')
     } catch (error) {
       console.log(error, 'entre en el error del trycatch')
+      alert('Ocurrió un error: ' + error);
+     
     }
   };
 

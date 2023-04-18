@@ -75,6 +75,7 @@ export const Datos3 = () => {
 
       } catch (error) {
         console.log(error, 'no se pudo registrar')
+        alert('Ocurrió un error: ' + error);
       }
         
     }
