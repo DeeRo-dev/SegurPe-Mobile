@@ -89,6 +89,7 @@ const sendDataUser = async (token, method, route, image = null) => {
     return;
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
+       alert('Ocurrió un error: ' + error);
        return error
   }
 }

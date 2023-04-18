@@ -54,6 +54,8 @@ export const InicioSesion = () => {
    return navigator.navigate('Map')
     } catch (error) {
       console.log(error, 'entre en el error del trycatch')
+      alert('Ocurrió un error: ' + error);
+     
     }
   };
 

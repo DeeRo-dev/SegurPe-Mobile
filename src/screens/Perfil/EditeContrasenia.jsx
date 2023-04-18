@@ -60,6 +60,7 @@ const sendDataUser = async (token, data) => {
     navigator.navigate("MiPerfil")
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
+       alert('Ocurrió un error: ' + error);
        return error
   }
 }
