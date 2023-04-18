@@ -4,10 +4,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { performRequest } from '../../helpers/api';
 import { TOKEN } from '../../helpers/const';
 import { getUserToken } from '../../helpers/store';
+import { useNavigation } from '@react-navigation/native';
 
 
 export const EditeMail = () => {
-
+navigator = useNavigation();
 const [data, setData] = useState({
   email:'',
   repEmail:'',
@@ -40,6 +41,7 @@ const sendDataUser = async (token, data) => {
     const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
    console.log(response, 'se dio EXITOSO')
     // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+    navigator.navigate("MiPerfil")
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
        return error
@@ -63,11 +65,18 @@ const getUser = async (name, data)=>{
 
 
 const onChangeEmail = (name, value) =>{
+  if (name == 'email' || name == 'repEmail') {
+    let date = value.toLowerCase()
+    setData({
+      ...data,
+      [name]: date
+    })
+  }else{
   setData({
     ...data,
     [name]: value 
      })
- 
+  }
   // setErrors(validate({
   //   ...data,
   //   [name]: value 

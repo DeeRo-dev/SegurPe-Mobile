@@ -19,11 +19,20 @@ export const InicioSesion = () => {
  
 
   const cargarDatos = (name, value) => {
+    if (name == 'email') {
+      let data = value.toLowerCase()
+      setDatos({
+        ...datos,
+        [name]: data
+      })
+      
+    }else{
     setDatos({
       ...datos,
       [name]: value,
     });
-  };
+  }
+}
   console.log(datos);
 
   // Funcion para inicio de sesion

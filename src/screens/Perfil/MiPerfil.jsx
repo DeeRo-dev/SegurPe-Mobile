@@ -14,7 +14,7 @@ export const MiPerfil = () => {
 
   const navigator = useNavigation();
   const [data, setData] = useState({})
-
+  const [img, setImg] = useState('')
   // Libreria para cargar la image
 const loadImageFromGallery = async(array) =>{
   const response = {status:false, image:null}
@@ -81,8 +81,11 @@ const sendDataUser = async (token, method, route, image = null) => {
  
   try {
     const response = await performRequest(method, route ,null , headerList, image)
-
     setData(response.data)
+    if (response.data.imgProfile) {
+      setImg(response.data.imgProfile)
+    }
+    
     return;
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
@@ -99,12 +102,15 @@ const sendDataUser = async (token, method, route, image = null) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              {data.imgProfile
+              {/* {data.imgProffile
                ? <Image source={{uri:data.imgProfile}}
                style={styles.avatarPerfil} />
                :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
                 style={styles.avatarPerfil} />
-              }
+              } */}
+              <Image source={{uri: img? img : "https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg" }}
+               style={styles.avatarPerfil} />
+
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
          <Text  style={styles.titleName}> 

@@ -15,11 +15,19 @@ export const Datos2 = () => {
     clave:false
   });
   const onChangeData = (name, value)=>{
-    
-    loginAction({
-      type: name,
-      data: value
-    })
+    if (name == 'email') {
+      let data = value.toLowerCase()
+      loginAction({
+        type: name,
+        data: data
+      })
+      
+    }else{
+      loginAction({
+        type: name,
+        data: value
+      })
+    }
     // controlPassword( login, error)
 };
 

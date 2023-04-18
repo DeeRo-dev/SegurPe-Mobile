@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Crea una instancia de axios con una configuración predeterminada
 const api = axios.create({
-  baseURL: "https://backend.segurpe.com/",
+  baseURL: "https://backend.segurpe.com/api/",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
