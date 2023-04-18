@@ -93,7 +93,7 @@ const sendDataUser = async (token, method, route, image = null) => {
        return error
   }
 }
-
+//  console.log(img)
 
   return (
 

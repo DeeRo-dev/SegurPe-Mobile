@@ -122,7 +122,10 @@ export const styles = StyleSheet.create({
     bkColorListo:{backgroundColor:'#F57D20'},
     bkColorNoListo:{backgroundColor:'#D5DBDB'},
     textError:{
-        color:'red'
+        color:'red',
+        width:'70%',
+        fontSize:12,
+        marginLeft:22
     },
   
 })
