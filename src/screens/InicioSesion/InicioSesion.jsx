@@ -33,8 +33,8 @@ export const InicioSesion = () => {
   const sendLogin = async (data) => {
     try {
       if (data) {
-        const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
-       console.log(result.data, 'esto devuelve')
+        const result = await performRequest('POST', 'auth/loginSerenazgos',data , null, null)
+      //  console.log(result.data, 'esto devuelve')
        if (result.data.token) {
          // Guarda un token de usuario en el almacenamiento seguro.
          await saveUserToken(TOKEN, result.data.token)

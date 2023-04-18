@@ -33,7 +33,7 @@ const sendDataUser = async (token, data) => {
     "Authorization" : 'Bearer ' + token
   }
   try {
-    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+    const response = await performRequest('PUT', 'updateSerenazgoProfileInfo',data , headerList, null)
    console.log(response, 'se dio EXITOSO')
     // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
   } catch (error) { 

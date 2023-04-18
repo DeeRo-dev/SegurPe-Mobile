@@ -46,7 +46,7 @@ const cargarFoto = async() =>{
   // FUNCION PARA CARGAR LA IMAGEN DEL AVATAR
     if (result.image) {
       // console.log(TOKEN, 'PUT', 'UploadUserImage', objImage)
-       getUser(TOKEN, 'PUT', 'UploadUserImage', objImage)
+       getUser(TOKEN, 'PUT', 'UploadSerenazgoImage', objImage)
     }
   return
 }
@@ -66,7 +66,7 @@ const getUser = async (name, method, route, image = null)=>{
  }
  
  useEffect(() => {
-  getUser(TOKEN, 'GET', 'getUserProfileInfo')
+  getUser(TOKEN, 'GET', 'getSerenazgoProfileInfo')
   ,[]
  }
 )
@@ -99,12 +99,14 @@ const sendDataUser = async (token, method, route, image = null) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              {data.imgProfile
+          {/* {data.imgProfile
                ? <Image source={{uri:data.imgProfile}}
                style={styles.avatarPerfil} />
                :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
                 style={styles.avatarPerfil} />
-              }
+              } */}
+              <Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
+                style={styles.avatarPerfil} />
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
          <Text  style={styles.titleName}> 
