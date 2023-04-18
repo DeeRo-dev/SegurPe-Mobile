@@ -90,7 +90,6 @@ const sendDataUser = async (token, method, route, image = null) => {
   }
 }
 
-// console.log(data)
 
   return (
 
@@ -103,10 +102,9 @@ const sendDataUser = async (token, method, route, image = null) => {
               {data.imgProfile
                ? <Image source={{uri:data.imgProfile}}
                style={styles.avatarPerfil} />
-               :<Image source={{uri:"https://static.dw.com/image/64142948_303.jpg"}}
+               :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
                 style={styles.avatarPerfil} />
               }
-
                  <Ionicons style={styles.pencilAvatar} name="pencil-outline" size={20} color='black' onPress={cargarFoto}/>
          </View>
          <Text  style={styles.titleName}> 
