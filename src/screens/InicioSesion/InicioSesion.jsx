@@ -1,16 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { View, Text, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./ThemeInicioSesion";
 import { performRequest } from "../../helpers/api";
-import { saveUserInfo, saveUserToken } from "../../helpers/store";
+import { getUserToken, saveUserInfo, saveUserToken } from "../../helpers/store";
 import { TOKEN, USER } from "../../helpers/const";
 
 
 export const InicioSesion = () => {
   const navigator = useNavigation();
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const [datos, setDatos] = useState({
     email: "",
     password: "",
@@ -33,7 +33,7 @@ export const InicioSesion = () => {
     });
   }
 }
-  console.log(datos);
+  // console.log(datos);
 
   // Funcion para inicio de sesion
   // cuenta
@@ -48,16 +48,20 @@ export const InicioSesion = () => {
          // Guarda un token de usuario en el almacenamiento seguro.
          await saveUserToken(TOKEN, result.data.token)
          await saveUserInfo(USER,result.data)
-
+        
      } 
    }
-   return navigator.navigate('Map')
+  
+     return navigator.navigate('Map')
+  
     } catch (error) {
-      console.log(error, 'entre en el error del trycatch')
+      // console.log(error, 'entre en el error del trycatch')
       alert('Ocurrió un error: ' + error);
-     
     }
   };
+
+
+
 
   return (
     <View style={styles.content}>

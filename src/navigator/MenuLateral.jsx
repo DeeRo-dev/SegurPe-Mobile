@@ -11,6 +11,10 @@ import { Map } from "../screens/Map/Map";
 import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
+import { useState, useEffect } from "react";
+import { getUserToken } from "../helpers/store";
+import { TOKEN } from "../helpers/const";
+import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
 
@@ -42,6 +46,7 @@ const menuItems = [
 ];
 
 export const MenuLateral = () => {
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -51,7 +56,7 @@ export const MenuLateral = () => {
         },
       }}
       drawerContent={(props) => <MenuInterno {...props} />}
-    >
+    > 
       <Drawer.Screen
         name="SesionStackNavigator"
         options={{ title: false }}
@@ -64,11 +69,35 @@ export const MenuLateral = () => {
           component={item.component}
         />
       ))}
+      
+     
     </Drawer.Navigator>
   );
 };
 
 const MenuInterno = ({ navigation }) => {
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+
+// Función para verificar si el usuario está autenticado
+const isAuthenticated =  async (name) => {
+  // Comprobar si existe un token de autenticación válido
+ 
+ try {const authToken =  await getUserToken(name)  
+   console.log(authToken, ' token')
+//   console.log(authToken,'sdsd')
+   if (authToken.length > 1) {
+     setLoggedIn(true);
+  }
+ } catch (error) {
+   console.log(error)
+}
+
+}
+console.log(loggedIn, 'estate')
+useEffect(() => {
+ isAuthenticated(TOKEN) 
+}, []);
   return (
     <DrawerContentScrollView>
       <View style={styles.container}>
@@ -78,7 +107,15 @@ const MenuInterno = ({ navigation }) => {
             key={item.name}
             title={item.title}
             iconName={item.icon}
-            onPress={() => navigation.navigate(item.name)}
+            onPress={ () => {
+              if (loggedIn) {
+                navigation.navigate(item.name);
+              } else {
+                navigation.navigate('InicioSesion');
+              }
+            }
+          }
+            // onPress={() => navigation.navigate(item.name)}
           />
         ))}
       </View>
