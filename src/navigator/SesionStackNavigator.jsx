@@ -30,18 +30,20 @@ const isAuthenticated =  async (name) => {
  try {const authToken =  await getUserToken(name)  
    console.log(authToken, ' token')
     console.log(authToken,'sdsd')
-   if (authToken.length > 1) {
-     setLoggedIn(true);
-  }
+   if (authToken) {
+     setLoggedIn(!!authToken);
+  }else{
+    setLoggedIn(false)
+   }
  } catch (error) {
    console.log(error)
 }
 
 }
 console.log(loggedIn, 'estate')
-useEffect(() => {
+
  isAuthenticated(TOKEN) 
-}, []);
+
 
   return (
     <Stack.Navigator 
@@ -66,7 +68,20 @@ useEffect(() => {
       </>
       ) : (
      <>
-
+      <Stack.Screen
+        options={{
+          title:'Map',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="Map"  component={Map} />
       <Stack.Screen 
         options={{
           title:'Edición', 
@@ -124,20 +139,7 @@ useEffect(() => {
           },
         }}
         name="EditeContrasenia"  component={EditeContrasenia} />
-        <Stack.Screen
-        options={{
-          title:'Map',
-          headerStyle:{
-            backgroundColor:'#16253A',
-          },
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle:{
-            color: 'white',
-            justifyContent:'center'
-          },
-        }}
-        name="Map"  component={Map} /> 
+         
         </>
         )}
     </Stack.Navigator>

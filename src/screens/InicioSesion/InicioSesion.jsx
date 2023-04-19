@@ -48,11 +48,11 @@ export const InicioSesion = () => {
          // Guarda un token de usuario en el almacenamiento seguro.
          await saveUserToken(TOKEN, result.data.token)
          await saveUserInfo(USER,result.data)
-        
+         return navigator.navigate("Map")
      } 
    }
   
-     return navigator.navigate('Map')
+     
   
     } catch (error) {
       // console.log(error, 'entre en el error del trycatch')

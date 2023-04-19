@@ -12,7 +12,7 @@ import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
 import { useState, useEffect } from "react";
-import { getUserToken } from "../helpers/store";
+import { deleteUserToken, getUserToken } from "../helpers/store";
 import { TOKEN } from "../helpers/const";
 import { useNavigation } from "@react-navigation/native";
 
@@ -70,13 +70,13 @@ export const MenuLateral = () => {
         />
       ))}
       
-     
+  
     </Drawer.Navigator>
   );
 };
 
 const MenuInterno = ({ navigation }) => {
-  
+  navigation = useNavigation();
   const [loggedIn, setLoggedIn] = useState(false);
 
 // Función para verificar si el usuario está autenticado
@@ -86,18 +86,23 @@ const isAuthenticated =  async (name) => {
  try {const authToken =  await getUserToken(name)  
    console.log(authToken, ' token')
 //   console.log(authToken,'sdsd')
-   if (authToken.length > 1) {
+   if (authToken) {
      setLoggedIn(true);
-  }
+  }else{
+    setLoggedIn(false)
+   }
  } catch (error) {
    console.log(error)
 }
 
 }
 console.log(loggedIn, 'estate')
-useEffect(() => {
+
  isAuthenticated(TOKEN) 
-}, []);
+const closeSesion= (name) =>{
+  deleteUserToken(name)
+  navigation.navigate("HomeRegistrarIniciarSesion" )
+}
   return (
     <DrawerContentScrollView>
       <View style={styles.container}>
@@ -120,6 +125,9 @@ useEffect(() => {
         ))}
       </View>
       <LogoutButton />
+      <TouchableOpacity onPress={() => closeSesion(TOKEN)}>
+        <Text>Cerrar sesion</Text>
+     </TouchableOpacity>
     </DrawerContentScrollView>
   );
 };
