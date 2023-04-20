@@ -4,8 +4,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { performRequest } from '../../helpers/api';
 import { TOKEN } from '../../helpers/const';
 import { getUserToken } from '../../helpers/store';
+import { useNavigation } from '@react-navigation/native';
 export const EditeTelefono = () => {
-
+  navigator = useNavigation();
   const [valuePhone, setValuePhone] = useState({
     phone:'',
     codVerf:''
@@ -18,27 +19,24 @@ export const EditeTelefono = () => {
          })
   }
   
-
+  
 // FUNCION PARA HACER LA PETICION
 const sendDataUser = async (token,data) => {
-  
   console.log(data, 'data')
   const headerList = {
     "Authorization" : 'Bearer ' + token
   }
   try {
-    const response = await performRequest('PUT', 'updateUserProfileInfo',data , headerList, null)
+    const response = await performRequest('PUT', 'updateSerenazgoProfileInfo',data , headerList, null)
    console.log(response, 'se dio EXITOSO')
     // SI SE DA EXITOSO, TIENE QUE NAVEGAR A OTRA PANTALLA
+    navigator.navigate("MiPerfil")
   } catch (error) { 
        console.log(error, ' entro en el error del senddata')
+       alert('Ocurrió un error: ' + error);
        return error
   }
 }
-
-
-
-
 
 // FUNCION PARA TRAER INFO DEL USER
 const getUser = async (name, data)=>{

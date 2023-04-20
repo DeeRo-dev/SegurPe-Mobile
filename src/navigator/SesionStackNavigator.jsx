@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CrearCuenta } from '../screens/CrearCuenta/CrearCuenta';
@@ -8,11 +8,20 @@ import { EditeTelefono } from '../screens/Perfil/EditeTelefono';
 import { EditeMail } from '../screens/Perfil/EditeMail';
 import { EditeDireccion } from '../screens/Perfil/EditeDireccion';
 import { EditeContrasenia } from '../screens/Perfil/EditeContrasenia';
+import { Map } from '../screens/Map/Map';
+import { TOKEN } from '../helpers/const';
+import { getUserToken } from '../helpers/store';
+import { AuthContext } from '../contextCrearUsuario/AuthContext';
 
 
 const Stack = createStackNavigator();
 
+
 export const SesionStackNavigator = () => {
+
+const [date, dataAction]= useContext(AuthContext) 
+
+//  console.log(date, 'estate')
   return (
     <Stack.Navigator 
       initialRouteName='HomeRegistrarIniciarSesion'
@@ -22,6 +31,8 @@ export const SesionStackNavigator = () => {
         }
       }}
     >
+   {!date.status || date.status === 'not-authenticated' ? (
+    <>
       <Stack.Screen name="HomeRegistrarIniciarSesion" 
       options={{
           title:'Login',
@@ -30,6 +41,24 @@ export const SesionStackNavigator = () => {
       component={HomeRegistrarIniciarSesion} />
       <Stack.Screen name="InicioSesion" options={{title:'Iniciar Sesion'}} component={InicioSesion} />
       <Stack.Screen name="CrearCuenta" options={{title:'Crear Cuenta'}} component={CrearCuenta} />
+      
+      </>
+      ) : (
+     <>
+      <Stack.Screen
+        options={{
+          title:'Map',
+          headerStyle:{
+            backgroundColor:'#16253A',
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            color: 'white',
+            justifyContent:'center'
+          },
+        }}
+        name="Map"  component={Map} />
       <Stack.Screen 
         options={{
           title:'Edición', 
@@ -87,6 +116,10 @@ export const SesionStackNavigator = () => {
           },
         }}
         name="EditeContrasenia"  component={EditeContrasenia} />
+         
+        </>
+        )}
     </Stack.Navigator>
+   
   );
 }

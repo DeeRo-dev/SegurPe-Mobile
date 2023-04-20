@@ -19,7 +19,7 @@ import { performRequest } from "../../helpers/api";
 export const MiPerfil = () => {
   const navigator = useNavigation();
   const [data, setData] = useState({});
-
+  const [img, setImg] = useState("");
   // Libreria para cargar la image
   const loadImageFromGallery = async (array) => {
     const response = { status: false, image: null };
@@ -43,42 +43,68 @@ export const MiPerfil = () => {
   const cargarFoto = async () => {
     const result = await loadImageFromGallery([1, 1]);
     console.log(result);
+    const objImage = {
+      uri: result.image,
+      name: "image.jpg",
+      type: "image/jpeg",
+    };
+
     // FUNCION PARA CARGAR LA IMAGEN DEL AVATAR
+    if (result.image) {
+      // console.log(TOKEN, 'PUT', 'UploadUserImage', objImage)
+      getUser(TOKEN, "PUT", "UploadSerenazgoImage", objImage);
+    }
+    return;
   };
 
+  //  console.log(data)
+
   // FUNCION PARA TRAER INFO DEL USER
-  const getUser = async (name) => {
+  const getUser = async (name, method, route, image = null) => {
     // Obtiene un token de usuario del almacenamiento seguro.
     const tokenSeg = await getUserToken(name);
     //  TRAER INFO DEL USUARIO
     if (tokenSeg) {
-      const respon = await sendDataUser(tokenSeg);
+      const respon = await sendDataUser(tokenSeg, method, route, image);
       // console.log(respon, 'se dio')
     }
+    return;
   };
 
-  getUser(TOKEN);
-
-  // FUNCION PARA REALIZAR EL GET USER
-  const sendDataUser = async (token) => {
+  useEffect(() => {
+    getUser(TOKEN, "GET", "getSerenazgoProfileInfo"), [];
+  });
+  // FUNCION PARA REALIZAR EL GET - PUT USER
+  const sendDataUser = async (token, method, route, image = null) => {
     const headerList = {
       Authorization: "Bearer " + token,
     };
+    if (method == "PUT") {
+      console.log(method, route, null, headerList, image, "DESDEEE");
+    }
+
     try {
       const response = await performRequest(
-        "GET",
-        "getSerenazgoProfileInfo",
+        method,
+        route,
         null,
         headerList,
-        null
+        image
       );
-      //  console.log(response, 'se dio por2')
       setData(response.data);
+      if (response.data.imgProfile) {
+        setImg(response.data.imgProfile);
+      }
+
+      return;
     } catch (error) {
       console.log(error, " entro en el error del senddata");
+      alert("Ocurrió un error: " + error);
       return error;
     }
   };
+  //  console.log(img)
+
   return (
     <View>
       {/* Avatar content */}

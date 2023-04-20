@@ -1,11 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import { TOKEN } from '../../helpers/const';
+import { AuthContext } from '../../contextCrearUsuario/AuthContext';
+import { deleteUserToken } from '../../helpers/store';
 
-export const ModalBasico = ({text, titleModal, btn}) => {
+export const ModalBasico = ({ text, titleModal, btn }) => {
   const [modalVisible, setModalVisible] = useState(false);
- const abrir = (text)=>{
-  setModalVisible(text)
+  const [date, dateAction] = useContext(AuthContext);
+
+ const actionBtn = (data, text)=>{
+  closeSesion(TOKEN, text)
+  setModalVisible(data)
  }
+ const closeSesion= (name, text) =>{
+  if (text === 'Cerrar sesión' && date.status === "authenticated") {
+    deleteUserToken(name)
+    dateAction(
+      {
+        type: 'not-authenticated',
+        data:null
+      })
+  }
+}
+
 
   return (
     <View style={styles.centeredView}>
@@ -27,8 +44,9 @@ export const ModalBasico = ({text, titleModal, btn}) => {
               <Text style={styles.textCancelar}>Cancelar</Text>
             </Pressable>
             <Pressable
+              
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
+              onPress={() => actionBtn(!modalVisible, text)}>
               <Text style={styles.textStyle}>{btn}</Text>
             </Pressable>
            </View>
