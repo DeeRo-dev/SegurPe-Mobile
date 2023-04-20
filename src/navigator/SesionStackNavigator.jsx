@@ -35,7 +35,7 @@ const isAuthenticated =  async (name) => {
   }else{
     setLoggedIn(false)
    }
- } catch (error) {
+ } catch (error){
    console.log(error)
 }
 
