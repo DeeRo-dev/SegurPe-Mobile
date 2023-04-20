@@ -1,22 +1,24 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useState,useEffect, useContext } from "react";
 import { View, Text, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { styles } from "./ThemeInicioSesion";
 import { performRequest } from "../../helpers/api";
-import { saveUserInfo, saveUserToken } from "../../helpers/store";
+import { getUserToken, saveUserInfo, saveUserToken } from "../../helpers/store";
 import { TOKEN, USER } from "../../helpers/const";
+import { AuthContext } from "../../contextCrearUsuario/AuthContext";
 
 
 export const InicioSesion = () => {
   const navigator = useNavigation();
-
+  const [date, dateAction] = useContext(AuthContext)
+  const [loggedIn, setLoggedIn] = useState(false);
   const [datos, setDatos] = useState({
     email: "",
     password: "",
   });
 
- 
+
 
   const cargarDatos = (name, value) => {
     if (name == 'email') {
@@ -33,13 +35,13 @@ export const InicioSesion = () => {
     });
   }
 }
-  console.log(datos);
+  // console.log(datos);
 
   // Funcion para inicio de sesion
   // cuenta
   // EMAIL:Derek@gmail.com
   // CLAVE:87654321Derek
-  const sendLogin = async (data) => {
+  const sendLogin = async (data, date) => {
     try {
       if (data) {
         const result = await performRequest('POST', 'auth/loginSerenazgos',data , null, null)
@@ -48,16 +50,31 @@ export const InicioSesion = () => {
          // Guarda un token de usuario en el almacenamiento seguro.
          await saveUserToken(TOKEN, result.data.token)
          await saveUserInfo(USER,result.data)
-
+         dateAction(
+          {
+            type: 'singUp',
+            data: result.data.token
+          })
+          return navigator.navigate("Map") 
      } 
    }
-   return navigator.navigate('Map')
-    } catch (error) {
-      console.log(error, 'entre en el error del trycatch')
-      alert('Ocurrió un error: ' + error);
+  
      
+  
+    } catch (error) {
+      dateAction(
+        {
+          type: 'addError',
+          data: error
+        })
+     
+       console.log(error, 'entre en el error del trycatch')
+       alert('Ocurrió un error con el context: ' + date.errorMessage);
     }
   };
+
+    console.log(date,'datastate') 
+
 
   return (
     <View style={styles.content}>
@@ -80,7 +97,7 @@ export const InicioSesion = () => {
       <TouchableOpacity
 
         disabled={!datos.email || !datos.password}
-        onPress={() => sendLogin(datos)}
+        onPress={() => sendLogin(datos, date)}
         style={[styles.btn,  !datos.email || !datos.password ? styles.bkColorNoListo : styles.bkColorListo]}
       >
         <Text style={styles.textBtn}>Confirmar</Text>

@@ -3,7 +3,6 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
-import { Home } from "../components/Home";
 import { MiPerfil } from "../screens/Perfil/MiPerfil";
 import { StyleSheet, Text, TouchableOpacity, View, Switch, } from "react-native";
 import { Historial } from "../screens/Historial/Historial";
@@ -12,7 +11,11 @@ import { Map } from "../screens/Map/Map";
 import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
-import { useEffect } from "react";
+import {  useContext } from "react";
+import { deleteUserToken, getUserToken } from "../helpers/store";
+import { TOKEN } from "../helpers/const";
+import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../contextCrearUsuario/AuthContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -44,6 +47,8 @@ const menuItems = [
 ];
 
 export const MenuLateral = () => {
+  const [date, dateAction] = useContext(AuthContext)
+console.log(date)
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -53,8 +58,7 @@ export const MenuLateral = () => {
         },
       }}
       drawerContent={(props) => <MenuInterno {...props} />}
-    >
-    
+    > 
       <Drawer.Screen
         name="SesionStackNavigator"
         options={{ title: false }}
@@ -68,16 +72,16 @@ export const MenuLateral = () => {
           component={item.component}
         />
       ))}
+      
+  
     </Drawer.Navigator>
   );
 };
 
 const MenuInterno = ({ navigation }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
+  navigation = useNavigation();
+  const [date, dateAction] = useContext(AuthContext)
 
-  const toggleSwitch = () => {
-    setIsEnabled(previousState => !previousState);
-  };
   return (
     <DrawerContentScrollView>
       
@@ -106,11 +110,21 @@ const MenuInterno = ({ navigation }) => {
             key={item.name}
             title={item.title}
             iconName={item.icon}
-            onPress={() => navigation.navigate(item.name)}
+            onPress={ () => {
+              if (date.status === "authenticated") {
+                navigation.navigate(item.name);
+              } else {
+                
+                navigation.navigate('InicioSesion');
+              }
+            }
+          }
+           
           />
         ))}
       </View>
       <LogoutButton />
+     
     </DrawerContentScrollView>
   );
 };
@@ -134,6 +148,7 @@ const MenuItem = ({ title, iconName, onPress }) => (
 const LogoutButton = () => (
   <View style={styles.contentSesion}>
     <ModalBasico
+      // action={action(TOKEN)}
       text="Cerrar sesión"
       titleModal="¿Estás seguro que deseas cerrar sesión?"
       btn="Cerrar sesión"

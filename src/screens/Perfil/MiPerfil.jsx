@@ -50,8 +50,8 @@ const cargarFoto = async() =>{
     }
   return
 }
-// "primerserenazgo@gmail.com", "password": "OecXNUZb"
-//  console.log(img)
+  
+//  console.log(data)
 
 // FUNCION PARA TRAER INFO DEL USER
 const getUser = async (name, method, route, image = null)=>{
