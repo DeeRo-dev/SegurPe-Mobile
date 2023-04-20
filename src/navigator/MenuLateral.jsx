@@ -81,7 +81,11 @@ console.log(date)
 const MenuInterno = ({ navigation }) => {
   navigation = useNavigation();
   const [date, dateAction] = useContext(AuthContext)
+  const [isEnabled, setIsEnabled] = useState(false);
 
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
   return (
     <DrawerContentScrollView>
       

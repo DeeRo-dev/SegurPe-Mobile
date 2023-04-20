@@ -39,8 +39,8 @@ export const InicioSesion = () => {
 
   // Funcion para inicio de sesion
   // cuenta
-  // EMAIL:Derek@gmail.com
-  // CLAVE:87654321Derek
+  // EMAIL:primerserenazgo@gmail.com
+  // CLAVE: OecXNUZb
   const sendLogin = async (data, date) => {
     try {
       if (data) {
