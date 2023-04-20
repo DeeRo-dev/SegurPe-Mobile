@@ -45,6 +45,11 @@ export const InicioSesion = () => {
     try {
       if (data) {
         const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
+        dateAction(
+          {
+            type: 'loading',
+            
+          })
        console.log(result.data, 'esto devuelve')
        if (result.data.token) {
          // Guarda un token de usuario en el almacenamiento seguro.
@@ -58,8 +63,6 @@ export const InicioSesion = () => {
           return navigator.navigate("Map") 
      } 
    }
-  
-     
   
     } catch (error) {
       dateAction(
