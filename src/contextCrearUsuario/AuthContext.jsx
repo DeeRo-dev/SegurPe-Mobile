@@ -51,12 +51,12 @@ const AuthReducer = ( state = AuthState, payload) => {
 }
 
 
-const AuthContext = createContext(AuthState);
+export const AuthContext = createContext(AuthState);
 
 export const AuthProvider = ({children})=>{
-    const [data, dataAction] = useReducer(AuthReducer, AuthState)
+    const [date, dateAction] = useReducer(AuthReducer, AuthState)
     return (
-        <AuthContext.Provider value={[data, dataAction]}> 
+        <AuthContext.Provider value={[date, dateAction]}> 
             {children}
         </AuthContext.Provider>
     )

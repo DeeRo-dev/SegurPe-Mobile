@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CrearCuenta } from '../screens/CrearCuenta/CrearCuenta';
@@ -11,6 +11,7 @@ import { EditeContrasenia } from '../screens/Perfil/EditeContrasenia';
 import { Map } from '../screens/Map/Map';
 import { TOKEN } from '../helpers/const';
 import { getUserToken } from '../helpers/store';
+import { AuthContext } from '../contextCrearUsuario/AuthContext';
 
 
 const Stack = createStackNavigator();
@@ -20,29 +21,29 @@ const Stack = createStackNavigator();
 
 export const SesionStackNavigator = () => {
 
+const [date, dataAction]= useContext(AuthContext) 
+// const [loggedIn, setLoggedIn] = useState(false);
 
-const [loggedIn, setLoggedIn] = useState(false);
-
-// Función para verificar si el usuario está autenticado
-const isAuthenticated =  async (name) => {
-  // Comprobar si existe un token de autenticación válido
+// // Función para verificar si el usuario está autenticado
+// const isAuthenticated =  async (name) => {
+//   // Comprobar si existe un token de autenticación válido
  
- try {const authToken =  await getUserToken(name)  
-   console.log(authToken, ' token')
-    console.log(authToken,'sdsd')
-   if (authToken) {
-     setLoggedIn(!!authToken);
-  }else{
-    setLoggedIn(false)
-   }
- } catch (error){
-   console.log(error)
-}
+//  try {const authToken =  await getUserToken(name)  
+//    console.log(authToken, ' token')
+//     console.log(authToken,'sdsd')
+//    if (authToken) {
+//      setLoggedIn(!!authToken);
+//   }else{
+//     setLoggedIn(false)
+//    }
+//  } catch (error){
+//    console.log(error)
+// }
 
-}
-console.log(loggedIn, 'estate')
+// }
+ console.log(date, 'estate')
 
- isAuthenticated(TOKEN) 
+//  isAuthenticated(TOKEN) 
 
 
   return (
@@ -54,7 +55,7 @@ console.log(loggedIn, 'estate')
         }
       }}
     >
-   { !loggedIn ? (
+   {!date.status || date.status === 'not-authenticated' ? (
     <>
       <Stack.Screen name="HomeRegistrarIniciarSesion" 
       options={{
