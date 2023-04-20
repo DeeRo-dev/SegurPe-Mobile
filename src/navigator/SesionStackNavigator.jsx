@@ -12,6 +12,7 @@ import { Map } from '../screens/Map/Map';
 import { TOKEN } from '../helpers/const';
 import { getUserToken } from '../helpers/store';
 import { AuthContext } from '../contextCrearUsuario/AuthContext';
+import { LoadingScreen } from '../screens/Loading/LoadingScreen';
 
 
 const Stack = createStackNavigator();
@@ -20,7 +21,9 @@ const Stack = createStackNavigator();
 export const SesionStackNavigator = () => {
 
 const [date, dataAction]= useContext(AuthContext) 
-
+ if (date.status === 'checking') {
+   return <LoadingScreen/>
+ }
 //  console.log(date, 'estate')
   return (
     <Stack.Navigator 
