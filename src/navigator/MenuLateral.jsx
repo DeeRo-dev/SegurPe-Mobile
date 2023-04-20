@@ -2,6 +2,7 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
+
 import { MiPerfil } from "../screens/Perfil/MiPerfil";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Historial } from "../screens/Historial/Historial";
@@ -11,8 +12,6 @@ import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
 import {  useContext } from "react";
-import { deleteUserToken, getUserToken } from "../helpers/store";
-import { TOKEN } from "../helpers/const";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../contextCrearUsuario/AuthContext";
 
@@ -47,9 +46,13 @@ const menuItems = [
 
 export const MenuLateral = () => {
   const [date, dateAction] = useContext(AuthContext)
+  // if (date.status === '' ) {
+  //   return <View></View>
+  // }
 console.log(date)
   return (
     <Drawer.Navigator
+    drawerIcon={null}
       screenOptions={{
         drawerStyle: {
           backgroundColor: "#16253A",
@@ -57,6 +60,7 @@ console.log(date)
         },
       }}
       drawerContent={(props) => <MenuInterno {...props} />}
+    
     > 
       <Drawer.Screen
         name="SesionStackNavigator"
@@ -81,7 +85,7 @@ const MenuInterno = ({ navigation }) => {
   const [date, dateAction] = useContext(AuthContext)
 
   return (
-    <DrawerContentScrollView>
+    <DrawerContentScrollView >
       <View style={styles.container}>
         <MenuHeader />
         {menuItems.map((item) => (

@@ -21,6 +21,8 @@ const Stack = createStackNavigator();
 export const SesionStackNavigator = () => {
 
 const [date, dataAction]= useContext(AuthContext) 
+
+// Pagina de carga
  if (date.status === 'checking') {
    return <LoadingScreen/>
  }

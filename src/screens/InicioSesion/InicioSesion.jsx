@@ -72,7 +72,7 @@ export const InicioSesion = () => {
         })
      
        console.log(error, 'entre en el error del trycatch')
-       alert('Ocurrió un error con el context: ' + date.errorMessage);
+       alert('Ocurrió un error: ' + date.errorMessage);
     }
   };
 
