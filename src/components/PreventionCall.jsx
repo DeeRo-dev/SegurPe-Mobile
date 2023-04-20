@@ -2,11 +2,15 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import CustomAlert from "./CustomAlert";
 
-const PreventionCall = () => {
+const PreventionCall = ({ onDelegation, onAsistentPreventions, visible }) => {
+  console.log(visible);
   return (
-    <CustomAlert>
-      <Text> Prevencion</Text>
-    </CustomAlert>
+    <CustomAlert
+      title="Prevención"
+      button1Text="Delegar"
+      button2Text="Asistir prevención"
+      visible={visible}
+    />
   );
 };
 

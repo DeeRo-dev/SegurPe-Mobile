@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MapStyle from "../../components/CustomerMaps";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
 import PreventionCall from "../../components/PreventionCall";
+import ButtonUtils from "../../components/ButtonUtils";
 
 export function Map() {
   // Estado para almacenar la ubicación del usuario
   const [location, setLocation] = useState(null);
+  const [prevention, setPrevention] = useState(false);
+  const handleOnPress = () => {
+    console.log("handleOnPress called");
+    setPrevention(!prevention);
+  };
 
   useEffect(() => {
     // Función asíncrona para solicitar permisos de ubicación
@@ -46,9 +52,32 @@ export function Map() {
               longitude: location.longitude,
             }}
           />
+          <Marker
+            coordinate={{
+              latitude: -11.99415645,
+              longitude: -77.0611521221075,
+            }}
+          />
+          <Polyline
+            coordinates={[
+              {
+                latitude: -11.99415645,
+                longitude: -77.0611521221075,
+              },
+              {
+                latitude: location.latitude,
+                longitude: location.longitude,
+              },
+            ]}
+            strokeWidth={4}
+            strokeColor="blue"
+          />
         </MapView>
       )}
-      <PreventionCall />
+      <View style={styles.buttonContainer}>
+        <ButtonUtils title="prueba" onPress={handleOnPress} />
+      </View>
+      <PreventionCall visible={prevention} />
     </View>
   );
 }
@@ -61,5 +90,11 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  buttonContainer: {
+    position: "absolute",
+    top: 20, // ajusta este valor para cambiar la posición vertical del botón
+    width: "100%",
+    alignItems: "center",
   },
 });
