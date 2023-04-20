@@ -17,35 +17,11 @@ import { AuthContext } from '../contextCrearUsuario/AuthContext';
 const Stack = createStackNavigator();
 
 
-
-
 export const SesionStackNavigator = () => {
 
 const [date, dataAction]= useContext(AuthContext) 
-// const [loggedIn, setLoggedIn] = useState(false);
 
-// // Función para verificar si el usuario está autenticado
-// const isAuthenticated =  async (name) => {
-//   // Comprobar si existe un token de autenticación válido
- 
-//  try {const authToken =  await getUserToken(name)  
-//    console.log(authToken, ' token')
-//     console.log(authToken,'sdsd')
-//    if (authToken) {
-//      setLoggedIn(!!authToken);
-//   }else{
-//     setLoggedIn(false)
-//    }
-//  } catch (error){
-//    console.log(error)
-// }
-
-// }
- console.log(date, 'estate')
-
-//  isAuthenticated(TOKEN) 
-
-
+//  console.log(date, 'estate')
   return (
     <Stack.Navigator 
       initialRouteName='HomeRegistrarIniciarSesion'

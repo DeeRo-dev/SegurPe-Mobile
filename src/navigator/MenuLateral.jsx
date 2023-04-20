@@ -2,7 +2,6 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
-import { Home } from "../components/Home";
 import { MiPerfil } from "../screens/Perfil/MiPerfil";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Historial } from "../screens/Historial/Historial";
@@ -11,7 +10,7 @@ import { Map } from "../screens/Map/Map";
 import { SesionStackNavigator } from "../navigator/SesionStackNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from "../components/Modals/ModalBasico";
-import { useState, useEffect, useContext } from "react";
+import {  useContext } from "react";
 import { deleteUserToken, getUserToken } from "../helpers/store";
 import { TOKEN } from "../helpers/const";
 import { useNavigation } from "@react-navigation/native";
@@ -80,28 +79,7 @@ console.log(date)
 const MenuInterno = ({ navigation }) => {
   navigation = useNavigation();
   const [date, dateAction] = useContext(AuthContext)
-//   const [loggedIn, setLoggedIn] = useState(true);
 
-// // Función para verificar si el usuario está autenticado
-// const isAuthenticated =  async (name) => {
-//   // Comprobar si existe un token de autenticación válido
- 
-//  try {const authToken =  await getUserToken(name)  
-//    console.log(authToken, ' token')
-// //   console.log(authToken,'sdsd')
-//    if (authToken) {
-//      setLoggedIn(true);
-//   }else{
-//     setLoggedIn(false)
-//    }
-//  } catch (error) {
-//    console.log(error)
-// }
-
-// }
-// console.log(loggedIn, 'estate')
-
-//  isAuthenticated(TOKEN) 
 const closeSesion= (name) =>{
   deleteUserToken(name)
   dateAction(
@@ -129,7 +107,7 @@ const closeSesion= (name) =>{
               }
             }
           }
-            // onPress={() => navigation.navigate(item.name)}
+           
           />
         ))}
       </View>
