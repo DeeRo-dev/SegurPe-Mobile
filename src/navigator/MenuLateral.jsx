@@ -109,7 +109,7 @@ const closeSesion= (name) =>{
       type: 'not-authenticated',
       data:null
     })
-  navigation.navigate("HomeRegistrarIniciarSesion" )
+  
 }
   return (
     <DrawerContentScrollView>
