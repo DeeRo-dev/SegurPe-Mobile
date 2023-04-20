@@ -80,15 +80,6 @@ const MenuInterno = ({ navigation }) => {
   navigation = useNavigation();
   const [date, dateAction] = useContext(AuthContext)
 
-const closeSesion= (name) =>{
-  deleteUserToken(name)
-  dateAction(
-    {
-      type: 'not-authenticated',
-      data:null
-    })
-  
-}
   return (
     <DrawerContentScrollView>
       <View style={styles.container}>
@@ -112,9 +103,7 @@ const closeSesion= (name) =>{
         ))}
       </View>
       <LogoutButton />
-      <TouchableOpacity onPress={() => closeSesion(TOKEN)}>
-        <Text>Cerrar sesion</Text>
-     </TouchableOpacity>
+     
     </DrawerContentScrollView>
   );
 };
@@ -137,6 +126,7 @@ const MenuItem = ({ title, iconName, onPress }) => (
 const LogoutButton = () => (
   <View style={styles.contentSesion}>
     <ModalBasico
+      // action={action(TOKEN)}
       text="Cerrar sesión"
       titleModal="¿Estás seguro que deseas cerrar sesión?"
       btn="Cerrar sesión"
