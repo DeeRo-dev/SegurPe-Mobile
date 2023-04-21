@@ -9,6 +9,7 @@ import {
 import PreventionCall from "../../components/PreventionCall";
 import ButtonUtils from "../../components/ButtonUtils";
 import getDirections from "../../helpers/directions";
+import playSound from "../../helpers/playSound";
 
 export function Map() {
   // Estado para almacenar la ubicación del usuario
@@ -48,6 +49,7 @@ export function Map() {
       if (error) {
         console.log(error);
       }
+      await playSound();
     } else {
       console.log("Location or locationUser is not available");
     }
