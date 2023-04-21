@@ -36,7 +36,7 @@ const [date, dataAction]= useContext(AuthContext)
         }
       }}
     >
-   {!date.status || date.status === 'not-authenticated' ? (
+   {/* {!date.status || date.status === 'not-authenticated' ? (
     <>
       <Stack.Screen name="HomeRegistrarIniciarSesion" 
       options={{
@@ -49,7 +49,7 @@ const [date, dataAction]= useContext(AuthContext)
       
       </>
       ) : (
-     <>
+     <> */}
       <Stack.Screen
         options={{
           title:'Map',
@@ -122,8 +122,8 @@ const [date, dataAction]= useContext(AuthContext)
         }}
         name="EditeContrasenia"  component={EditeContrasenia} />
          
-        </>
-        )}
+        {/* </>
+        )} */}
     </Stack.Navigator>
    
   );
