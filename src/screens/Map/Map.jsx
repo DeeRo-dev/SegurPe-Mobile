@@ -8,16 +8,17 @@ import {
 } from "expo-location";
 import PreventionCall from "../../components/PreventionCall";
 import ButtonUtils from "../../components/ButtonUtils";
+import getDirections from "../../helpers/directions";
 
 export function Map() {
   // Estado para almacenar la ubicación del usuario
   const [location, setLocation] = useState(null);
+  const [locationUser, setLocationUser] = useState({
+    latitude: -11.989778,
+    longitude: -77.061889,
+  });
   const [prevention, setPrevention] = useState(false);
-  const handleOnPress = () => {
-    console.log("handleOnPress called");
-    setPrevention(!prevention);
-  };
-
+  const [directions, setDirections] = useState(null);
   useEffect(() => {
     // Función asíncrona para solicitar permisos de ubicación
     const requestLocationPermission = async () => {
@@ -32,6 +33,25 @@ export function Map() {
     requestLocationPermission();
   }, []);
 
+  const handleOnPress = () => {
+    console.log("handleOnPress called");
+    setPrevention(!prevention);
+  };
+  const handleDirections = async () => {
+    if (location && locationUser) {
+      const { directions, error } = await getDirections(location, locationUser);
+
+      if (directions) {
+        setDirections(directions);
+      }
+
+      if (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Location or locationUser is not available");
+    }
+  };
   return (
     <View style={styles.container}>
       {location ? ( // Solo muestra el mapa si se ha obtenido la ubicación del usuario
@@ -53,26 +73,19 @@ export function Map() {
               longitude: location.longitude,
             }}
           />
-          <Marker
-            coordinate={{
-              latitude: -11.99415645,
-              longitude: -77.0611521221075,
-            }}
-          />
-          <Polyline
-            coordinates={[
-              {
-                latitude: -11.99415645,
-                longitude: -77.0611521221075,
-              },
-              {
-                latitude: location.latitude,
-                longitude: location.longitude,
-              },
-            ]}
-            strokeWidth={4}
-            strokeColor="blue"
-          />
+          {locationUser && <Marker coordinate={locationUser} />}
+          {directions && (
+            <Polyline
+              coordinates={directions.geometry.coordinates.map(
+                (coordinate) => ({
+                  latitude: coordinate[1],
+                  longitude: coordinate[0],
+                })
+              )}
+              strokeWidth={3}
+              strokeColor="blue"
+            />
+          )}
         </MapView>
       ) : (
         <Text> No tenemos por permisos </Text>
@@ -80,7 +93,10 @@ export function Map() {
       <View style={styles.buttonContainer}>
         <ButtonUtils title="prueba" onPress={handleOnPress} />
       </View>
-      <PreventionCall visible={prevention} />
+      <PreventionCall
+        visible={prevention}
+        onAsistentPreventions={handleDirections}
+      />
     </View>
   );
 }

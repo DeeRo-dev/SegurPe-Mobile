@@ -10,6 +10,7 @@ const PreventionCall = ({ onDelegation, onAsistentPreventions, visible }) => {
       button1Text="Delegar"
       button2Text="Asistir prevención"
       visible={visible}
+      onButton1Press={onAsistentPreventions}
     />
   );
 };
