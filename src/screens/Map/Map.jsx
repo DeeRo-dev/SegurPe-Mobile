@@ -20,6 +20,8 @@ export function Map() {
   });
   const [prevention, setPrevention] = useState(false);
   const [directions, setDirections] = useState(null);
+  const [time, setTime] = useState(null);
+  const [distance, setDistance] = useState(null);
   useEffect(() => {
     // Función asíncrona para solicitar permisos de ubicación
     const requestLocationPermission = async () => {
