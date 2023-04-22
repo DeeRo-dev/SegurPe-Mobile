@@ -41,7 +41,7 @@ export const InicioSesion = () => {
   // cuenta
   // EMAIL:Derek@gmail.com
   // CLAVE:87654321Derek
-  const sendLogin = async (data, date) => {
+  const sendLogin = async (data) => {
     try {
       if (data) {
         const result = await performRequest('POST', 'auth/loginUsers',data , null, null)
@@ -60,7 +60,7 @@ export const InicioSesion = () => {
             type: 'singUp',
             data: result.data.token
           })
-          return navigator.navigate("Map") 
+           return navigator.navigate("HomeRegistrarIniciarSesion") 
      } 
    }
   
@@ -72,11 +72,26 @@ export const InicioSesion = () => {
         })
      
        console.log(error, 'entre en el error del trycatch')
-       alert('Ocurrió un error: ' + date.errorMessage);
+        alert('Ocurrió un error: ' + date.errorMessage);
     }
   };
 
-    console.log(date,'datastate') 
+   
+const [data, setData] = useState(false)
+
+const infoToken = async(name) =>{
+  const token = await getUserToken(name)
+  console.log(token, 'entddddr')
+  if (token) {
+       setData(true)
+  }
+  else{
+    setData(false)
+  }
+}
+
+infoToken(TOKEN)
+console.log(data,'data user token') 
 
 
   return (
@@ -100,7 +115,7 @@ export const InicioSesion = () => {
       <TouchableOpacity
 
         disabled={!datos.email || !datos.password}
-        onPress={() => sendLogin(datos, date)}
+        onPress={() => sendLogin(datos)}
         style={[styles.btn,  !datos.email || !datos.password ? styles.bkColorNoListo : styles.bkColorListo]}
       >
         <Text style={styles.textBtn}>Confirmar</Text>

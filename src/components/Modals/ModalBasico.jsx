@@ -8,20 +8,24 @@ export const ModalBasico = ({ text, titleModal, btn }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [date, dateAction] = useContext(AuthContext);
 
- const actionBtn = (data, text)=>{
-  closeSesion(TOKEN, text)
+ const actionBtn = async (data, text)=>{
+  const deleteToke =await deleteUserToken(TOKEN)
+  console.log( deleteToke,'se elimino?')
   setModalVisible(data)
  }
- const closeSesion= (name, text) =>{
-  if (text === 'Cerrar sesión' && date.status === "authenticated") {
-    deleteUserToken(name)
-    dateAction(
-      {
-        type: 'not-authenticated',
-        data:null
-      })
-  }
-}
+
+
+//  const closeSesion= (name, text) =>{
+//   if (text === 'Cerrar sesión' && date.status === "authenticated") {
+    
+//     deleteUserToken(name)
+//     // dateAction(
+//     //   {
+//     //     type: 'not-authenticated',
+//     //     data:null
+//     //   })
+//   }
+// }
 
 
   return (

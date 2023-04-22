@@ -23,10 +23,10 @@ export const InicioStackNavigator = () => {
 const [date, dateAction]= useContext(AuthContext) 
 
 // Pagina de carga
-//  if (date.status === 'checking') {
-//    return <LoadingScreen/>
-//  }
-//  console.log(date, 'estate')
+ if (date.status === 'checking') {
+   return <LoadingScreen/>
+ }
+ console.log(date, 'estate')
   return (
     <Stack.Navigator 
       initialRouteName='HomeRegistrarIniciarSesion'
