@@ -1,5 +1,7 @@
-import { Twilio } from 'twilio-client';
-import twilio from 'twilio-client';
+// import { Twilio } from 'twilio-client';
+// import {twilio} from 'twilio-client';
+import axios from "axios";
+import {TWILIO_ACCOUNT_ID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER} from '@env';
 
 // export const sendSms = () =>{
 //     const verificationCode = Math.floor(100000 + Math.random() * 900000);
@@ -21,25 +23,32 @@ import twilio from 'twilio-client';
 
 
 
-export const sendSMS = async (message, clientPhone) => {
-    try {
-      // Inicializamos el cliente de Twilio con nuestro Account SID y Auth Token
-      const client = twilio(
-        process.env.TWILIO_ACCOUNT_ID,
-        process.env.TWILIO_AUTH_TOKEN,
-      );
+//   curl 'https://api.twilio.com/2010-04-01/Accounts/ACd6fed300e0e5c78ab9dcc6fc33fb2f87/Messages.json' -X POST \
+//   --data-urlencode 'To=+541141668947' \
+//   --data-urlencode 'From=+16813346938' \
+//   --data-urlencode 'Body=Hola Derek' \
+//   -u ACd6fed300e0e5c78ab9dcc6fc33fb2f87:[AuthToken]
+  
+  
+  // Crea una instancia de axios 
 
-      // Enviamos el mensaje de texto utilizando la API de Twilio
-      const response = await client.messages.create({
-        body: message,
-        from: process.env.TWILIO_NUMBER, // número de Twilio
-        to :  clientPhone,
-      });
+export const sendMessage = async (clientPhone) => {
 
-      // Mostramos una alerta con el ID del mensaje enviado
-      Alert.alert('Mensaje enviado', `ID del mensaje: ${response.sid}`);
-    } catch (error) {
-      console.log(error);
-      Alert.alert('Error', 'Hubo un error al enviar el mensaje');
-    }
-  };
+    const verificationCode = Math.floor(100000 + Math.random() * 900000);
+     
+  try {
+    const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_ID}/Messages.json`, {
+      To: `+54${clientPhone}`,
+      From: TWILIO_NUMBER,
+      Body: verificationCode
+    }, {
+      auth: {
+        accountId: TWILIO_ACCOUNT_ID,
+        token: TWILIO_AUTH_TOKEN
+      }
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error, ' error en la patecion de TWILIO');
+  }
+}

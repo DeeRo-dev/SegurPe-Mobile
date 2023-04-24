@@ -2,7 +2,7 @@ import React, {useContext,useState} from 'react';
 import {styles} from './ThemeCrearCuenta';
 import { View,Text, TouchableOpacity, TextInput } from 'react-native';
 import { DataExtraContext, UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
-import { sendSms } from '../../helpers/twillo';
+import { sendMessage } from '../../helpers/twillo';
 
 
 
@@ -17,7 +17,7 @@ export const Datos4 = () => {
 
     try {
       // Llama a la API de Twilio Functions para enviar el código de autenticación
-      //  const data = await sendSms(message, clientPhone)
+        const data = await sendMessage(phoneNumber)
        // Si la respuesta es satisfactoria, actualiza el estado con el código de autenticación generado
         console.log(data)
     } catch (error) {
@@ -26,6 +26,9 @@ export const Datos4 = () => {
   };
 
   const onChangeData = (name, value)=>{
+    if (name === 'phone') {
+      setPhoneNumber(value)
+    }
     loginAction({
       type: name,
       data: value
@@ -49,10 +52,9 @@ const onChangeDataExtra = (name, value) =>{
         </View>
 
        <View>
-      
             <Text style={styles.titleInput}>Número de teléfono</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
-            <TouchableOpacity onPress={handleSendVerificationCode}>
+            <TouchableOpacity onPress={()=>handleSendVerificationCode()}>
               <Text>
                 Enviar codigo
               </Text>
