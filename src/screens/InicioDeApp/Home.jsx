@@ -5,12 +5,12 @@ import { View, Text, Image, TouchableOpacity,StyleSheet } from 'react-native'
 import { Vista1 } from './Vista1';
 import { Vista2 } from './Vista2';
 import { Vista3 } from './Vista3';
-import {styles} from './ThemeCrearCuenta';
+import {styles} from './ThemeHome';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { ModalBasico } from '../../components/Modals/ModalBasico';
 import { Vista4 } from './Vista4';
 
-export const CrearCuenta = () => {
+export const HomeOnboarding = () => {
 
   const [select, setSelect] = useState(0)
   const ref = useRef();
@@ -25,7 +25,7 @@ export const CrearCuenta = () => {
   return (
 
     <View style={styles.content}>
-        <View style={styles.contentImg}>
+         <View style={styles.contentImg}>
          <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
       </View>
 
@@ -60,18 +60,19 @@ export const CrearCuenta = () => {
       ref={ref}
       >
       <View style={style.page} key="1">
-        <Vista1/>
+         <Vista1/> 
       </View>
       <View style={style.page} key="2">
-       <Vista2/>
+        <Vista2/>
       </View>
       <View style={style.page} key="3">
-        <Vista3/>
+       <Vista3/> 
       </View>
       <View style={style.page} key="4">
-        <Vista4/>
+       <Vista4/> 
       </View>
-    </PagerView>
+    </PagerView> 
+   
   </View>  
   )
 }

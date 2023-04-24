@@ -1,7 +1,7 @@
 import React from 'react'
 import { View,Text } from 'react-native'
 
-export const Vista1 = () => {
+export const Vista3 = () => {
   return (
     <View>
         <Text>Prevención</Text>

@@ -32,23 +32,28 @@ import { btoa } from 'base-64';
   
   
   // Crea una instancia de axios 
+ 
+const accountId = TWILIO_ACCOUNT_ID
+const authToken = TWILIO_AUTH_TOKEN;
+const numberTwillo = TWILIO_NUMBER;
 
-export const sendMessage = async (clientPhone) => {
 
+export const sendMessage = async (clientPhone ) => {
+console.log(accountId, authToken,numberTwillo,'holaa', clientPhone)
     const verificationCode = Math.floor(100000 + Math.random() * 900000);
-console.log()
+
   try {
-    const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_ID}/Messages.json`, 
+    const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${accountId}/Messages.json`, 
     {
         headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: 'Basic' + btoa(`${TWILIO_ACCOUNT_ID}:${TWILIO_AUTH_TOKEN}`),
+          Authorization: 'Basic' + btoa(`${accountId}:${authToken}`),
         }
       },
     {
        data: { 
         To: `+54${clientPhone}`,
-        From: TWILIO_NUMBER,
+        From: numberTwillo,
         Body: verificationCode
        }
     });

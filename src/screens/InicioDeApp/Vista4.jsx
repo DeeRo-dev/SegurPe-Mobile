@@ -1,13 +1,20 @@
+import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 
 import {  StyleSheet, View,Text , TouchableOpacity} from 'react-native'
 
-export const Vista1 = () => {
+export const Vista4 = () => {
+  const navigate = useNavigation()
+  const OnNavegation = () =>{
+    navigate.navigate('HomeRegistrarIniciarSesion')
+  }
   return (
     <View>
         <Text>Emergencia</Text>
         <Text>En caso de una emergencia  podrás dar aviso y el serenazgo irá a tu ubicación para ayudar a resolverla.</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={OnNavegation}
+         >
              <View style={style.btn}>
                <Text style={style.textBtn}>Continuar</Text>
             </View> 
