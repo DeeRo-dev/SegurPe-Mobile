@@ -8,9 +8,6 @@ import { AuthContext } from '../../contextCrearUsuario/AuthContext';
 import { useContext } from 'react';
 
 
-
-
-
 export default function Incio() {  
  const [date, dateAction] = useContext(AuthContext);  
 
