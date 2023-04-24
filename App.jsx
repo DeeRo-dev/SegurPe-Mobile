@@ -2,14 +2,14 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuLateral } from './src/navigator/MenuLateral';
-import { SesionStackNavigator } from './src/navigator/SesionStackNavigator';
-import { InicioSesion } from './src/screens/InicioSesion/InicioSesion';
 import { AuthContext, AuthProvider } from './src/contextCrearUsuario/AuthContext';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { InicioStackNavigator } from './src/navigator/InicioStackNavigator';
-import { getUserInfo, getUserToken } from './src/helpers/store';
+import {  getUserToken } from './src/helpers/store';
 import { TOKEN } from './src/helpers/const';
+import Incio from './src/screens/InicioDeApp/Inicio';
+
+
 
 useEffect
 const AppState = ({children}) =>{
@@ -21,50 +21,45 @@ const AppState = ({children}) =>{
 }
 
 export default function App() {
-  // const [date, dateAction] =useContext(AuthContext)
+  //  const [date, dateAction] =useContext(AuthContext)
    
 const [data, setData] = useState(false)
 
-  const infoToken = async(name) =>{
-    const token = await getUserToken(name)
-    console.log(token, 'entdr')
-    if (token) {
-          setData(true)
-        console.log('entru rtere')
 
-    }
-    else{
-       setData(false)
-      console.log('false')
-
-    }
-  }
-    
+// useEffect(()=>{
+//   reloadApp()
+// const token = getUserToken(TOKEN)
+// console.log('entre>')
+//     console.log(token, 'deero')
+//     if (token) {
+//           setData(false)
+//     }
+//     else{
+//        setData(true)
+//        console.log('entre> en el esle')
+//     }
+//     r
+// },[data])
   
-console.log(data, 'dsd')
+  
+    
+// useEffect(()=>{
+//   console.log(AuthContext, 'Auth desde app')
+// },[])
 
-useEffect(()=>{
-  infoToken(TOKEN)
-},[data])
-console.log(getUserToken(TOKEN),'dfg')
+
+
+// infoToken(TOKEN)
+
+
 
   return (
-    <NavigationContainer>  
+    // <NavigationContainer>  
       <AppState>   
-       {/* <AppState>   
-          <MenuLateral/>         
-       </AppState>  */}
-       {
-        !data || data === 'undefined' ? (
-      
-            <InicioStackNavigator/>
-        )
-        : ( 
-            <MenuLateral/>         
-        )
-       }
-          </AppState>
-    </NavigationContainer>
+    
+        <Incio/>
+      </AppState>
+    // </NavigationContainer>
   );
 }
 

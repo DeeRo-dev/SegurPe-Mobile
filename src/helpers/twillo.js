@@ -36,7 +36,7 @@ import { btoa } from 'base-64';
 export const sendMessage = async (clientPhone) => {
 
     const verificationCode = Math.floor(100000 + Math.random() * 900000);
-
+console.log()
   try {
     const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_ID}/Messages.json`, 
     {

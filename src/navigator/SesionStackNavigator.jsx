@@ -28,8 +28,8 @@ const [date, dataAction]= useContext(AuthContext)
  }
 //  console.log(date, 'estate')
   return (
+    
     <Stack.Navigator 
-      initialRouteName='HomeRegistrarIniciarSesion'
       options={{
         headerStyle:{
           backgroundColor:'#16253A',

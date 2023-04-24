@@ -10,22 +10,22 @@ export const ModalBasico = ({ text, titleModal, btn }) => {
 
  const actionBtn = async (data, text)=>{
   const deleteToke =await deleteUserToken(TOKEN)
+  closeSesion(text)
   console.log( deleteToke,'se elimino?')
   setModalVisible(data)
  }
 
 
-//  const closeSesion= (name, text) =>{
-//   if (text === 'Cerrar sesión' && date.status === "authenticated") {
-    
-//     deleteUserToken(name)
-//     // dateAction(
-//     //   {
-//     //     type: 'not-authenticated',
-//     //     data:null
-//     //   })
-//   }
-// }
+ const closeSesion= (text) =>{
+  if (text === 'Cerrar sesión' && date.status === "authenticated") {
+
+    dateAction(
+      {
+        type: 'not-authenticated',
+        data:null
+      })
+  }
+}
 
 
   return (
