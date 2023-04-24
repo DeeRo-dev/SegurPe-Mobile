@@ -43,6 +43,7 @@ console.log(accountId, authToken,numberTwillo,'holaa', clientPhone)
     const verificationCode = Math.floor(100000 + Math.random() * 900000);
 
   try {
+    console.log(accountId, authToken,numberTwillo,'holaaa', clientPhone)
     const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${accountId}/Messages.json`, 
     {
         headers: {
