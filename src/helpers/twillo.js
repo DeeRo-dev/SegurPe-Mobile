@@ -2,7 +2,7 @@
 // import {twilio} from 'twilio-client';
 import axios from "axios";
 import {TWILIO_ACCOUNT_ID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER} from '@env';
-import { btoa } from 'base-64';
+// import { btoa } from 'base-64';
 
 // export const sendSms = () =>{
 //     const verificationCode = Math.floor(100000 + Math.random() * 900000);
@@ -47,8 +47,8 @@ console.log(accountId, authToken,numberTwillo,'holaa', clientPhone)
     const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${accountId}/Messages.json`, 
     {
         headers: {
-         'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: 'Basic' + btoa(`${accountId}:${authToken}`),
+         'Content-Type': 'application/json',
+          Authorization: `${accountId}:${authToken}`,
         }
       },
     {
