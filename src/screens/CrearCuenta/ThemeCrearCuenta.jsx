@@ -127,5 +127,13 @@ export const styles = StyleSheet.create({
         fontSize:12,
         marginLeft:22
     },
-  
+  sendSMS:{
+    color:'white',
+    paddingHorizontal:5,
+    backgroundColor: 'green',
+    width:100,
+    borderRadius:10,
+    marginHorizontal:20,
+    marginVertical:20,
+  }
 })

@@ -55,7 +55,7 @@ const onChangeDataExtra = (name, value) =>{
             <Text style={styles.titleInput}>Número de teléfono</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
             <TouchableOpacity onPress={()=>handleSendVerificationCode()}>
-              <Text>
+              <Text style={styles.sendSMS}>
                 Enviar codigo
               </Text>
             </TouchableOpacity>
