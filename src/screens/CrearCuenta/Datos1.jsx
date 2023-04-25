@@ -31,8 +31,6 @@ export const Datos1 = () => {
       return fecha;
   }
   
-  console.log(date)
-
 // Funcion para cargar en el estado global los datos de los inputs
   const onChangeData = (name, value)=>{
       loginAction({
@@ -71,7 +69,6 @@ console.log(login,'hola')
   const cargarFoto = async() =>{
     const result = await loadImageFromGallery([1,1])
     onChangeDataExtra('img', result.image)
-    // console.log(result.image)
   }
   
   return (
