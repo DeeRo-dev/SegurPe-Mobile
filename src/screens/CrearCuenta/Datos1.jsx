@@ -23,16 +23,15 @@ export const Datos1 = () => {
     setShowDatePicker(true);
   }
   
-  function formatDate(date) {
+  const formatDate =(date) =>{
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       const fecha = `${year}-${month}-${day}`
-  
       return fecha;
   }
   
-  
+  console.log(date)
 
 // Funcion para cargar en el estado global los datos de los inputs
   const onChangeData = (name, value)=>{
@@ -49,7 +48,7 @@ export const Datos1 = () => {
     });
 
   };
-
+console.log(login,'hola')
   const loadImageFromGallery = async(array) =>{
     const response = {status:false, image:null}
     const resultPermissions = await MediaLibrary.requestPermissionsAsync();
@@ -82,10 +81,8 @@ export const Datos1 = () => {
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('names', value)} placeholder="Nombre"/>
             <Text style={styles.titleInput}>Apellido</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('lastnames', value)} placeholder="Apellido"/> 
-      
             <Text style={styles.titleInput}>Fecha de Nacimiento</Text>
             <TouchableOpacity
-        
                onPress={showDatepicker}
             >
               <View style={styles.input}><Text>{formatDate(date)}</Text></View>
@@ -100,6 +97,7 @@ export const Datos1 = () => {
       setShowDatePicker(false);
       if (selectedDate) {
         setDate(selectedDate);
+        onChangeData('birthdate', date)
       }
     }}
   />

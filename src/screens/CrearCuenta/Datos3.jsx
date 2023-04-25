@@ -48,7 +48,7 @@ export const Datos3 = () => {
       !login.email ||
       !login.password ||
       !data.codVer ||
-      // !date.img ||
+      !login.birthdate ||
       !data.repPassword ||
       !data.terminos 
     ) {
@@ -69,7 +69,7 @@ export const Datos3 = () => {
       try {
          const result = await performRequest('POST', 'auth/signupUsers',data , null, null)
         console.log(result)
-
+        
       // SI LA RESPUESTA ES BUENA NAVEGAR HACIA INICIO DE SESION <-----
       return navigate.navigate('HomeRegistrarIniciarSesion')
 
@@ -126,6 +126,7 @@ export const Datos3 = () => {
               !login.names ||
               !login.lastnames ||
               !login.phone ||
+              !login.birthdate ||
               !login.email ||
               !login.password ||
               !data.codVer ||
@@ -138,6 +139,7 @@ export const Datos3 = () => {
               !login.phone ||
               !login.email ||
               !login.password ||
+              !login.birthdate ||
               !data.codVer ||
               // !date.img ||
               !data.repPassword ||

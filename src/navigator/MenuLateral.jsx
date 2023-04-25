@@ -45,11 +45,7 @@ const menuItems = [
 ];
 
 export const MenuLateral = () => {
-  const [date, dateAction] = useContext(AuthContext)
-  // if (date.status === '' ) {
-  //   return <View></View>
-  // }
-console.log(date)
+ 
   return (
     <Drawer.Navigator
     drawerIcon={null}
@@ -97,7 +93,6 @@ const MenuInterno = ({ navigation }) => {
               if (date.status === "authenticated") {
                 navigation.navigate(item.name);
               } else {
-                
                 navigation.navigate('InicioSesion');
               }
             }
