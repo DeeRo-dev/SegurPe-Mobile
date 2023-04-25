@@ -26,7 +26,7 @@ export const usuarioState = {
     DNI: "12345678",
     password:'',
     birthdate:'',
-    // terminos:false,
+    
 }
 
 

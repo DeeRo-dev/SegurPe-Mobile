@@ -59,7 +59,7 @@ export const Datos3 = () => {
     }
   };
   controlError(login, data, error)
-  console.log(data, 'data exta')
+  
 
   const envDatos = async (data, img) => {
     const obj = {
@@ -80,7 +80,7 @@ export const Datos3 = () => {
         
     }
   };
-// console.log(data, login)
+
   return (
     <View style={styles.contentTerminosCondiciones}>
       <ScrollView>
