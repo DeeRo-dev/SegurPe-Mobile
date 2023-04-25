@@ -129,7 +129,9 @@ const style = StyleSheet.create({
     flex: 1,
   },
   page: {
-    justifyContent: 'center',
+    width:'90%',
+    marginLeft:20,
+    marginTop:50,
     alignItems: 'center',
   },
 });

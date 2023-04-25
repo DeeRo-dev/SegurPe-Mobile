@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 
 import {  StyleSheet, View,Text , TouchableOpacity} from 'react-native'
-
+import {styles} from './ThemeHome';
 export const Vista4 = () => {
   const navigate = useNavigation()
   const OnNavegation = () =>{
@@ -10,8 +10,8 @@ export const Vista4 = () => {
   }
   return (
     <View>
-        <Text>Emergencia</Text>
-        <Text>En caso de una emergencia  podrás dar aviso y el serenazgo irá a tu ubicación para ayudar a resolverla.</Text>
+        <Text style={styles.title}>Emergencia</Text>
+        <Text style={styles.parrafo}>En caso de una emergencia  podrás dar aviso y el serenazgo irá a tu ubicación para ayudar a resolverla.</Text>
         <TouchableOpacity
           onPress={OnNavegation}
          >
@@ -27,7 +27,7 @@ export const Vista4 = () => {
 const style = StyleSheet.create({
 
 btn:{
-  marginTop:10,
+  marginTop:100,
   paddingVertical:5,
   height:50,
   borderRadius:100,
