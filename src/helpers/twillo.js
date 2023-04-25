@@ -33,9 +33,10 @@ import {TWILIO_ACCOUNT_ID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER} from '@env';
   
   // Crea una instancia de axios 
  
-const accountId = TWILIO_ACCOUNT_ID
-const authToken = TWILIO_AUTH_TOKEN;
-const numberTwillo = TWILIO_NUMBER;
+ const accountId = TWILIO_ACCOUNT_ID
+ const authToken = TWILIO_AUTH_TOKEN;
+ const numberTwillo = TWILIO_NUMBER;
+
 
 
 export const sendMessage = async (clientPhone ) => {
@@ -45,19 +46,21 @@ console.log(accountId, authToken,numberTwillo,'holaa', clientPhone)
   try {
     console.log(accountId, authToken,numberTwillo,'holaaa', clientPhone)
     const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${accountId}/Messages.json`, 
+   
     {
         headers: {
-         'Content-Type': 'application/json',
-          Authorization: `${accountId}:${authToken}`,
+          // 'Content-Type': 'application/json',
+          auth: `${accountId}:${authToken}`,
         }
       },
-    {
-       data: { 
-        To: `+54${clientPhone}`,
-        From: numberTwillo,
-        Body: verificationCode
-       }
-    });
+      {
+        data: { 
+         To: `+54${clientPhone}`,
+         From: numberTwillo,
+         Body: verificationCode
+        }
+     }
+   );
     console.log(response.data);
   } catch (error) {
     console.error(error, ' error en la patecion de TWILIO');

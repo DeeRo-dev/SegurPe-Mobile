@@ -74,7 +74,7 @@ export const Datos1 = () => {
     onChangeDataExtra('img', result.image)
     // console.log(result.image)
   }
-  console.log(date)
+  
   return (
     <View style={styles.content}>
         <View style={styles.contentInputs}>

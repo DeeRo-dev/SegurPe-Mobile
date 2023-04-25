@@ -57,7 +57,7 @@ const controlDePasswords = (password, repPassword) =>{
   // si cumple retorna True, si no False
 }
 
-//  console.log(error, 'error clave') 
+
   return (
     <View>
         <View>

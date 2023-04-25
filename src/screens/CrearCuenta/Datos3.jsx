@@ -80,7 +80,7 @@ export const Datos3 = () => {
         
     }
   };
-console.log(data, login)
+// console.log(data, login)
   return (
     <View style={styles.contentTerminosCondiciones}>
       <ScrollView>
