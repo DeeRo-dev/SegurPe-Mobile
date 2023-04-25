@@ -2,26 +2,6 @@
 // import {twilio} from 'twilio-client';
 import axios from "axios";
 import {TWILIO_ACCOUNT_ID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER} from '@env';
-// import { btoa } from 'base-64';
-
-// export const sendSms = () =>{
-//     const verificationCode = Math.floor(100000 + Math.random() * 900000);
-//     const twilioClient = new Twilio(
-//                  process.env.TWILIO_ACCOUNT_ID,
-//                  process.env.TWILIO_AUTH_TOKEN,
-//           );
-        
-//           twilioClient.messages.create({
-//                    body: `Tu código de autenticación es: ${verificationCode}`,
-//                   from:  '+541141668947',
-//                  to: process.env.TWILIO_NUMBER,
-//                 }).then(() => {
-//                    callback(null, `Código de autenticación enviado a ${phoneNumber}`);
-//                 }).catch((error) => {
-//                    callback(error);
-//                  });
-//               };
-
 
 
 //   curl 'https://api.twilio.com/2010-04-01/Accounts/ACd6fed300e0e5c78ab9dcc6fc33fb2f87/Messages.json' -X POST \

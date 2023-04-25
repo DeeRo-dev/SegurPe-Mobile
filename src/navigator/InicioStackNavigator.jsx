@@ -6,6 +6,8 @@ import { InicioSesion } from '../screens/InicioSesion/InicioSesion';
 import { AuthContext } from '../contextCrearUsuario/AuthContext';
 import { LoadingScreen } from '../screens/Loading/LoadingScreen';
 import {  HomeOnboarding } from '../screens/InicioDeApp/Home';
+import { getUserToken } from '../helpers/store';
+import { TOKEN } from '../helpers/const';
 
 
 const Stack = createStackNavigator();
@@ -13,6 +15,11 @@ const Stack = createStackNavigator();
 
 export const InicioStackNavigator = () => {
 
+// const tokenUser = getUserToken(TOKEN)
+// if (tokenUser.token) {
+//   console.log('es un string')
+// }
+// console.log(tokenUser)
 const [date, dateAction]= useContext(AuthContext) 
 
 // Pagina de carga
