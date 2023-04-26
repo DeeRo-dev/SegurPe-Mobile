@@ -108,18 +108,20 @@ async function getIsBoarding(keyName) {
   const statusIsBoarding = await SecureStore.getItemAsync(keyName);
   if ( statusIsBoarding !== null) {
     const booleanValue = ( statusIsBoarding === 'true');
-    console.log(booleanValue);
-  } else {
-    console.log('No value stored');
+  if (booleanValue) {
+    return true
   }
-  return statusIsBoarding;
+  } else {
+    return false
+  }
+  
 }
 /**
  * Elimina la información de iSBOARDING del almacenamiento seguro.
  *
  * @param {string} keyName - El nombre de la clave bajo la cual se encuentra almacenada la información del usuario.
  */
-async function deleteIsBoarding(keyName) {
+ async function deleteIsBoarding(keyName) {
   await SecureStore.deleteItemAsync(keyName);
 }
 

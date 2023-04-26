@@ -6,10 +6,11 @@ import {styles} from './ThemeHomeRegistrarIniciarSesion';
 import { useNavigation } from '@react-navigation/native';
 import { getIsBoarding } from '../../helpers/store';
 import { ISBOARDING } from '../../helpers/const';
+import { deleteIsBoarding } from '../../helpers/store';
 
 export const HomeRegistrarIniciarSesion = () => {
   const navigator = useNavigation();
-  getIsBoarding(ISBOARDING)
+  
   return (
     <View style={styles.content}>
       
@@ -31,6 +32,10 @@ export const HomeRegistrarIniciarSesion = () => {
        <TouchableOpacity style={styles.btnLogGoogle}>
               <Image source={require('../../assets/icon.png')}/>
               <Text style={styles.textBtnGoogle}>Ingresar con Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnLogGoogle} onPress={() => deleteIsBoarding(ISBOARDING)}>
+
+              <Text style={styles.textBtnGoogle}>eliminar isboarding</Text>
           </TouchableOpacity>
     </View>
   )
