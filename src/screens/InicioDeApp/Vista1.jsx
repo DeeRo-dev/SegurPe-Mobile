@@ -1,6 +1,7 @@
 import React from 'react'
 import { View,Text } from 'react-native'
 import {styles} from './ThemeHome';
+import { ModalEmergency } from '../../components/Modals/ModalEmergency';
 export const Vista1 = () => {
   return (
     <View>
