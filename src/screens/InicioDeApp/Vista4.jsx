@@ -3,9 +3,12 @@ import React from 'react'
 
 import {  StyleSheet, View,Text , TouchableOpacity} from 'react-native'
 import {styles} from './ThemeHome';
+import { saveIsBoarding } from '../../helpers/store';
+import { ISBOARDING } from '../../helpers/const';
 export const Vista4 = () => {
-  const navigate = useNavigation()
-  const OnNavegation = () =>{
+  const navigate =  useNavigation()
+  const OnNavegation = async () =>{
+    await saveIsBoarding (ISBOARDING, true)
     navigate.navigate('HomeRegistrarIniciarSesion')
   }
   return (

@@ -4,9 +4,12 @@ import { View,Image, Text } from 'react-native';
 import {styles} from './ThemeHomeRegistrarIniciarSesion';
 
 import { useNavigation } from '@react-navigation/native';
+import { getIsBoarding } from '../../helpers/store';
+import { ISBOARDING } from '../../helpers/const';
 
 export const HomeRegistrarIniciarSesion = () => {
   const navigator = useNavigation();
+  getIsBoarding(ISBOARDING)
   return (
     <View style={styles.content}>
       

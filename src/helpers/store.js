@@ -86,6 +86,43 @@ async function deleteUserInfo(keyName) {
   await SecureStore.deleteItemAsync(keyName);
 }
 
+/**
+ * Guarda la información del usuario en el almacenamiento seguro para no volver a mostrar el onboarding.
+ * La información del usuario setea como un boolaen.
+ *
+ * @param {string} keyName - El nombre de la clave bajo la cual se almacenará la información del usuario.
+ * @param {Boolean} isBoarding - El valor para saber si el usuario ya vio el onboarding.
+ */
+
+async function saveIsBoarding(keyName, isBoarding) {
+  // const userInfoJSON = JSON.stringify(userInfo);
+  await SecureStore.setItemAsync(keyName, isBoarding.toString());
+}
+/**
+ * Obtiene isBoarding del usuario en el almacenamiento seguro.
+ *
+ * @param {string} keyName - El nombre de la clave bajo la cual se encuentra almacenado el token.
+ *
+ */
+async function getIsBoarding(keyName) {
+  const statusIsBoarding = await SecureStore.getItemAsync(keyName);
+  if ( statusIsBoarding !== null) {
+    const booleanValue = ( statusIsBoarding === 'true');
+    console.log(booleanValue);
+  } else {
+    console.log('No value stored');
+  }
+  return statusIsBoarding;
+}
+/**
+ * Elimina la información de iSBOARDING del almacenamiento seguro.
+ *
+ * @param {string} keyName - El nombre de la clave bajo la cual se encuentra almacenada la información del usuario.
+ */
+async function deleteIsBoarding(keyName) {
+  await SecureStore.deleteItemAsync(keyName);
+}
+
 export {
   saveUserToken,
   getUserToken,
@@ -95,4 +132,7 @@ export {
   getUserInfo,
   updateUserInfo,
   deleteUserInfo,
+  saveIsBoarding,
+  getIsBoarding,
+  deleteIsBoarding,
 };
