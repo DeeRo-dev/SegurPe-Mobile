@@ -25,7 +25,7 @@ const actPage = (data)=>{
     </View>
       {/* PAGINACION: ENVIAR LOS DATOS EN LA PAGINA QUE ESTA, 
       Y FUNCION PARA SETEAR DESDE EL COMPONENTE PAGINATION LOS DATOS. */}
-       <View style={style.contentBtnPag}>
+       <View style={style.contentPag}>
               <Pagination valuePage={page} actPage={actPage}/>
        </View>
     <PagerView
@@ -65,7 +65,7 @@ const style = StyleSheet.create({
   contentPag:{
     // backgroundColor:'red',
     marginTop:50,
-    marginLeft:15
+    marginLeft:10
 },
 });
 

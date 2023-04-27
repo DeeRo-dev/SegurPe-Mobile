@@ -14,7 +14,7 @@ export const Pagination = ( {valuePage, actPage}) => {
     btn3:false,
     btn4:false,
   });
-console.log(select,'selec')
+
   const setBtn =(btn)=>{
     switch (btn) {
       case  0:
