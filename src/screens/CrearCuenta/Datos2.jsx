@@ -45,12 +45,11 @@ const onChangeDataExtra = (name, value,) =>{
             {!controlEmail(login.email) && login.email.length > 1 &&   <Text style={styles.textError}>No cumple con las condiciones de un email</Text>}
             <Text style={styles.titleInput}>Contraseña</Text>           
             <TextInput secureTextEntry={true}  onChangeText={(value)=>onChangeData('password', value)}  style={styles.input} placeholder="Contraseña"/>
-            {!controlPassword(login.password) && login.password.length > 1 &&   <Text style={styles.textError}>La clave debe contener al menos una mayúscula y 8 caracteres</Text>}
+            {!controlPassword(login.password) && login.password.length > 1 &&  <Text style={styles.textError}>La clave debe contener al menos una mayúscula y 8 caracteres</Text>}
             <Text style={styles.titleInput}>Repetir contraseña</Text>
             <TextInput secureTextEntry={true} style={styles.input} onChangeText={(value)=>onChangeDataExtra('repPassword', value,login, data )} placeholder="Repetir contraseña"/>
-            {!controlDePasswords(login.password, data.repPassword) && login.repPassword.length > 1 &&   <Text style={styles.textError}>Las claves no coinciden</Text>}
+            {!controlDePasswords(login.password, data.repPassword) && data.repPassword.length > 1 &&   <Text style={styles.textError}>Las claves no coinciden</Text>}
         </View>
-        
     </View>
   )
 }

@@ -12,10 +12,9 @@ export const Datos4 = () => {
   const [login, loginAction] = useContext(UsuarioContext)
   const [data, dataAction] = useContext(DataExtraContext)
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
+  // const [verificationCode, setVerificationCode] = useState('');
 
   const handleSendVerificationCode = async () => {
-
     try {
       // Llama a la API de Twilio Functions para enviar el código de autenticación
         const data = await sendMessage(phoneNumber)
@@ -25,7 +24,7 @@ export const Datos4 = () => {
       console.error(error);
     }
   };
-
+  // SETEAR ESTADO GLOBAL
   const onChangeData = (name, value)=>{
     if (name === 'phone') {
       setPhoneNumber(value)
@@ -35,17 +34,16 @@ export const Datos4 = () => {
       data: value
     })
     setPhoneNumber(value)
-}
+
+}// SETEAR ESTADO GLOBAL
 const onChangeDataExtra = (name, value) =>{
   dataAction({
     type: name,
     data: value
 })
 }
-
   return (
     <View>  
-        
         <View style={styles.contTitles}>
             <Text style={styles.titleCodeTel}>Enviaremos un código para verificar tu celular</Text>
             <Text style={styles.subTitleCodeTel}>Luego de ingresar tu número de teléfono completa el último campo con el código que te enviaremos.</Text>
@@ -56,7 +54,6 @@ const onChangeDataExtra = (name, value) =>{
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
             <Text style={styles.titleInput}>Código de verificación</Text>
             <TextInput  onChangeText={(value)=>onChangeDataExtra('codVer', value)} style={styles.input}  placeholder="Código de verificación"/> 
-            {/* {/* onChangeText={(value)=>onChangeData('codVer', value)} */}
         </View>
         <TouchableOpacity onPress={()=>handleSendVerificationCode()}  style={styles.btn}>
             <Text style={styles.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>Enviar código</Text>

@@ -10,14 +10,16 @@ import { useNavigation } from "@react-navigation/native";
 export const Datos3 = () => {
 
   navigate = useNavigation()
-
+ //DATOS GLOBALES
   const [data, dataAction] = useContext(DataExtraContext);
   const [login, loginAction] = useContext(UsuarioContext);
-   // Estado para controlar que todos los campos del registro esten completos
-   const [error, setError] = useState(false);
 
-
-
+  //  CONTROL DEL CHECK TERMINOS Y CONDISIONES
+  const [isChecked, setIsChecked] = useState(false);
+  const handleCheckboxChange = (name) => {
+    setIsChecked(!isChecked);
+    onChangeDataExtra(name, !isChecked);
+  }
   // Funcion para cargar en el estado global los datos de los inputs
  
   const onChangeDataExtra = (name, value) => {
@@ -27,18 +29,11 @@ export const Datos3 = () => {
     });
 
   };
-  const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = (name) => {
-    setIsChecked(!isChecked);
-    onChangeDataExtra(name, !isChecked);
-    console.log(error, 'el error estas en')
-  }
   
-
-  const controlError = (login,data,error) => {
+//CONTROL PARA QUE TODOS LOS CAMPOS ESTEN COMPLETOS, RETORNA TRUE SI ESTAN COMPETO SI NO FALSE
+  const controlError = (login,data) => {
     // falta controlar la img que este completo
-     //  && LA FECHA DE NACIMIENTO
     if (
       !login.names ||
       !login.lastnames ||
@@ -50,13 +45,10 @@ export const Datos3 = () => {
       !data.repPassword ||
       !data.terminos 
     ) {
-       if (error === false) {
-        setError(true);
-       }
-      
-    }
+      return true
+    }else return false
   };
-  controlError(login, data, error)
+ 
   
 
   const envDatos = async (data, img) => {
@@ -67,7 +59,6 @@ export const Datos3 = () => {
       try {
          const result = await performRequest('POST', 'auth/signupUsers',data , null, null)
         console.log(result)
-        
       // SI LA RESPUESTA ES BUENA NAVEGAR HACIA INICIO DE SESION <-----
       return navigate.navigate('HomeRegistrarIniciarSesion')
 
@@ -121,27 +112,9 @@ export const Datos3 = () => {
              onPress={() => envDatos(login)}
             style={[
               styles.btnLog,
-              !login.names ||
-              !login.lastnames ||
-              !login.phone ||
-              !login.birthdate ||
-              !login.email ||
-              !login.password ||
-              !data.codVer ||
-              // !date.img ||
-              !data.repPassword ||
-              !data.terminos  ? styles.bkColorNoListo : styles.bkColorListo,
+              controlError(login, data)? styles.bkColorNoListo : styles.bkColorListo,
             ]}
-             disabled={ !login.names ||
-              !login.lastnames ||
-              !login.phone ||
-              !login.email ||
-              !login.password ||
-              !login.birthdate ||
-              !data.codVer ||
-              // !date.img ||
-              !data.repPassword ||
-              !data.terminos }
+             disabled={controlError(login, data)}
           >
             <Text style={styles.textBtnLog}>Crear una cuenta</Text>
           </TouchableOpacity>

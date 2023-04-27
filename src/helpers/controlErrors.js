@@ -22,3 +22,5 @@ export const controlDePasswords = (password, repPassword) =>{
      return regex.test(data);
     // si cumple retorna True, si no False
   }  
+
+  
