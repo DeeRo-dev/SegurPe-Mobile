@@ -4,16 +4,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import { MenuLateral } from '../../navigator/MenuLateral';
 import { InicioStackNavigator } from '../../navigator/InicioStackNavigator';
-import { AuthContext } from '../../contextCrearUsuario/AuthContext';
-import { useContext } from 'react';
 import { getUserToken } from '../../helpers/store';
 import { TOKEN } from '../../helpers/const';
 import { LoadingScreen } from '../Loading/LoadingScreen';
 
-
+//NAVEGACION DE LA APP SI CIERRA SESION ENTRA A LA APP 
 export default function Incio() {  
- const [date, dateAction] = useContext(AuthContext);  
-   // State para saber si hay que mostrar el loading y esperar que recupere los datos del storage
+ 
+// State para saber si hay que mostrar el loading y esperar que recupere los datos del storage
 const [value, setValue] = useState({
   token:false,
   loading:true,
@@ -21,7 +19,6 @@ const [value, setValue] = useState({
 
 const getAction = async ()=> {
   const data = await getUserToken(TOKEN)
-  
   if (data && value.token === false) {
     console.log(data, 'entra:?')
     setValue({
@@ -38,8 +35,10 @@ const getAction = async ()=> {
    }
  
 }
+useEffect(()=>{
+  getAction()
+},[value])
 
-getAction()
 // Loading para esperar los datos
 useEffect(() => {
   const timeoutId = setTimeout(() => {
@@ -53,11 +52,12 @@ useEffect(() => {
     clearTimeout(timeoutId);
   };
 }, []);
-
+//LOADING 
 if (value.loading === true) {
   return <LoadingScreen/>
 }
-console.log(value.token)
+console.log(value.token, 'sde')
+
   return (
     <NavigationContainer>  
     

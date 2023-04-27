@@ -8,7 +8,7 @@ import {styles} from './ThemeHome';
 import { Vista4 } from './Vista4';
 import { Pagination } from '../../components/Pagination/Pagination';
 
-
+//MUESTRA EL ONBOARDING
 export const HomeOnboarding = () => {
 const [page, setPage] = useState(0)
   const ref = useRef();

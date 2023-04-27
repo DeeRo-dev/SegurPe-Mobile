@@ -38,9 +38,7 @@ export const InicioSesion = () => {
   // console.log(datos);
 
   // Funcion para inicio de sesion
-  // cuenta
-  // EMAIL:Derek@gmail.com
-  // CLAVE:87654321Derek
+
   const sendLogin = async (data) => {
     try {
       if (data) {
@@ -78,7 +76,7 @@ export const InicioSesion = () => {
 
    
 const [data, setData] = useState(false)
-
+//TRAE INFO DEL TOKEN DEL USUARIO GUARDADO EN EL STORAGE
 const infoToken = async(name) =>{
   const token = await getUserToken(name)
   console.log(token, 'entddddr')
