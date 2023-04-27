@@ -1,24 +1,23 @@
 import React, {useContext, useState} from 'react'
-import * as MediaLibrary from 'expo-media-library';
-import * as  ImagePicker from 'expo-image-picker'
-import { Alert } from 'react-native'
 import {styles} from './ThemeCrearCuenta'
 import { View,Text, TouchableOpacity, TextInput} from 'react-native'
-import { DataExtraContext, UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
+import { UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { loadImageFromGallery } from '../../helpers/ImageFromGallery';
 
 
 
 export const Datos1 = () => {
 
   // Estado para controlar datos extra en el registro del user
-  const [data, dataAction] = useContext(DataExtraContext);
-   // Estado para controlar datos del user
+  // const [data, dataAction] = useContext(DataExtraContext);
+  // Estado para controlar datos del user
   const [login, loginAction] = useContext(UsuarioContext)
-    // Estado para controlar la carga de la fecha
+
+  // Estado para controlar la carga de la fecha
   const [date, setDate] = useState(new Date());
-   const [birthdate, setBirthdate]= useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
+
   function showDatepicker() {
     setShowDatePicker(true);
   }
@@ -39,36 +38,17 @@ export const Datos1 = () => {
       })
       
   }
-  const onChangeDataExtra = (name, value) => {
-    dataAction({
-      type: name,
-      data: value,
-    });
-
-  };
-console.log(login,'hola')
-  const loadImageFromGallery = async(array) =>{
-    const response = {status:false, image:null}
-    const resultPermissions = await MediaLibrary.requestPermissionsAsync();
-
-    if (resultPermissions.status === "denied") {
-      Alert.alert("Debes darle permiso a la app para acceder a la galeria")
-      return response
-    }
-    const result = await  ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: array
-    })
-    if (result.canceled) {
-      return response
-    }
-    response.status = true
-    response.image = result.uri
-    return response
-  }
+  // CARGAR LA IMAGEN DEL DNI
+  // const onChangeDataExtra = (name, value) => {
+  //   dataAction({
+  //     type: name,
+  //     data: value,
+  //   });
+  // };
   const cargarFoto = async() =>{
     const result = await loadImageFromGallery([1,1])
-    onChangeDataExtra('img', result.image)
+    // console.log(result,'URL IMG')
+    // onChangeDataExtra('img', result.image)
   }
   
   return (

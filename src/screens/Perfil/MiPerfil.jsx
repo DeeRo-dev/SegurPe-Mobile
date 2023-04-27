@@ -1,13 +1,12 @@
 import React,{ useState,useEffect } from 'react';
-import * as MediaLibrary from 'expo-media-library';
-import * as  ImagePicker from 'expo-image-picker'
 import {styles} from './ThemeMiPerfil'
 import { Image,TextInput, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
-import { getUserInfo, getUserToken } from '../../helpers/store';
-import {USER, TOKEN} from '../../helpers/const'
+import { getUserToken } from '../../helpers/store';
+import {TOKEN} from '../../helpers/const'
 import { performRequest } from '../../helpers/api';
+import { loadImageFromGallery } from '../../helpers/ImageFromGallery';
 
 
 export const MiPerfil = () => {
@@ -15,26 +14,9 @@ export const MiPerfil = () => {
   const navigator = useNavigation();
   const [data, setData] = useState({})
   const [img, setImg] = useState('')
-  // Libreria para cargar la image
-const loadImageFromGallery = async(array) =>{
-  const response = {status:false, image:null}
-  const resultPermissions = await MediaLibrary.requestPermissionsAsync();
 
-  if (resultPermissions.status === "denied") {
-    Alert.alert("Debes darle permiso a la app para acceder a la galeria")
-    return response
-  }
-  const result = await  ImagePicker.launchImageLibraryAsync({
-    allowsEditing: true,
-    aspect: array
-  })
-  if (result.canceled) {
-    return response
-  }
-  response.status = true
-  response.image = result.uri
-  return response
-}
+
+// LLAMA LA FUNCION PARA ACCEDER A LA GALERIA
 const cargarFoto = async() =>{
   const result = await loadImageFromGallery([1,1])
   console.log(result)
@@ -103,12 +85,6 @@ const sendDataUser = async (token, method, route, image = null) => {
       {/* Avatar content */}
         <View style={styles.contNameAvatar}>
           <View style={styles.contentAvatar}>
-              {/* {img
-               ? <Image source={{uri : img}}
-               style={styles.avatarPerfil} />
-               :<Image source={{uri:"https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg"}}
-                style={styles.avatarPerfil} />
-              } */}
               <Image source={{uri: img ? (img) : ("https://bysperfeccionoral.com/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.jpg") }}
                style={styles.avatarPerfil} />
 
