@@ -3,6 +3,7 @@ import {styles} from './ThemeCrearCuenta';
 import { View,Text, TouchableOpacity, TextInput } from 'react-native';
 import { DataExtraContext, UsuarioContext } from '../../contextCrearUsuario/CrearUsuarioContext';
 import { sendMessage } from '../../helpers/twillo';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 
 
@@ -35,7 +36,6 @@ export const Datos4 = () => {
     })
     setPhoneNumber(value)
 }
-
 const onChangeDataExtra = (name, value) =>{
   dataAction({
     type: name,
@@ -54,16 +54,13 @@ const onChangeDataExtra = (name, value) =>{
        <View>
             <Text style={styles.titleInput}>Número de teléfono</Text>
             <TextInput style={styles.input} onChangeText={(value)=>onChangeData('phone', value)} keyboardType="numeric" placeholder="154545"/>
-            <TouchableOpacity onPress={()=>handleSendVerificationCode()}>
-              <Text style={styles.sendSMS}>
-                Enviar codigo
-              </Text>
-            </TouchableOpacity>
             <Text style={styles.titleInput}>Código de verificación</Text>
             <TextInput  onChangeText={(value)=>onChangeDataExtra('codVer', value)} style={styles.input}  placeholder="Código de verificación"/> 
             {/* {/* onChangeText={(value)=>onChangeData('codVer', value)} */}
         </View>
-        
+        <TouchableOpacity onPress={()=>handleSendVerificationCode()}  style={styles.btn}>
+            <Text style={styles.textBtn}><Ionicons name="log-in-outline" size={20} color='#004494'/>Enviar código</Text>
+        </TouchableOpacity>
     </View>
   )
 }

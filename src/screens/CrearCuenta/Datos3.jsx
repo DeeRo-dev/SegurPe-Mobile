@@ -4,8 +4,6 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { DataExtraContext, UsuarioContext } from "../../contextCrearUsuario/CrearUsuarioContext";
 import { performRequest } from "../../helpers/api";
-import { getUserToken, saveUserInfo } from "../../helpers/store";
-import { TOKEN, USER } from "../../helpers/const";
 import { useNavigation } from "@react-navigation/native";
 
 
