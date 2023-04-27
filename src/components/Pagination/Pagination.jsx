@@ -1,9 +1,12 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import { View, Text,TouchableOpacity,StyleSheet } from 'react-native'
 import Ionicons from "@expo/vector-icons/Ionicons";
-export const Pagination = () => {
+
+
+export const Pagination = ( {valuePage, actPage}) => {
     const [select, setSelect] = useState(0)
     const ref = useRef();
+
     // ESTADO Y SWICHT PARA MOSTRAR EN QUE PAGINA DEL PAGINADO ESTA EL USUARIO
   const [activeButton, setActiveButton] = useState({
     btn1:true,
@@ -11,7 +14,7 @@ export const Pagination = () => {
     btn3:false,
     btn4:false,
   });
-
+console.log(select,'selec')
   const setBtn =(btn)=>{
     switch (btn) {
       case  0:
@@ -50,33 +53,39 @@ export const Pagination = () => {
         break;
     }
   }
+//   Cuando se presiona el btn
   const selectBtn = (value) => {
     setSelect(value)
-    console.log(select)
-     ref.current?.setPage(value)
+    setBtn(value)
+     actPage(value)
+   }
 
-}
+useEffect(()=>{
+    setBtn(valuePage)
+    setSelect(valuePage)
+},[valuePage])
+  
   return (
     <View style={styles.contentBtnPag}>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
-      <Text>
+      
          <Ionicons name={activeButton.btn1 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
+     
     </TouchableOpacity>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(1)}>
-      <Text>
+      
          <Ionicons  name={activeButton.btn2 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
+   
     </TouchableOpacity>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(2)}>
-      <Text>
+     
       <Ionicons   name={activeButton.btn3 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
+    
     </TouchableOpacity>
     <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(3)}>
-      <Text>
+      
       <Ionicons  name={activeButton.btn4 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
+      
     </TouchableOpacity>
     </View>
   )
@@ -85,10 +94,7 @@ export const Pagination = () => {
 
  const styles = StyleSheet.create({
     contentBtnPag:{
-        // backgroundColor:'red',
         flexDirection:'row',
-        marginTop:50,
-        marginLeft:15
     },
     btnPag:{
         marginLeft:10

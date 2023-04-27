@@ -1,129 +1,52 @@
-import { useNavigation } from '@react-navigation/native';
 import React, {useRef, useState} from 'react'
 import PagerView from 'react-native-pager-view';
-import { View, Text, Image, TouchableOpacity,StyleSheet } from 'react-native'
+import { View,  Image,StyleSheet } from 'react-native'
 import { Vista1 } from './Vista1';
 import { Vista2 } from './Vista2';
 import { Vista3 } from './Vista3';
 import {styles} from './ThemeHome';
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { ModalBasico } from '../../components/Modals/ModalBasico';
 import { Vista4 } from './Vista4';
 import { Pagination } from '../../components/Pagination/Pagination';
 
 
-
 export const HomeOnboarding = () => {
-const [select, setSelect] = useState(0)
+const [page, setPage] = useState(0)
   const ref = useRef();
 
-  // ESTADO Y SWICHT PARA MOSTRAR EN QUE PAGINA DEL PAGINADO ESTA EL USUARIO
-  // const [activeButton, setActiveButton] = useState({
-  //   btn1:true,
-  //   btn2:false,
-  //   btn3:false,
-  //   btn4:false,
-  // });
-
-
-  // const setBtn =(btn)=>{
-  //   switch (btn) {
-  //     case  0:
-  //       setActiveButton({
-  //         btn1:true,
-  //         btn2:false,
-  //         btn3:false,
-  //         btn4:false,
-  //       })
-       
-  //       break;
-  //       case 1:
-  //       setActiveButton({
-  //         btn1:false,
-  //         btn2:true,
-  //         btn3:false,
-  //         btn4:false,
-  //       })
-        
-  //       break;
-  //       case  2:
-  //       setActiveButton({
-  //         btn1:false,
-  //         btn2:false,
-  //         btn3:true,
-  //         btn4:false,
-  //       })
-  //       break;
-  //       case 3:
-  //       setActiveButton({
-  //         btn1:false,
-  //         btn2:false,
-  //         btn3:false,
-  //         btn4:true,
-  //       })
-  //       break;
-  //   }
-  // }
-  // const selectBtn = (value) => {
-  //     setSelect(value)
-  //     console.log(select)
-  //     ref.current?.setPage(value)
-
-  // }
-
+const actPage = (data)=>{
+  ref.current?.setPage(data)
+  setPage(data)
+}
   return (
 
     <View style={styles.content}>
          <View style={styles.contentImg}>
       <Image style={styles.imgSegur} source={require('../../assets/SegurPe.png')}/>
     </View>
-    <Pagination/>
-
-      {/* <View style={styles.contentBtnPag}>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(0)}>
-       <Text>
-         <Ionicons name={activeButton.btn1 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(1)}>
-      <Text>
-         <Ionicons  name={activeButton.btn2 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(2)}>
-      <Text>
-      <Ionicons   name={activeButton.btn3 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity  style={styles.btnPag} onPress={()=> selectBtn(3)}>
-      <Text>
-      <Ionicons  name={activeButton.btn4 ? "radio-button-on-outline" : "radio-button-off-outline"} size={15} color="black" />
-      </Text>
-    </TouchableOpacity>
-    </View> */}
-    
-    
-       
+      {/* PAGINACION: ENVIAR LOS DATOS EN LA PAGINA QUE ESTA, 
+      Y FUNCION PARA SETEAR DESDE EL COMPONENTE PAGINATION LOS DATOS. */}
+       <View style={style.contentBtnPag}>
+              <Pagination valuePage={page} actPage={actPage}/>
+       </View>
     <PagerView
      style={style.viewPager}
       initialPage={0}
       ref={ref}
-      // onPageSelected={e => {setBtn(e.nativeEvent.position)}}
+      onPageSelected={e => {setPage(e.nativeEvent.position)}}
       >
-      <View style={style.page} key="1">
+      <View style={style.page} key="0">
          <Vista1/> 
       </View>
-      <View style={style.page} key="2">
+      <View style={style.page} key="1">
         <Vista2/>
       </View>
-      <View style={style.page} key="3">
+      <View style={style.page} key="2">
        <Vista3/> 
       </View>
-      <View style={style.page} key="4">
+      <View style={style.page} key="3">
        <Vista4/> 
       </View>
     </PagerView> 
-   
   </View>  
   )
 }
@@ -139,5 +62,10 @@ const style = StyleSheet.create({
     marginTop:50,
     alignItems: 'center',
   },
+  contentPag:{
+    // backgroundColor:'red',
+    marginTop:50,
+    marginLeft:15
+},
 });
 

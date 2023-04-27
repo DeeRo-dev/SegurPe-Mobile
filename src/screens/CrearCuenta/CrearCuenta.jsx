@@ -13,7 +13,6 @@ import { UsuarioProvider, DataExtraProvider} from '../../contextCrearUsuario/Cre
 
 export const CrearCuenta = () => {
 
-
   const [activeButton, setActiveButton] = useState({
     btn1:true,
     btn2:false,

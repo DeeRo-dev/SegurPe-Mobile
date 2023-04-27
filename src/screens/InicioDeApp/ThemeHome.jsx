@@ -5,16 +5,6 @@ export const styles = StyleSheet.create({
         flex:1,
         textAlign:'center'
     },
-
-    contentBtnPag:{
-        // backgroundColor:'red',
-        flexDirection:'row',
-        marginTop:50,
-        marginLeft:15
-    },
-    btnPag:{
-        marginLeft:10
-    },
     contentImg:{
         width:'100%',
         height:385,
