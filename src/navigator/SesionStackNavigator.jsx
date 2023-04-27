@@ -12,6 +12,7 @@ import { Map } from '../screens/Map/Map';
 import { TOKEN } from '../helpers/const';
 import { getUserToken } from '../helpers/store';
 import { AuthContext } from '../contextCrearUsuario/AuthContext';
+import { LoadingScreen } from '../screens/Loading/LoadingScreen';
 
 
 const Stack = createStackNavigator();
@@ -21,17 +22,21 @@ export const SesionStackNavigator = () => {
 
 const [date, dataAction]= useContext(AuthContext) 
 
+// Pagina de carga
+ if (date.status === 'checking') {
+   return <LoadingScreen/>
+ }
 //  console.log(date, 'estate')
   return (
+    
     <Stack.Navigator 
-      initialRouteName='HomeRegistrarIniciarSesion'
       options={{
         headerStyle:{
           backgroundColor:'#16253A',
         }
       }}
     >
-   {!date.status || date.status === 'not-authenticated' ? (
+   {/* {!date.status || date.status === 'not-authenticated' ? (
     <>
       <Stack.Screen name="HomeRegistrarIniciarSesion" 
       options={{
@@ -44,7 +49,7 @@ const [date, dataAction]= useContext(AuthContext)
       
       </>
       ) : (
-     <>
+     <> */}
       <Stack.Screen
         options={{
           title:'Map',
@@ -117,8 +122,8 @@ const [date, dataAction]= useContext(AuthContext)
         }}
         name="EditeContrasenia"  component={EditeContrasenia} />
          
-        </>
-        )}
+        {/* </>
+        )} */}
     </Stack.Navigator>
    
   );

@@ -92,13 +92,8 @@ export const InicioSesion = () => {
 
       <TouchableOpacity
         disabled={!datos.email || !datos.password}
-        onPress={() => sendLogin(datos, date)}
-        style={[
-          styles.btn,
-          !datos.email || !datos.password
-            ? styles.bkColorNoListo
-            : styles.bkColorListo,
-        ]}
+        onPress={() => sendLogin(datos)}
+        style={[styles.btn,  !datos.email || !datos.password ? styles.bkColorNoListo : styles.bkColorListo]}
       >
         <Text style={styles.textBtn}>Confirmar</Text>
       </TouchableOpacity>

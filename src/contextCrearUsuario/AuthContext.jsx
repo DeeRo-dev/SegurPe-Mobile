@@ -3,7 +3,7 @@ import React,{ createContext, useReducer } from "react";
 
 export const AuthState = {
     errorMessage:'',
-    status:'',
+    status:'not-authenticated',
     token: null,
 };
  
