@@ -15,6 +15,8 @@ const Stack = createStackNavigator();
 
 export const InicioStackNavigator = () => {
 const [date, dateAction]= useContext(AuthContext) 
+
+
   // State para saber si hay que mostrar el loading y esperar que recupere los datos del storage
 const [value, setValue] = useState({
   isBoarding:false,

@@ -18,7 +18,6 @@ export const ModalBasico = ({ text, titleModal, btn }) => {
 
  const closeSesion= (text) =>{
   if (text === 'Cerrar sesión' && date.status === "authenticated") {
-
     dateAction(
       {
         type: 'not-authenticated',

@@ -8,6 +8,10 @@ import { getIsBoarding } from '../../helpers/store';
 import { ISBOARDING } from '../../helpers/const';
 import { deleteIsBoarding } from '../../helpers/store';
 
+
+// COMPONENTE DONDE SE MUESTRA SI VA A REGISTRARSE O INICIAR SESION 
+
+
 export const HomeRegistrarIniciarSesion = () => {
   const navigator = useNavigation();
   
