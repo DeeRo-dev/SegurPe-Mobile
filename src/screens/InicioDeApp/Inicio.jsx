@@ -7,9 +7,12 @@ import { InicioStackNavigator } from '../../navigator/InicioStackNavigator';
 import { getUserToken } from '../../helpers/store';
 import { TOKEN } from '../../helpers/const';
 import { LoadingScreen } from '../Loading/LoadingScreen';
+import { useContext } from 'react';
+import { AuthContext } from '../../contextCrearUsuario/AuthContext';
 
 //NAVEGACION DE LA APP SI CIERRA SESION ENTRA A LA APP 
 export default function Incio() {  
+  const [date, dateAction] = useContext(AuthContext);
  
 // State para saber si hay que mostrar el loading y esperar que recupere los datos del storage
 const [value, setValue] = useState({
@@ -35,9 +38,9 @@ const getAction = async ()=> {
    }
  
 }
-useEffect(()=>{
+
   getAction()
-},[value])
+console.log(date)
 
 // Loading para esperar los datos
 useEffect(() => {
@@ -53,7 +56,7 @@ useEffect(() => {
   };
 }, []);
 //LOADING 
-if (value.loading === true) {
+if (date.status === 'checking') {
   return <LoadingScreen/>
 }
 console.log(value.token, 'sde')
