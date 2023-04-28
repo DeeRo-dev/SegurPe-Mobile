@@ -7,17 +7,15 @@ export const HistoryData = () => {
     const lista = dataFake.map((dato) => {
       return (
         <View style={style.contentData} key={dato.address}>
-            <View>
+            <View style={style.contentIcon}>
                 <Text>Icono</Text>
             </View>
-            <View>
-                 <Text>{dato.address}</Text>
-                 <Text>{dato.name}</Text></View>
-            <View> 
-                <Text>{dato.fecha.toDateString()}</Text>
+            <View style={style.contentName}>
+                 <Text style={style.direc}>{dato.address}</Text>
+                 <Text style={style.name}>{dato.name}</Text></View>
+            <View  style={style.contentFecha}> 
+                <Text style={style.fechaData}>{dato.fecha.toDateString()}</Text>
             </View>
-         
-         
         </View>
       );
     });
@@ -36,5 +34,27 @@ const style = StyleSheet.create({
         alignSelf:'center',
         borderBottomWidth:1,
         borderBottomColor:'#CAC4D0'
+    },
+    contentIcon:{
+        flex:1,
+    },
+    contentName:{
+        flex:2,
+    },
+    direc:{
+        color:'#1C1B1F',
+        fontSize:16,
+    },
+    name:{
+        color:'#49454F',
+        fontSize:14,
+        
+    },
+    contentFecha:{
+        flex:1
+    },
+    fechaData:{
+        color:'#49454F',
+        fontSize:11,
     }
 })
