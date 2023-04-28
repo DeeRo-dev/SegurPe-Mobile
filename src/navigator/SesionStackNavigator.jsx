@@ -36,20 +36,6 @@ const [date, dataAction]= useContext(AuthContext)
         }
       }}
     >
-   {/* {!date.status || date.status === 'not-authenticated' ? (
-    <>
-      <Stack.Screen name="HomeRegistrarIniciarSesion" 
-      options={{
-          title:'Login',
-         headerShown:false
-        }} 
-      component={HomeRegistrarIniciarSesion} />
-      <Stack.Screen name="InicioSesion" options={{title:'Iniciar Sesion'}} component={InicioSesion} />
-      <Stack.Screen name="CrearCuenta" options={{title:'Crear Cuenta'}} component={CrearCuenta} />
-      
-      </>
-      ) : (
-     <> */}
       <Stack.Screen
         options={{
           title:'Map',

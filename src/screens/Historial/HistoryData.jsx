@@ -4,6 +4,7 @@ import { dataFake } from './dataFake';
 
 
 export const HistoryData = () => {
+    
     const lista = dataFake.map((dato) => {
       return (
         <View style={style.contentData} key={dato.address}>

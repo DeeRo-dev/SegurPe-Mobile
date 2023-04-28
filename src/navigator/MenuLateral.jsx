@@ -90,11 +90,9 @@ const MenuInterno = ({ navigation }) => {
             title={item.title}
             iconName={item.icon}
             onPress={ () => {
-              if (date.status === "authenticated") {
+              
                 navigation.navigate(item.name);
-              } else {
-                navigation.navigate('InicioSesion');
-              }
+              
             }
           }
            

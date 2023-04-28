@@ -3,16 +3,21 @@ import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import { TOKEN } from '../../helpers/const';
 import { AuthContext } from '../../contextCrearUsuario/AuthContext';
 import { deleteUserToken } from '../../helpers/store';
+import { useNavigation } from '@react-navigation/native';
 
 export const ModalBasico = ({ text, titleModal, btn }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [date, dateAction] = useContext(AuthContext);
+ const navigate = useNavigation();
 
+ //CERRAR SESION
+//ELIMINAR EL TOKEN 
  const actionBtn = async (data, text)=>{
   const deleteToke =await deleteUserToken(TOKEN)
   closeSesion(text)
   console.log( deleteToke,'se elimino?')
   setModalVisible(data)
+  // navigate.navigate("HomeRegistrarIniciarSesion" )
  }
 
 

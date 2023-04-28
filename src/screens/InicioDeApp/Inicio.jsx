@@ -39,8 +39,10 @@ const getAction = async ()=> {
  
 }
 
-  getAction()
-console.log(date)
+  
+getAction()
+  
+
 
 // Loading para esperar los datos
 useEffect(() => {
