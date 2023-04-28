@@ -25,8 +25,8 @@ const menuItems = [
     component: MiPerfil,
   },
   {
-    name: "Historial",
-    title: "Historial de actividad",
+    name: "Registro de actividad",
+    title: "Registro de actividad",
     icon: "time-outline",
     component: Historial,
   },
