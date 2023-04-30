@@ -7,9 +7,11 @@ import {
   getCurrentPositionAsync,
 } from "expo-location";
 import PreventionCall from "../../components/PreventionCall";
+import EmergencyCall from "../../components/EmergencyCall";
 import ButtonUtils from "../../components/ButtonUtils";
 import getDirections from "../../helpers/directions";
 import playSound from "../../helpers/playSound";
+import socket from "../../helpers/socket";
 
 export function Map() {
   // Estado para almacenar la ubicación del usuario
@@ -19,14 +21,15 @@ export function Map() {
     longitude: -77.061889,
   });
   const [prevention, setPrevention] = useState(false);
+  const [emergency, setEmergency] = useState(false);
   const [directions, setDirections] = useState(null);
   const [time, setTime] = useState(null);
   const [distance, setDistance] = useState(null);
+  const [connected, setConnected] = useState(false);
   useEffect(() => {
     // Función asíncrona para solicitar permisos de ubicación
     const requestLocationPermission = async () => {
       const { granted } = await requestForegroundPermissionsAsync();
-
       if (granted) {
         // Obtener la posición actual del usuario
         const { coords } = await getCurrentPositionAsync({});
@@ -35,17 +38,59 @@ export function Map() {
     };
     requestLocationPermission();
   }, []);
+  useEffect(() => {
+    if (socket) {
+      socket.on("connect", () => {
+        console.log("Conectado al servidor Socket.IO");
+      });
+      socket.on("callPrevention", (data) => {
+        console.log("se realizo una prevencions");
+        console.log(data);
+      });
+      socket.on("callEmergency", (data) => {
+        console.log("se realizo una llamada de emergencia");
+        console.log(data);
+      });
+    }
+  }, []);
 
   const handleOnPress = () => {
     console.log("handleOnPress called");
     setPrevention(!prevention);
   };
+
+  const startActivities = () => {
+    socket.emit();
+  };
+
+  const endActivities = () => {
+    socket.emit();
+  };
+
+  const takeCallPrevention = () => {
+    socket.emit();
+  };
+
+  const takeCallEmengency = () => {
+    socket.emit();
+  };
+
+  const refuzedPrevention = () => {
+    socket.emit();
+  };
+
+  const refuzedEmergency = () => {
+    socket.emit();
+  };
+
+  const shareLocation = () => {};
+
   const handleDirections = async () => {
     if (location && locationUser) {
       const { directions, error } = await getDirections(location, locationUser);
 
       if (directions) {
-        setDirections(directions);
+        setDirections(directions.geometry);
       }
 
       if (error) {
@@ -56,6 +101,7 @@ export function Map() {
       console.log("Location or locationUser is not available");
     }
   };
+
   return (
     <View style={styles.container}>
       {location ? ( // Solo muestra el mapa si se ha obtenido la ubicación del usuario
@@ -80,12 +126,10 @@ export function Map() {
           {locationUser && <Marker coordinate={locationUser} />}
           {directions && (
             <Polyline
-              coordinates={directions.geometry.coordinates.map(
-                (coordinate) => ({
-                  latitude: coordinate[1],
-                  longitude: coordinate[0],
-                })
-              )}
+              coordinates={directions.coordinates.map((coordinate) => ({
+                latitude: coordinate[1],
+                longitude: coordinate[0],
+              }))}
               strokeWidth={3}
               strokeColor="blue"
             />
@@ -101,6 +145,7 @@ export function Map() {
         visible={prevention}
         onAsistentPreventions={handleDirections}
       />
+      <EmergencyCall visible={emergency} />
     </View>
   );
 }

@@ -1,63 +1,71 @@
-// Importamos las dependencias necesarias
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { io } from "socket.io-client";
+import { getUserToken } from "../helpers/store";
+import { TOKEN } from "../helpers/const";
 
-// Creamos el custom hook `useSocket` que recibe como parámetro la URL del servidor
 const useSocket = (serverUrl) => {
-  // Declaramos el estado para almacenar la instancia del socket
-  const [socket, setSocket] = useState(null);
+  const socketRef = useRef(null);
 
-  // Función para conectar el socket al servidor, utilizando `useCallback` para evitar re-creaciones innecesarias
-  const connect = useCallback(() => {
-    // Creamos una nueva instancia del socket y nos conectamos al servidor
-    const newSocket = io(serverUrl);
-    // Actualizamos el estado con la nueva instancia del socket
-    setSocket(newSocket);
+  const connect = useCallback(async () => {
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+    }
+    const token = await getUserToken(TOKEN);
+    const newSocket = io(serverUrl, {
+      reconnectionDelayMax: 10000,
+      transports: ["websocket"],
+      auth: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    socketRef.current = newSocket;
+    console.log("se realizado la configuracion del socket ");
     return newSocket;
   }, [serverUrl]);
 
-  // Función para desconectar el socket del servidor
   const disconnect = useCallback(() => {
-    if (socket) {
-      // Desconectamos el socket del servidor y actualizamos el estado
-      socket.disconnect();
-      setSocket(null);
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+      socketRef.current = null;
     }
-  }, [socket]);
+  }, []);
 
-  // Función para emitir eventos al servidor
   const emitEvent = (eventName, data) => {
-    if (socket) {
-      // Emitimos el evento y los datos al servidor
-      socket.emit(eventName, data);
+    if (socketRef.current) {
+      socketRef.current.emit(eventName, data);
     }
   };
 
-  // Función para escuchar eventos provenientes del servidor
-  const onEvent = (eventName, callback) => {
-    if (socket) {
-      // Escuchamos el evento y ejecutamos la función `callback` cuando se reciba
-      socket.on(eventName, callback);
+  const onEvent = useCallback((eventName, callback) => {
+    if (socketRef.current) {
+      socketRef.current.on(eventName, callback);
     }
-  };
+  }, []);
 
-  // Función para dejar de escuchar eventos provenientes del servidor
-  const offEvent = (eventName, callback) => {
-    if (socket) {
-      // Dejamos de escuchar el evento y desvinculamos la función `callback`
-      socket.off(eventName, callback);
+  const offEvent = useCallback((eventName, callback) => {
+    if (socketRef.current) {
+      socketRef.current.off(eventName, callback);
     }
-  };
+  }, []);
 
-  // Al desmontar el componente, nos aseguramos de desconectar el socket
   useEffect(() => {
-    return () => {
-      disconnect();
-    };
-  }, [disconnect]);
+    if (serverUrl) {
+      const socketInstance = connect();
+      return () => {
+        disconnect(socketInstance);
+      };
+    }
+  }, [connect, disconnect, serverUrl]);
 
-  // Retornamos las funciones y el objeto socket para utilizarlos en el componente
-  return { connect, disconnect, emitEvent, onEvent, offEvent, socket };
+  return {
+    connect,
+    disconnect,
+    emitEvent,
+    onEvent,
+    offEvent,
+    socket: socketRef.current,
+  };
 };
 
 export default useSocket;
